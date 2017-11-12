@@ -1,6 +1,6 @@
 package backEnd;
 import java.util.*;
-public class MemberComparator implements Comparator{
+public class IDHolderComparator implements Comparator{
 
 	@Override
 	public int compare(Object o1, Object o2) {
