@@ -44,7 +44,7 @@ public class Controller {
 		return member;
 	}
 	
-	public Member ValidateMember(){
+	public Member ValidateMember (){
 		return member;
 	}
 	
