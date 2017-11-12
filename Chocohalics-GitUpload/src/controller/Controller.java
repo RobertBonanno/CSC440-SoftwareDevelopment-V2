@@ -18,7 +18,7 @@ public class Controller {
 		providerLog = new ProviderLog();
 		receiptLog = new ReceiptLog();
 		serviceLog = new ServiceLog();
-		terminal = new Terminal();
+		terminal = new Terminal("Console");
 	}
 	
 	//===========Provider Stuff=================
