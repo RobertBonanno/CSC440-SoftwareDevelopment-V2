@@ -19,7 +19,10 @@ public class Terminal {
 			break;
 		}
 	}
-	
+	/**
+	 * pushes the output down the chain of responsibility to the correct IO class. Either GUI or Console. 
+	 * @param output: The text that is to be printed on screen. 
+	 */
 	public void setOutput(String output) {
 		IO.setOutput(output);
 	}
