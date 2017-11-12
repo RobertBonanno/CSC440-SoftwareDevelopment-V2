@@ -8,7 +8,7 @@ abstract class IDHolder {
 	
 	int IDHIDnum;
 	
-	address IDHaddress;
+	Address IDHaddress;
 
 	
 	
@@ -26,7 +26,7 @@ abstract class IDHolder {
 	//	return Status;
 	//}
 	
-	public address getAddress() {
+	public Address getAddress() {
 		return IDHaddress;
 	}	
 	
@@ -46,7 +46,7 @@ abstract class IDHolder {
 	//	Status = status;
 	//}
 
-	public void setAddress(address iDHaddress) {
+	public void setAddress(Address iDHaddress) {
 		IDHaddress = iDHaddress;
 	}
 
