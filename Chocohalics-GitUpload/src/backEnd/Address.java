@@ -1,4 +1,4 @@
-package backEnd;
+package backEnd;	//new
 
 public class Address {
 
@@ -47,6 +47,10 @@ public class Address {
 		this.city = city;
 		this.state = state;
 		this.zipCode = zipCode;
+	}
+	
+	public String getAddress(){
+		return (toString());
 	}
 	
 	/**

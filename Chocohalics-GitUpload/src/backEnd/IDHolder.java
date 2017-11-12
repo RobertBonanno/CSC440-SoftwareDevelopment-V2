@@ -1,54 +1,37 @@
 package backEnd;
 import java.lang.String;
-abstract class IDHolder {
+public interface IDHolder {
 
-	String IDHname;
-	String IDHEmail;
+	//String IDHname;
+	//String IDHEmail;
 	//String Status;
 	
-	int IDHIDnum;
+	//int IDHIDnum;
 	
-	Address IDHaddress;
+	//Address IDHaddress;
 
-	
-	
-	
-	
-	public String getName() {
-		return IDHname;
-	}
 
-	public String getEmail() {
-		return IDHEmail;
-	}
+	public String getName(); 
+
+	public String getEmail();
 
 	//public String getStatus() {
 	//	return Status;
 	//}
 	
-	public Address getAddress() {
-		return IDHaddress;
-	}	
+	public Address getAddress();
 	
-	public int getIDnum() {
-		return IDHIDnum;
-	}
+	public int getIDNum();
 
-	public void setName(String iDHname) {
-		IDHname = iDHname;
-	}	
-
-	public void setEmail(String iDHEmail) {
-		IDHEmail = iDHEmail;
-	}	
+	public void setName(String iDHname);
+	
+	public void setEmail(String iDHEmail);
 	
 	//public void setStatus(String status) {
 	//	Status = status;
 	//}
 
-	public void setAddress(Address iDHaddress) {
-		IDHaddress = iDHaddress;
-	}
+	public void setAddress(Address iDHaddress);
 
 	
 /*	request service

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MemberLog extends DataStore{
 
 	ArrayList membersLog = new ArrayList();
-	MemberComparator useMe2 = new MemberComparator();
+	IDHolderComparator useMe2 = new IDHolderComparator();
 	LogMethods<Member> util = new LogMethods(); 
 	
 	public void addMember(Member Member){
