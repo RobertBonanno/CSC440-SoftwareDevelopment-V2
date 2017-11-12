@@ -1,0 +1,16 @@
+For each use Case:
+-------------------------------------------------------------
+Define actors:
+	-
+
+Title -  As a ___ I want to be able to ___
+	-
+
+Story:
+   *Define primary workflow
+   *Define alternative paths such as error conditions
+	-
+
+Acceptance Criteria:
+   *What can you do at the end to determine if the story was completed successful
+	-
