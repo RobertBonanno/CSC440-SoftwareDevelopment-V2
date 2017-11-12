@@ -32,7 +32,9 @@ public class Service {
 		this.serviceFee = serviceFee;
 		this.serviceDescrp = serviceDescrp;
 	}
+
 	
+////////////////////////////
 	/**
 	 * 
 	 * @return name of service
