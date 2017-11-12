@@ -10,10 +10,7 @@ public interface IDHolder {
 	
 	//Address IDHaddress;
 
-	
-	
-	
-	
+
 	public String getName(); 
 
 	public String getEmail();

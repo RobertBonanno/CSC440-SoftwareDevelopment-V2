@@ -22,6 +22,11 @@ public class Provider implements IDHolder{
 		ProviderName = name;
 	}
 	
+	private void addService(Service service){
+		if(util.listed(service, ServicesOffered, useMe2)){}
+		ServicesOffered.add(service);
+	}
+	
 	@Override
 	public int getIDNum() {
 		return ProviderIDNum;
@@ -76,8 +81,4 @@ public class Provider implements IDHolder{
 		
 	}
 	
-	private void addService(Service service){
-		if(util.listed(service, ServicesOffered, useMe2)){}
-		ServicesOffered.add(service);
-	}
 }
