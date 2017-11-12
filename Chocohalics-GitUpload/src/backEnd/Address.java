@@ -1,6 +1,6 @@
 package backEnd;
 
-public class address {
+public class Address {
 
 	private String street;
 	private String city;
@@ -12,7 +12,7 @@ public class address {
 	 * constructor of address class, allows instance to be seen
 	 */
 	
-	address(){
+	Address(){
 		street = "x";
 		city = "y";
 		state = "z";
@@ -27,7 +27,7 @@ public class address {
 	 * @param zipCode is an int value of the areas zipCode 
 	 */
 	
-	address(String street, String city, String state, int zipCode){
+	Address(String street, String city, String state, int zipCode){
 		this.street = street;
 		this.city = city;
 		this.state = state;
