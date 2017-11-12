@@ -5,14 +5,32 @@ public class Terminal {
 	String UIType;
 	UI IO; 
 
-	public void IOType(String output){
-		switch(UIType){
+	public Terminal(String ioType){
+		IOType(ioType); 
+	}
+	
+	public void IOType(String ioType){
+		switch(ioType){
 		case "Console":
-			Console.setOutput(output); 
+			IO = new Console();  
 			break;
 		case "GUI":
-			GUI.setOutput(output);
+			IO = new GUI();
 			break;
 		}
 	}
+	
+	public void setOutput(String output) {
+		IO.setOutput(output);
+	}
+
+	public String readInput() {
+		return IO.readInput();
+		
+	}
+
+	public String readCard() {
+		return IO.readCard();
+	}
+	
 }
