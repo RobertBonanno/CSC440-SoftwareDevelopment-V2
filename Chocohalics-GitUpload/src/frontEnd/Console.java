@@ -19,9 +19,11 @@ public class Console extends UI {
 	}
 	
 	@Override
-	public String readText() {
-		return in.nextLine(); 
-		
+	public String readText() throws IllegalArgumentException{
+		String input = in.nextLine(); 
+		if(input.length()>25)
+			throw new IllegalArgumentException();
+		return input;
 	}
 
 	@Override
