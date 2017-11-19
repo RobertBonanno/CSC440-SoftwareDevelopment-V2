@@ -1,5 +1,7 @@
 package frontEnd;
 
+import java.util.concurrent.TimeoutException;
+
 public class Terminal {
 	
 	UI IO; 
@@ -37,17 +39,18 @@ public class Terminal {
 	 * passes the user input down the chain of responsibility to the correct IO class. Either GUI or Console. 
 	 * @return: The input that was entered by the user.
 	 */
-	public String readInput() {
-		return IO.readInput();
+	public String readText() {
+		return IO.readText();
 		
 	}
 	
 	/**
 	 * passes the card input down the chain of responsibility to the correct IO class. Either GUI or Console. 
 	 * @return: The input that was read from the card
+	 * @throws TimeoutException 
 	 */
-	public String readCard() {
-		return IO.readCard();
+	public int readInt() throws TimeoutException {
+		return IO.readInt();
 	}
 	
 }

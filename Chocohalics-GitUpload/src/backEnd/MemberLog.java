@@ -20,6 +20,20 @@ public class MemberLog extends DataStore{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Member search(int uid) throws IndexOutOfBoundsException{
+		//remove this code from testing
+		Address temp = new Address("123 flossmore", "Delightberg", "Heaven", 77777);
+		Member trial = new Member("Valid", 12345, "Paul", temp);
+		
+		
+		if(trial.getIDNum()!=uid)
+			throw new IndexOutOfBoundsException();
+		
+		return trial;
+		
+		
+	}
 
 	@Override
 	public void writeToDisk() {

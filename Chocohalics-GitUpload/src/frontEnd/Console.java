@@ -1,6 +1,8 @@
 package frontEnd;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.TimeoutException;
 
 public class Console extends UI {
 	
@@ -17,15 +19,26 @@ public class Console extends UI {
 	}
 	
 	@Override
-	public String readInput() {
+	public String readText() {
 		return in.nextLine(); 
 		
 	}
 
 	@Override
-	public String readCard() {
-		return in.nextLine(); 
-		
+	public int readInt() throws TimeoutException{
+		int inputAttemptcount = 0;
+		while(in.hasNext()){
+			if(inputAttemptcount>4)
+				break;
+			try{
+				return in.nextInt(); 
+			} catch (InputMismatchException e){
+				in.nextLine();
+				System.out.println("Invalid input. Please try again:");
+				inputAttemptcount++;
+			}
+		}
+		throw new TimeoutException();
 	}
 
 }

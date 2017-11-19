@@ -9,14 +9,14 @@ public class GUI extends UI {
 	}
 
 	@Override
-	public String readInput() {
+	public String readText() {
 		return "No GUI working yet!\nUse the Console God Damn it!";
 		
 	}
 
 	@Override
-	public String readCard() {
-		return "No GUI working yet!\nUse the Console God Damn it!";
+	public int readInt() {
+		return 0;
 		
 	}
 

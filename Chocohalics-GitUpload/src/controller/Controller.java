@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 import backEnd.*;
 import frontEnd.Terminal;
@@ -23,11 +24,11 @@ public class Controller {
 	
 	//===========Provider Stuff=================
 	public Provider AddProvider(){
-		return provider;
+		return null;
 	}
 		
 	public Provider EditProvider(){
-			return provider;
+		return null;
 	}
 	
 	public void CreateProviderDirectory(){
@@ -37,15 +38,28 @@ public class Controller {
 	
 	//==========Member Stuff=================
 	public Member AddMember(){
-		return member;
+		return null;
 	}
 	
 	public Member DeleteMember(){
-		return member;
+		return null;
 	}
 	
-	public Member ValidateMember(){
-		return member;
+	public String ValidateMember(int uid){
+		Member temp;
+		
+		try{
+			temp = memberLog.search(uid);
+			switch(temp.getStatus()){
+			case "Valid": return "Welcome";
+			case "Suspended": return "Your membership has been suspended. Pay us to reinstate your membership.";
+			}
+		
+		}catch(IndexOutOfBoundsException e){
+			//e.printStackTrace();
+		}
+		
+		return "You are not a member yet. Please consider joining us to receive the benefits of being a member.";
 	}
 	
 	
@@ -55,21 +69,25 @@ public class Controller {
 	 * @return
 	 */
 	public Service AddService(){
-		return service; 
+		return null; 
 	}
 	
 	public Service EditServiceLog(){
-		return service;
+		return null;
 	}
 	
 	
 	//=============Terminal Stuff==================
-	public String WriteToTerminal(){
-		return "";
+	public void WriteToTerminal(String message){
+		terminal.setOutput(message);
 	}
 	
-	public void ReadFromTerminal(){
-		
+	public int ReadIntFromTerminal() throws TimeoutException{
+		return terminal.readInt();
+	}
+	
+	public String ReadFromTerminal(){
+		return terminal.readText();
 	}
 	
 	//============Transactions==================

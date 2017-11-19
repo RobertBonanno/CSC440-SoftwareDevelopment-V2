@@ -1,5 +1,7 @@
 package frontEnd;
 
+import java.util.concurrent.TimeoutException;
+
 public abstract class UI {
 	
 	String output;
@@ -7,9 +9,9 @@ public abstract class UI {
 	
 	public abstract void setOutput(String output);
 	
-	public abstract String readInput();
+	public abstract String readText();
 	
-	public abstract String readCard(); 
+	public abstract int readInt() throws TimeoutException; 
 	
 
 }
