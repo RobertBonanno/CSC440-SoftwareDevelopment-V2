@@ -1,11 +1,11 @@
-package backEnd;	//new
+package backEnd;
 
 import java.util.ArrayList;
 
 public class Member implements IDHolder{
 
 	String Status;
-	int MemberIDNum;
+	int MemberID;
 	String MembererName = "";
 	Address HomeAddress = new Address();
 	//LogMethods<Service> util = new LogMethods(); 
@@ -13,6 +13,13 @@ public class Member implements IDHolder{
 
 	private Member(){
 		
+	}
+	
+	private Member(String stat, int ID, String name, Address home){
+		Status = stat;
+		MemberID = ID;
+		MembererName = name;
+		HomeAddress = home;
 	}
 	
 	/**
@@ -27,13 +34,21 @@ public class Member implements IDHolder{
 	/**
 	 * 
 	 * @param status is an attribute unique to members that can take one of multiple states
-	 * 	()
-	 *  ()
-	 *  ()
+	 * 	switch case verz is more secure/reliable
 	 */
-	public void setStatus(String status) {
-			Status = status;
-	}
+	//public void setStatus(String status) {
+	//		Status = status;
+	//}
+	
+	public void setStatus(int status) {
+		switch(status){
+		case 1: Status = "VALID";
+		case 2: Status = "SUSPENDED";
+		case 3: Status = "INVALID";
+		}
+		
+	
+}
 	
 	private void seekService(){
 		
@@ -53,8 +68,8 @@ public class Member implements IDHolder{
 
 
 	@Override
-	public int getIDNum() {
-		return MemberIDNum;
+	public int getID() {
+		return MemberID;
 	}
 
 

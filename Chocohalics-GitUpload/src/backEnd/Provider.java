@@ -1,11 +1,11 @@
-package backEnd; //new
+package backEnd; 
 
 import java.util.ArrayList;
 
 //import java.util.List;
 public class Provider implements IDHolder{
 
-	int ProviderIDNum;
+	int ProviderID;
 	String ProviderName = "";
 	Address WorkAddress = new Address();
 	ArrayList ServicesOffered = new ArrayList();
@@ -13,24 +13,29 @@ public class Provider implements IDHolder{
 	ServiceComparator useMe2 = new ServiceComparator();
 	
 	private Provider(){
-		ProviderIDNum = 0;
+		ProviderID = 0;
 		ProviderName = "x";
 	}
 	
-	private Provider(int num, String name){
-		ProviderIDNum = num;
+	private Provider(int ID, String name){
+		ProviderID = ID;
 		ProviderName = name;
 	}
 	
-	private void addService(Service service){
+	//private void addService(Service service){
+	//	if(util.listed(service, ServicesOffered, useMe2)){}
+	//	ServicesOffered.add(service);
+	//}
+	
+	protected void addService(Service service){
 		if(util.listed(service, ServicesOffered, useMe2)){}
 		ServicesOffered.add(service);
-	}
+	}	
 
 ///////////////////////////////////////////
 	@Override
-	public int getIDNum() {
-		return ProviderIDNum;
+	public int getID() {
+		return ProviderID;
 	}
 
 	@Override
@@ -47,8 +52,8 @@ public class Provider implements IDHolder{
 		return ServicesOffered;
 	}
 
-	public void setIDNum(int providerIDNum) {
-		ProviderIDNum = providerIDNum;
+	public void setIDNum(int providerID) {
+		this.ProviderID = providerID;
 	}
 
 	public void setName(String providerName) {

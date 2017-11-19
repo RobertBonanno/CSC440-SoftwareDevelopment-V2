@@ -76,7 +76,7 @@ public class Service {
 	 * 
 	 * @param serviceName is used to update a name change
 	 */
-	public void setServiceName(String serviceName) {
+	protected void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
 	//public void setServiceID(int serviceID) {
@@ -87,7 +87,7 @@ public class Service {
 	 * 
 	 * @param serviceFee is used to update a price change
 	 */
-	public void setServiceFee(double serviceFee) {
+	protected void setServiceFee(double serviceFee) {
 		this.serviceFee = serviceFee;
 	}
 	
@@ -95,7 +95,7 @@ public class Service {
 	 * 
 	 * @param serviceDescrp replaces old service description with new description
 	 */
-	public void setServiceDescrp(String serviceDescrp) {
+	protected void setServiceDescrp(String serviceDescrp) {
 		this.serviceDescrp = serviceDescrp;
 	}
 }
