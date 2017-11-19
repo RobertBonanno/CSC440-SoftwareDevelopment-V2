@@ -1,0 +1,23 @@
+Test Data:
+2 Valid Members
+2 Suspended Members
+2 Providers
+2 Services
+2 Addresses
+2 Transactions
+Faulty data - like string input when expecting int
+            - String too long
+            - Invalid entry too many times
+            
+---------------------------------------------------
+
+Test Scripts:
+1 for each use case
+---------------------------------------------------
+Login
+Transaction finalization
+Alphabetically organized list of Names
+Member record updates
+Provider record updates
+Member receive Accounting report
+Provider Transaction Report
