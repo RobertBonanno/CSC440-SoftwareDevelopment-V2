@@ -21,7 +21,7 @@ public interface IDHolder {
 	
 	public Address getAddress();
 	
-	public int getIDNum();
+	public int getID();
 
 	public void setName(String iDHname);
 	

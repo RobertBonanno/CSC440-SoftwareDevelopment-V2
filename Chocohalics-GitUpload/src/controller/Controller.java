@@ -60,6 +60,9 @@ public class Controller {
 		}
 		
 		return "You are not a member yet. Please consider joining us to receive the benefits of being a member.";
+=======
+	public Member ValidateMember (){
+		return member;
 	}
 	
 	
