@@ -12,7 +12,7 @@ public class MemberHash extends DataStoreHash {
 	 * @return if mem is not added, notifies the caller to delete duplicate. possible to duplicate members if accidentally given different id numbers.
 	 */
 	@Override
-	public boolean add(int memberID, Member member ){
+	public boolean add(int memberID, Object member ){
 		if(membersHash.get(memberID) == null){
 			membersHash.put(memberID, member);
 			return true;

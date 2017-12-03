@@ -11,7 +11,7 @@ public class ProviderHash extends DataStoreHash{
 	 * @param member
 	 * @return if prov is not added, notifies the caller to delete duplicate. possible to duplicate providers if accidentally given different id numbers.
 	 */
-	public boolean addProv(int providerID, Provider provider ){
+	public boolean add(int providerID, Object provider ){
 		if(providersHash.get(providerID) == null){
 			providersHash.put(providerID, provider);
 			return true;
@@ -19,24 +19,11 @@ public class ProviderHash extends DataStoreHash{
 		return false;
 	}
 	
-	public String addProvR(int providerID, Provider provider ){
-		if(providersHash.get(providerID) == null){
-			providersHash.put(providerID, provider);
-			return "added Provider";
-		}
-		return "Provider already exists";
-	}
-	
-	public void deleteProv(int providerID){
+	public void remove(int providerID){
 		providersHash.put(providerID, null);
 	}
 	
-	public String removeProvR(int providerID){
-		providersHash.put(providerID, null);
-		return "Provider deleted";
-	}
-
-	public String searchProv(int providerID){
+	public String search(int providerID){
 		if(providersHash.get(providerID) == null){
 			return "invalid";
 		}
@@ -61,3 +48,17 @@ public class ProviderHash extends DataStoreHash{
 	}
 	
 }
+
+/*	public String addProvR(int providerID, Provider provider ){
+		if(providersHash.get(providerID) == null){
+			providersHash.put(providerID, provider);
+			return "added Provider";
+		}
+		return "Provider already exists";
+	}
+		public String removeProvR(int providerID){
+		providersHash.put(providerID, null);
+		return "Provider deleted";
+	}
+	*
+	*/
