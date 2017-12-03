@@ -31,12 +31,13 @@ public class MemberHash extends DataStoreHash {
 	 * @return if member is found, calls and returns member class get status
 	 */
 	@Override
-	public String search(int memberID){
+	public Object search(int memberID){
 		if(membersHash.get(memberID) == null){
 			return "invalid";
 		}
 		else
-		return ((Member)membersHash.get(memberID)).getStatus();
+		return membersHash.get(memberID);
+		//return ((Member)membersHash.get(memberID)).getStatus();
 	}
 	
 	public String editMem(int memberID, Member member){
