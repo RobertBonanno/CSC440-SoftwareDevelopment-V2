@@ -12,7 +12,7 @@ public class Address {
 	 * constructor of address class, allows instance to be seen
 	 */
 	
-	Address(){
+	public Address(){
 		street = "x";
 		city = "y";
 		state = "z";
@@ -27,7 +27,7 @@ public class Address {
 	 * @param zipCode is an int value of the areas zipCode 
 	 */
 	
-	Address(String street, String city, String state, int zipCode){
+	public Address(String street, String city, String state, int zipCode){
 		this.street = street;
 		this.city = city;
 		this.state = state;
@@ -60,7 +60,7 @@ public class Address {
 	
 	public String toString(){
 		String address ="";
-		address = street +"\n" + city + state+ zipCode;
+		address = street +", " + city +", " + state +", "+ zipCode;
 		return address;
 	}
 }

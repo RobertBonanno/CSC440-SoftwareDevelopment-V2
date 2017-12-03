@@ -80,16 +80,21 @@ public class MemberHash {
 		System.out.println(date);
 		
 		try {
-			FileWriter writer = new FileWriter("ChocAn Member List"+date.toString());
-			ArrayList<String> memberNames = new ArrayList<String>();
+			FileWriter writer = new FileWriter("ChocAn Member List "+date.toString()+".txt");
+			ArrayList<Member> members = new ArrayList<Member>();
 			
 			
 			for(int i : membersHash.keySet()){
-				memberNames.add(membersHash.get(i).getName());
+				members.add(membersHash.get(i));
 			}
 			
-			memberNames.sort(new IDHolderComparator());
-					
+			Collections.sort(members, new IDHolderComparator());
+			
+			for(Member m : members){
+				writer.write(m.toString()+System.getProperty("line.separator"));
+			}
+			
+			writer.close();
 			
 		} catch (IOException e) {
 			e.printStackTrace();

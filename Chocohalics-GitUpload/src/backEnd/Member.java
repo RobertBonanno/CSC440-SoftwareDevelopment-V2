@@ -99,4 +99,12 @@ public class Member implements IDHolder{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public String toString() {
+		return MembererName+" [Status=" + Status + ", MemberID=" + MemberID + ", HomeAddress=" + HomeAddress + "]";
+	}
+	
+	
 }
