@@ -1,14 +1,9 @@
 package backEnd;
 import java.util.*;
-public class IDHolderComparator implements Comparator{
+public class IDHolderComparator implements Comparator<IDHolder>{
 
 	@Override
-	public int compare(Object o1, Object o2) {
-		Member m1 = (Member) o1;
-		Member m2 = (Member) o2;
-		
-		if(m1.getName() == m2.getName())
-			return 1;
-		return 0;
+	public int compare(IDHolder arg0, IDHolder arg1) {
+		return arg0.getName().compareTo(arg1.getName());
 	}
 }
