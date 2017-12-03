@@ -23,12 +23,13 @@ public class ProviderHash extends DataStoreHash{
 		providersHash.put(providerID, null);
 	}
 	
-	public String search(int providerID){
+	public Object search(int providerID){
 		if(providersHash.get(providerID) == null){
 			return "invalid";
 		}
 		else
-		return "found";//((Provider)providersHash.get(providerID));
+		return (Provider)providersHash.get(providerID);
+		//return "found";//((Provider)providersHash.get(providerID));
 	}
 	
 	public String editProv(int providerID, Provider provider, Service service){
