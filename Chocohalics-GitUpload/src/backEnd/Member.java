@@ -16,9 +16,9 @@ public class Member implements IDHolder{
 	}
 	
 
-	public Member(String status, int memberIDNum, String membererName, Address homeAddress) {
+	public Member(/*String status,*/ int memberIDNum, String membererName, Address homeAddress) {
 		super();
-		Status = status;
+		setStatus(1);
 		MemberID = memberIDNum;
 		MembererName = membererName;
 		HomeAddress = homeAddress;
@@ -45,9 +45,9 @@ public class Member implements IDHolder{
 	
 	public void setStatus(int status) {
 		switch(status){
-		case 1: Status = "VALID";
-		case 2: Status = "SUSPENDED";
-		case 3: Status = "INVALID";
+		case 1: this.Status = "VALID";
+		case 2: this.Status = "SUSPENDED";
+		case 3: this.Status = "INVALID";
 		}
 		
 	
