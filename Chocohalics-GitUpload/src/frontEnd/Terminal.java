@@ -53,10 +53,10 @@ public class Terminal {
 		try {
 			return IO.readInt();
 		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();		//uncomment this line to reinstate timeone exceptions
+			return readInt(); //ignores a timeout exception by calling recursively
+							  //May cause a memory leak
 		}
-		return -1; 
 	}
 	
 }
