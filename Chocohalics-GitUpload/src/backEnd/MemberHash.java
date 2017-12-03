@@ -13,7 +13,7 @@ public class MemberHash extends DataStoreHash {
 	 */
 	@Override
 	public boolean add(int memberID, Object member ){
-		try{
+	
 		if(membersHash.get(memberID) == null){
 			membersHash.put(memberID, member);
 			return true;

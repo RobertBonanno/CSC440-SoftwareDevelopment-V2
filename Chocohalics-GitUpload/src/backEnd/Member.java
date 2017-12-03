@@ -19,7 +19,8 @@ public class Member implements IDHolder{
 	public Member(/*String status, int memberIDNum,*/ String membererName, Address homeAddress) {
 		super();
 		setStatus(1);
-		MemberID = id.nextInt();
+		//MemberID = id.nextInt();
+		MemberID = 7501;
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
