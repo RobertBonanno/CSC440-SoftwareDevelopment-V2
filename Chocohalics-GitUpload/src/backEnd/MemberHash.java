@@ -1,5 +1,6 @@
 package backEnd;
 import java.util.HashMap;
+
 public class MemberHash {
 
 	HashMap membersHash = new HashMap();
@@ -56,12 +57,10 @@ public class MemberHash {
 			membersHash.put(memberID, member);
 		return "edited";
 	}
-	////////////////////////////////////////////////////////////
 
 	@Override
 	public void writeToDisk() {
-		// TODO Auto-generated method stub
+		
 		
 	}
-	///////////////////////////////////////////////////////////
 }

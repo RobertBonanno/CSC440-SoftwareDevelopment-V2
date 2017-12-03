@@ -1,5 +1,6 @@
 package backEnd;
 import java.util.HashMap;
+
 public class ServiceHash {
 
 	HashMap servicesHash = new HashMap();
@@ -69,14 +70,11 @@ public class ServiceHash {
 			((Service)servicesHash.get(serviceID)).setServiceDescrp(descrip);
 		return "service description eddited";
 	}
-	
-	////////////////////////////////////////////////////////////
 
 	@Override
 	public void writeToDisk() {
 		// TODO Auto-generated method stub
 		
 	}
-	///////////////////////////////////////////////////////////
 	
 }

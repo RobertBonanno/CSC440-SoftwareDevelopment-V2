@@ -27,7 +27,7 @@ public class MemberLog extends DataStore{
 		Member trial = new Member("Valid", 12345, "Paul", temp);
 		
 		
-		if(trial.getIDNum()!=uid)
+		if(trial.getID()!=uid)
 			throw new IndexOutOfBoundsException();
 		
 		return trial;

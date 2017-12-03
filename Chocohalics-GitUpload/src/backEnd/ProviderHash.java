@@ -1,5 +1,6 @@
 package backEnd;
 import java.util.HashMap;
+
 public class ProviderHash {
 
 	HashMap providersHash = new HashMap();
@@ -52,14 +53,11 @@ public class ProviderHash {
 		return "service added";
 	}
 	
-	
-	////////////////////////////////////////////////////////////
 
 	@Override
 	public void writeToDisk() {
 		// TODO Auto-generated method stub
 		
 	}
-	///////////////////////////////////////////////////////////
 	
 }

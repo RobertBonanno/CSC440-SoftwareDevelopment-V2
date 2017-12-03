@@ -15,24 +15,16 @@ public class Member implements IDHolder{
 		
 	}
 	
-<<<<<<< HEAD
+
 	Member(String status, int memberIDNum, String membererName, Address homeAddress) {
 		super();
 		Status = status;
-		MemberIDNum = memberIDNum;
+		MemberID = memberIDNum;
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
 
-=======
-	private Member(String stat, int ID, String name, Address home){
-		Status = stat;
-		MemberID = ID;
-		MembererName = name;
-		HomeAddress = home;
-	}
-	
->>>>>>> origin/Doren-11-19
+
 	/**
 	 * 
 	 * @return string state of member status
