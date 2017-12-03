@@ -49,6 +49,8 @@ public class MemberController extends MasterController {
 		id  = terminal.readInt();
 		
 		MemberHash.remove(id); 
+		
+		terminal.setOutput("Member " + id + " has been deleted"); 
 	}
 	
 	public String ValidateMember(int uid){
