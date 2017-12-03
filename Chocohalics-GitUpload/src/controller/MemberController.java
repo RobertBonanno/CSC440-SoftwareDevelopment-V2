@@ -42,8 +42,13 @@ public class MemberController extends MasterController {
 		return newMember; 
 	}
 	
-	public Member DeleteMember(){
-		return null;
+	public void DeleteMember(){
+		int id;
+		
+		terminal.setOutput("Please enter the member ID of the member you wish to delete: "); 
+		id  = terminal.readInt();
+		
+		MemberHash.remove(id); 
 	}
 	
 	public String ValidateMember(int uid){
