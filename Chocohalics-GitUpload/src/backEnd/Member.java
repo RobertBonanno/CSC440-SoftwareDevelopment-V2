@@ -1,13 +1,13 @@
 package backEnd;
 
-import java.util.ArrayList;
-
+import java.util.*;
 public class Member implements IDHolder{
 
 	String Status;
 	int MemberID;
 	String MembererName = "";
 	Address HomeAddress = new Address();
+	Random id = new Random();
 	//LogMethods<Service> util = new LogMethods(); 
 	//ServiceComparator useMe2 = new ServiceComparator();
 
@@ -16,10 +16,10 @@ public class Member implements IDHolder{
 	}
 	
 
-	public Member(/*String status,*/ int memberIDNum, String membererName, Address homeAddress) {
+	public Member(/*String status, int memberIDNum,*/ String membererName, Address homeAddress) {
 		super();
 		setStatus(1);
-		MemberID = memberIDNum;
+		MemberID = id.nextInt();
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
