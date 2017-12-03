@@ -20,7 +20,7 @@ public class MemberController extends MasterController {
 		String street;
 		String city;
 		String state;
-		int zipCode; 
+		int zipCode;
 		
 		
 		terminal.setOutput("Please enter your name: ");
@@ -39,7 +39,7 @@ public class MemberController extends MasterController {
 		
 		Member newMember = new Member(name, address); 
 		
-		return newMember; 
+		return newMember;
 	}
 	
 	public void DeleteMember(){
@@ -48,7 +48,7 @@ public class MemberController extends MasterController {
 		terminal.setOutput("Please enter the member ID of the member you wish to delete: "); 
 		id  = terminal.readInt();
 		
-		MemberHash.remove(id); 
+		MemberHash.remove(id);
 		
 		terminal.setOutput("Member " + id + " has been deleted"); 
 	}

@@ -3,7 +3,7 @@ package controller;
 import backEnd.Provider;
 import backEnd.ProviderHash;
 
-public class ProviderController {
+public class ProviderController extends MasterController{
 	ProviderHash providerHash; 
 	
 	ProviderController(){
@@ -11,8 +11,13 @@ public class ProviderController {
 	}
 	
 	//===========Provider Stuff=================
-	public Provider AddProvider(){
-		return null;
+	public void AddProvider(){
+		
+		String name; 
+		terminal.setOutput("Please enter the provider's name: ");
+		name = terminal.readText();
+		Provider newProvider = new Provider(name);
+		terminal.setOutput(providerHash.addProvR(newProvider.getID(), newProvider));
 	}
 		
 	public Provider EditProvider(){

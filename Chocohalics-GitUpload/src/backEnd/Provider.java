@@ -12,13 +12,13 @@ public class Provider implements IDHolder{
 	LogMethods<Service> util = new LogMethods(); 
 	ServiceComparator useMe2 = new ServiceComparator();
 	
-	private Provider(){
+	public Provider(){
 		ProviderID = 0;
 		ProviderName = "x";
 	}
 	
-	private Provider(int ID, String name){
-		ProviderID = ID;
+	public Provider(String name){
+		ProviderID = 5555;// add in a random number 
 		ProviderName = name;
 	}
 	
