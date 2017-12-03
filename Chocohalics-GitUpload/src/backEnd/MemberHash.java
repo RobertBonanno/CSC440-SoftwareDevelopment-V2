@@ -24,7 +24,6 @@ public class MemberHash extends DataStoreHash {
 	public void remove(int memberID){
 		membersHash.put(memberID, null);
 	}
-	
 
 	/**
 	 * 
@@ -54,6 +53,23 @@ public class MemberHash extends DataStoreHash {
 	public void writeToDisk() {
 		
 		
+	}
+
+
+
+
+
+
+
+
+
+	/**
+	 *  this method only serves for the test case, sould be replaced with a read from disc for security reasons
+	 * @param memberID
+	 * @param member
+	 */
+	public void put(int memberID, Object member ){
+		membersHash.put(memberID, member);
 	}
 }
 
