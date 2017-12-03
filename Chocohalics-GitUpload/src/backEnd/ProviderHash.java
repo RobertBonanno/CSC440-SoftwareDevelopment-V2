@@ -1,7 +1,7 @@
 package backEnd;
 import java.util.HashMap;
 
-public class ProviderHash {
+public class ProviderHash extends DataStoreHash{
 
 	HashMap providersHash = new HashMap();
 	
