@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 public class MemberHash {
+public class MemberHash extends DataStoreHash {
 
 	HashMap<Integer, Member> membersHash;
 	
@@ -39,12 +40,19 @@ public class MemberHash {
 	}
 	
 	
+	@Override
+	public void remove(int memberID){
+		membersHash.put(memberID, null);
+	}
+
 	/**
 	 * 
 	 * @param memberID: The numerical ID for a member. Typically 4-6 digits
 	 * @return if member is found, calls and returns member class get status
 	 */
 	public String searchMem(int memberID){
+	@Override
+	public Object search(int memberID){
 		if(membersHash.get(memberID) == null){
 			return "invalid";
 		}
@@ -102,4 +110,24 @@ public class MemberHash {
 		
 		
 	}
+
+
+
+
+
+
+
+
+
+	/**
+	 *  this method only serves for the test case, sould be replaced with a read from disc for security reasons
+	 * @param memberID
+	 * @param member
+	 */
+	public void put(int memberID, Object member ){
+		membersHash.put(memberID, member);
+	}
+}
+
+
 }

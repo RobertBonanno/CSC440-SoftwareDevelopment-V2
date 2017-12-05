@@ -2,12 +2,15 @@ package backEnd;
 
 import java.util.ArrayList;
 
+import java.util.*;
 public class Member implements IDHolder{
 
 	String Status;
 	int MemberID;
 	String MembererName = "";
+	int MemberID;
 	Address HomeAddress = new Address();
+	Random id = new Random();
 	//LogMethods<Service> util = new LogMethods(); 
 	//ServiceComparator useMe2 = new ServiceComparator();
 
@@ -18,6 +21,11 @@ public class Member implements IDHolder{
 
 	public Member(String membererName, Address homeAddress) {
 		super();
+	public Member(/*String status, int memberIDNum,*/ String membererName, Address homeAddress) {
+		super();
+		setStatus(1);
+		//MemberID = id.nextInt();
+		MemberID = 7501;
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
@@ -46,6 +54,9 @@ public class Member implements IDHolder{
 		case 1: Status = "VALID";
 		case 2: Status = "SUSPENDED";
 		case 3: Status = "INVALID";
+		case 1: this.Status = "VALID";
+		case 2: this.Status = "SUSPENDED";
+		case 3: this.Status = "INVALID";
 		}
 		
 	
