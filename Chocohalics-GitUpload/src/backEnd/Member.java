@@ -11,15 +11,13 @@ public class Member implements IDHolder{
 	//LogMethods<Service> util = new LogMethods(); 
 	//ServiceComparator useMe2 = new ServiceComparator();
 
-	Member(){
+	public Member(){
 		
 	}
 	
 
-	Member(String status, int memberIDNum, String membererName, Address homeAddress) {
+	public Member(String membererName, Address homeAddress) {
 		super();
-		Status = status;
-		MemberID = memberIDNum;
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}

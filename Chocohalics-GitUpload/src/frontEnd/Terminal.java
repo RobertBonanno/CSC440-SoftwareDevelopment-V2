@@ -49,8 +49,14 @@ public class Terminal {
 	 * @return: The input that was read from the card
 	 * @throws TimeoutException 
 	 */
-	public int readInt() throws TimeoutException {
-		return IO.readInt();
+	public int readInt() {
+		try {
+			return IO.readInt();
+		} catch (TimeoutException e) {
+			//e.printStackTrace();		//uncomment this line to reinstate timeone exceptions
+			return readInt(); //ignores a timeout exception by calling recursively
+							  //May cause a memory leak
+		}
 	}
 	
 }
