@@ -22,16 +22,20 @@ public class MemberHash extends DataStoreHash {
 	 * @param member
 	 * @return if mem is not added, notifies the caller to delete duplicate. possible to duplicate members if accidentally given different id numbers.
 	 */
+<<<<<<< HEAD
  	public boolean addMem(int memberID, Member member ){
+=======
 	@Override
 	public boolean add(int memberID, Object member ){
 	
+>>>>>>> Doren-11-19
 		if(membersHash.get(memberID) == null){
 			membersHash.put(memberID, member);
 			return true;
 		}
 		return false;
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * 
@@ -42,11 +46,13 @@ public class MemberHash extends DataStoreHash {
 	}
 	
 	
+=======
 	@Override
 	public void remove(int memberID){
 		membersHash.put(memberID, null);
 	}
 
+>>>>>>> Doren-11-19
 	/**
 	 * 
 	 * @param memberID: The numerical ID for a member. Typically 4-6 digits
@@ -58,9 +64,12 @@ public class MemberHash extends DataStoreHash {
 			return "invalid";
 		}
 		else
+<<<<<<< HEAD
 		return (membersHash.get(memberID)).getStatus();
+=======
 		return membersHash.get(memberID);
 		//return ((Member)membersHash.get(memberID)).getStatus();
+>>>>>>> Doren-11-19
 	}
 	
 	/**
