@@ -1,11 +1,14 @@
 package backEnd;
 
+import java.util.Random;
+
 public class Service {
 
 	String serviceName;
 	int serviceID;
 	double serviceFee;
 	String serviceDescrp;
+	Random id = new Random();
 	
 	/**
 	 * constructor of address class, allows instance to be seen
@@ -26,8 +29,9 @@ public class Service {
 	 * @param serviceDescrp is a string value detailing what occurs during the service
 	 */
 	
-	Service(String serviceName, int serviceID, double serviceFee, String serviceDescrp){
+	Service(String serviceName, double serviceFee, String serviceDescrp){
 		this.serviceName = serviceName;
+		//serviceID = id.nextInt();
 		this.serviceID = serviceID;
 		this.serviceFee = serviceFee;
 		this.serviceDescrp = serviceDescrp;

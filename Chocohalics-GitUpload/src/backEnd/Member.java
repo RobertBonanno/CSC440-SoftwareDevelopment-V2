@@ -39,8 +39,11 @@ public class Member implements IDHolder{
 	
 	/**
 	 * 
-	 * @param status is an attribute unique to members that can take one of multiple states
-	 * 	switch case verz is more secure/reliable
+	 * @param status: attribute unique to members that can take one of the following states:
+	 * case 1 sets status to "VALID" 
+	 * case 2 sets status to "SUSPENDED"
+	 * case 3 sets status to "INVALID"
+	 *  limits typing errors in maintenance
 	 */
 	//public void setStatus(String status) {
 	//		Status = status;
