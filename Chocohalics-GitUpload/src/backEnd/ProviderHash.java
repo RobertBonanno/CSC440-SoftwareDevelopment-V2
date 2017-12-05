@@ -32,7 +32,7 @@ public class ProviderHash extends DataStoreHash{
 		//return "found";//((Provider)providersHash.get(providerID));
 	}
 	
-	public String editProv(int providerID, Provider provider, Service service){
+	public String editProv(int providerID, Service service){
 		if(providersHash.get(providerID) == null){
 			return "invalid";
 		}
