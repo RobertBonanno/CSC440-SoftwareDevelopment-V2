@@ -4,8 +4,8 @@ import java.util.*;
 public class Member implements IDHolder{
 
 	String Status;
-	int MemberID;
 	String MembererName = "";
+	int MemberID;
 	Address HomeAddress = new Address();
 	Random id = new Random();
 	//LogMethods<Service> util = new LogMethods(); 
