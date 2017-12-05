@@ -2,9 +2,12 @@ package controller;
 
 import backEnd.Provider;
 import backEnd.ProviderHash;
+import backEnd.Service;
 
 public class ProviderController extends MasterController{
-	ProviderHash providerHash; 
+	ProviderHash providerHash;
+	Provider provider; 
+	ServiceController
 	
 	ProviderController(){
 		providerHash = new ProviderHash(); 
@@ -26,6 +29,19 @@ public class ProviderController extends MasterController{
 	
 	public void CreateProviderDirectory(){
 		
+	}
+	
+	public void AddService(){
+		int id;
+		terminal.setOutput("Please enter the ID of the provider you wish to add a service to: ");
+		id = terminal.readInt(); 
+		
+
+		
+		Service newService = new Service(); 
+		
+		
+		id = terminal.readInt();
 	}
 
 }
