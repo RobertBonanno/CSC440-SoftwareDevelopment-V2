@@ -15,17 +15,10 @@ public class Member implements IDHolder{
 		
 	}
 	
-
-<<<<<<< HEAD
 	public Member(String membererName, Address homeAddress) {
 		super();
-=======
-	public Member(/*String status, int memberIDNum,*/ String membererName, Address homeAddress) {
-		super();
 		setStatus(1);
-		//MemberID = id.nextInt();
 		MemberID = 7501;
->>>>>>> Doren-11-19
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
