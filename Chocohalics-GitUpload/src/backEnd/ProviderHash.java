@@ -48,6 +48,17 @@ public class ProviderHash extends DataStoreHash{
 		
 	}
 	
+	
+	
+	/**
+	 *  this method only serves for the test case, sould be replaced with a read from disc for security reasons
+	 * @param memberID
+	 * @param member
+	 */
+	public void put(int providerID, Object provider ){
+		providersHash.put(providerID, provider);
+	}
+	
 }
 
 /*	public String addProvR(int providerID, Provider provider ){

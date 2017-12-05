@@ -32,7 +32,7 @@ public class Service {
 	Service(String serviceName, double serviceFee, String serviceDescrp){
 		this.serviceName = serviceName;
 		//serviceID = id.nextInt();
-		this.serviceID = serviceID;
+		this.serviceID = 700;
 		this.serviceFee = serviceFee;
 		this.serviceDescrp = serviceDescrp;
 	}
