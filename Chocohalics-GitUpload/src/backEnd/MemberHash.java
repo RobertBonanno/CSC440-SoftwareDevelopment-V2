@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class MemberHash {
 public class MemberHash extends DataStoreHash {
 
 	HashMap<Integer, Member> membersHash;
@@ -24,6 +23,9 @@ public class MemberHash extends DataStoreHash {
 	 * @return if mem is not added, notifies the caller to delete duplicate. possible to duplicate members if accidentally given different id numbers.
 	 */
  	public boolean addMem(int memberID, Member member ){
+	@Override
+	public boolean add(int memberID, Object member ){
+	
 		if(membersHash.get(memberID) == null){
 			membersHash.put(memberID, member);
 			return true;
@@ -50,7 +52,6 @@ public class MemberHash extends DataStoreHash {
 	 * @param memberID: The numerical ID for a member. Typically 4-6 digits
 	 * @return if member is found, calls and returns member class get status
 	 */
-	public String searchMem(int memberID){
 	@Override
 	public Object search(int memberID){
 		if(membersHash.get(memberID) == null){
@@ -58,6 +59,8 @@ public class MemberHash extends DataStoreHash {
 		}
 		else
 		return (membersHash.get(memberID)).getStatus();
+		return membersHash.get(memberID);
+		//return ((Member)membersHash.get(memberID)).getStatus();
 	}
 	
 	/**
@@ -130,4 +133,27 @@ public class MemberHash extends DataStoreHash {
 }
 
 
+/*
+ * 
+ * 	public boolean add(int memberID, Object member ){
+		if(membersHash.get(memberID) == null){
+			membersHash.put(memberID, member);
+			return true;
+		}
+		return false;
+	}
+ * 
+ * 	public String addMemR(int memberID, Member member ){
+ 
+if(membersHash.get(memberID) == null){
+	membersHash.put(memberID, member);
+	return "added member";
 }
+return "member already exists";
+}
+	public String removeMemR(int memberID){
+			membersHash.put(memberID, null);
+		return "member deleted";
+	}
+*
+*/

@@ -48,3 +48,18 @@ public class ProviderHash extends DataStoreHash{
 		
 	}
 	
+}
+
+/*	public String addProvR(int providerID, Provider provider ){
+		if(providersHash.get(providerID) == null){
+			providersHash.put(providerID, provider);
+			return "added Provider";
+		}
+		return "Provider already exists";
+	}
+		public String removeProvR(int providerID){
+		providersHash.put(providerID, null);
+		return "Provider deleted";
+	}
+	*
+	*/
