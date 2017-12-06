@@ -25,6 +25,7 @@ public class Provider implements IDHolder{
 	Provider(int ID, String name){
 		ProviderID = ID;
 		ProviderName = name;
+		WorkAddress = new Address(); //--------------------
 		ServicesOffered = new ArrayList();
 		util = new LogMethods();
 		useMe2 = new ServiceComparator();

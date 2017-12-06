@@ -12,22 +12,17 @@ public class Member implements IDHolder{
 	//ServiceComparator useMe2 = new ServiceComparator();
 
 	public Member(){
-		
+		this.Status = "INVALID";
+		this.MembererName = "x";
+		this.MemberID = -7;
 	}
 	
 
-<<<<<<< HEAD
-	public Member(String membererName, Address homeAddress) {
-		super();
-=======
-	public Member(/*String status, int memberIDNum,*/ String membererName, Address homeAddress) {
 	public Member(String membererName, Address homeAddress) {/*String status, int memberIDNum, > code shouldn't be needed, id and status shouls be automated by constructor for simplicity/integrity*/ 
 		super();
 		setStatus(1);
-		//MemberID = id.nextInt();
 		//MemberID = id.nextInt(); to be used when constructor is known to work, possible issue with hitting same number
 		MemberID = 7501;
->>>>>>> Doren-11-19
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
