@@ -1,4 +1,4 @@
-package backEnd;
+/*package backEnd;
 
 import java.util.ArrayList;
 
@@ -42,9 +42,9 @@ public class MemberLog extends DataStore{
 	}
 //////////////////////////////////////
 	
-	
-	
-	
+
+}*/
+
 	/*
 	private boolean listed(member Member){
 		boolean inList = false;
@@ -65,4 +65,3 @@ public class MemberLog extends DataStore{
 		
 		return inList;
 	}*/
-}

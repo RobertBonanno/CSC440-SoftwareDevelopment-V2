@@ -21,9 +21,11 @@ public class Member implements IDHolder{
 		super();
 =======
 	public Member(/*String status, int memberIDNum,*/ String membererName, Address homeAddress) {
+	public Member(String membererName, Address homeAddress) {/*String status, int memberIDNum, > code shouldn't be needed, id and status shouls be automated by constructor for simplicity/integrity*/ 
 		super();
 		setStatus(1);
 		//MemberID = id.nextInt();
+		//MemberID = id.nextInt(); to be used when constructor is known to work, possible issue with hitting same number
 		MemberID = 7501;
 >>>>>>> Doren-11-19
 		MembererName = membererName;
@@ -42,8 +44,11 @@ public class Member implements IDHolder{
 	
 	/**
 	 * 
-	 * @param status is an attribute unique to members that can take one of multiple states
-	 * 	switch case verz is more secure/reliable
+	 * @param status: attribute unique to members that can take one of the following states:
+	 * case 1 sets status to "VALID" 
+	 * case 2 sets status to "SUSPENDED"
+	 * case 3 sets status to "INVALID"
+	 *  limits typing errors in maintenance
 	 */
 	//public void setStatus(String status) {
 	//		Status = status;
@@ -62,6 +67,8 @@ public class Member implements IDHolder{
 	private void seekService(){
 		
 	}
+	
+	// public String toString
 	
 ///////////////////////////////////////////////	
 	

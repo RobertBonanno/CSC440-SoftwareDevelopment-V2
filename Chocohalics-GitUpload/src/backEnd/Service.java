@@ -1,11 +1,14 @@
 package backEnd;
 
+import java.util.Random;
+
 public class Service {
 
 	String serviceName;
 	int serviceID;
 	double serviceFee;
 	String serviceDescrp;
+	Random id = new Random();
 	
 	/**
 	 * constructor of address class, allows instance to be seen
@@ -28,8 +31,8 @@ public class Service {
 	
 	Service(String serviceName, double serviceFee, String serviceDescrp){
 		this.serviceName = serviceName;
-		
-		serviceID = 5555;
+		//serviceID = id.nextInt();
+		this.serviceID = 700;
 		this.serviceFee = serviceFee;
 		this.serviceDescrp = serviceDescrp;
 	}

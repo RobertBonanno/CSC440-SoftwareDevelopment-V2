@@ -6,20 +6,28 @@ import java.util.ArrayList;
 public class Provider implements IDHolder{
 
 	int ProviderID;
-	String ProviderName = "";
-	Address WorkAddress = new Address();
-	ArrayList ServicesOffered = new ArrayList();
-	LogMethods<Service> util = new LogMethods(); 
-	ServiceComparator useMe2 = new ServiceComparator();
+	String ProviderName;
+	Address WorkAddress;
+	ArrayList ServicesOffered;
+	LogMethods<Service> util; 
+	ServiceComparator useMe2;
 	
 	public Provider(){
 		ProviderID = 0;
 		ProviderName = "x";
+		WorkAddress = new Address();
+		ServicesOffered = new ArrayList();
+		util = new LogMethods();
+		useMe2 = new ServiceComparator();
 	}
 	
-	public Provider(String name){
-		ProviderID = 5555;// add in a random number 
+
+	Provider(int ID, String name){
+		ProviderID = ID;
 		ProviderName = name;
+		ServicesOffered = new ArrayList();
+		util = new LogMethods();
+		useMe2 = new ServiceComparator();
 	}
 	
 	//private void addService(Service service){
@@ -48,8 +56,11 @@ public class Provider implements IDHolder{
 		return WorkAddress;
 	}
 
-	public ArrayList getServicesOffered() {
-		return ServicesOffered;
+	public String getServicesOffered() {
+		String serviceList = "";
+		
+		return "";
+		//return ServicesOffered;
 	}
 
 	public void setIDNum(int providerID) {

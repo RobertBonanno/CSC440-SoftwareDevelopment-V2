@@ -48,9 +48,13 @@ public class MemberHash extends DataStoreHash {
 	
 =======
 	@Override
-	public void remove(int memberID){
+	/*public void remove(int memberID){
 		membersHash.put(memberID, null);
+	}*/
+	public void remove(int memberID){
+		((Member)membersHash.get(memberID)).setStatus(3); //1 = VALID 2 = SUSPENDED 3 = INVALID; limits typing errors in maintenance
 	}
+	
 
 >>>>>>> Doren-11-19
 	/**
