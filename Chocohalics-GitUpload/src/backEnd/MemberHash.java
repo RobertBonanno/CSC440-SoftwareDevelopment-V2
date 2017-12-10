@@ -69,13 +69,17 @@ public class MemberHash extends DataStoreHash {
 	 */
 	@Override
 	public Object search(int memberID){
-		if(membersHash.get(memberID) == null){
-			return "invalid";
-		}
+		if(membersHash.containsKey(memberID))
+			return membersHash.get(memberID);
 		else
-
-		return (membersHash.get(memberID)).getStatus();
-
+			return null;
+	}
+	
+	public String validate(int memberID){
+		if(search(memberID).equals(null))
+			return "INVALID";
+		else
+			return (membersHash.get(memberID)).getStatus();
 	}
 	
 	/**
@@ -85,7 +89,7 @@ public class MemberHash extends DataStoreHash {
 	 * @return
 	 */
 	public String editMem(int memberID, Member member){
-		if(membersHash.get(memberID) == null){
+		if(membersHash.containsKey(memberID)){
 			return "invalid";
 		}
 		else
@@ -127,6 +131,12 @@ public class MemberHash extends DataStoreHash {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	//Temporary method for testing
+	public void add(Member mem) {
+		membersHash.put(mem.getID(), mem);
 		
 	}
 
