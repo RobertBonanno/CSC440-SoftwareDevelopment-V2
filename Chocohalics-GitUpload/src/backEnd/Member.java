@@ -7,22 +7,17 @@ public class Member implements IDHolder{
 	String MembererName = "";
 	int MemberID;
 	Address HomeAddress = new Address();
-	Random id = new Random();
 	//LogMethods<Service> util = new LogMethods(); 
 	//ServiceComparator useMe2 = new ServiceComparator();
 
 	public Member(){
-		this.Status = "INVALID";
-		this.MembererName = "x";
-		this.MemberID = -7;
+
 	}
 	
 
-	public Member(String membererName, Address homeAddress) {/*String status, int memberIDNum, > code shouldn't be needed, id and status shouls be automated by constructor for simplicity/integrity*/ 
-		super();
+	public Member(String membererName, Address homeAddress, int id){
 		setStatus(1);
-		//MemberID = id.nextInt(); to be used when constructor is known to work, possible issue with hitting same number
-		MemberID = 7501;
+		MemberID = id; 
 		MembererName = membererName;
 		HomeAddress = homeAddress;
 	}
@@ -52,8 +47,11 @@ public class Member implements IDHolder{
 	public void setStatus(int status) {
 		switch(status){
 		case 1: this.Status = "VALID";
+			break;
 		case 2: this.Status = "SUSPENDED";
+			break;
 		case 3: this.Status = "INVALID";
+			break;
 		}
 		
 	

@@ -2,6 +2,7 @@ package backEnd;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,17 +21,27 @@ public class MemberHash extends DataStoreHash {
 	 * 
 	 * @param memberID: The numerical ID for a member. Typically 4-6 digits
 	 * @param member
-	 * @return if mem is not added, notifies the caller to delete duplicate. possible to duplicate members if accidentally given different id numbers.
 	 */
 
 	@Override
-	public boolean add(int memberID, Object member ){
-
-		if(membersHash.get(memberID) == null){
-			membersHash.put(memberID, (Member) member);
-			return true;
+	public void add(String name, Address address){
+		Integer id = generateID(); 
+		
+		Member newMember = new Member(name,address,id.intValue());
+		newMember.setStatus(1);
+		membersHash.put(id, newMember); 
+	}
+	
+	private Integer generateID(){
+		Integer id; 
+		while(true){
+			id =(int) (Math.random()*1000.0); 
+			if(membersHash.containsKey(id)){
+				continue; 
+			}
+			break; 
 		}
-		return false;
+		return id;
 	}
 	
 	/**
@@ -48,7 +59,7 @@ public class MemberHash extends DataStoreHash {
 		membersHash.put(memberID, null);
 	}*/
 	public void remove(int memberID){
-		((Member)membersHash.get(memberID)).setStatus(3); //1 = VALID 2 = SUSPENDED 3 = INVALID; limits typing errors in maintenance
+		(membersHash.get(memberID)).setStatus(3); //1 = VALID 2 = SUSPENDED 3 = INVALID; limits typing errors in maintenance
 	}
 
 	/**
@@ -92,10 +103,11 @@ public class MemberHash extends DataStoreHash {
 	public void writeToDisk() {
 		
 		Date date = new Date(System.currentTimeMillis());
+		Time time = new Time(System.currentTimeMillis());
 		System.out.println(date);
 		
 		try {
-			FileWriter writer = new FileWriter("ChocAn Member List "+date.toString()+".txt");
+			FileWriter writer = new FileWriter("ChocAn Member List "+date.toString()+" "+time.getHours()+"-"+time.getMinutes()+".txt");
 			ArrayList<Member> members = new ArrayList<Member>();
 			
 			
@@ -126,14 +138,7 @@ public class MemberHash extends DataStoreHash {
 
 
 
-	/**
-	 *  this method only serves for the test case, sould be replaced with a read from disc for security reasons
-	 * @param memberID
-	 * @param member
-	 */
-	public void put(int memberID, Object member ){
-		membersHash.put(memberID, (Member) member);
-	}
+	
 }
 
 

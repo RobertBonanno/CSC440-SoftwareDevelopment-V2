@@ -33,7 +33,7 @@ public class Console extends UI {
 			if(inputAttemptcount>4)
 				break;
 			try{
-				return in.nextInt(); 
+				return in.nextInt()+in.nextLine().length()*0; 
 			} catch (InputMismatchException e){
 				in.nextLine();
 				System.out.println("Invalid input. Please try again:");
@@ -41,6 +41,10 @@ public class Console extends UI {
 			}
 		}
 		throw new TimeoutException();
+	}
+	
+	public void cleanUp(){
+		in.nextLine();
 	}
 
 }

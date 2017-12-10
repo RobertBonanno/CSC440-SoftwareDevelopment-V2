@@ -2,7 +2,7 @@ package backEnd;
 import java.util.HashMap;
 public abstract class DataStoreHash<T> {
 
-	public abstract boolean add(int ID, Object obj);
+	public abstract void add(String name, Address address);
 		
 	public abstract void remove(int ID);
 	

@@ -15,12 +15,13 @@ public class MemberController extends MasterController {
 	
 	
 	//==========Member Stuff=================
-	public Member AddMember(){
+	public void AddMember(){
 		String name;
 		String street;
 		String city;
 		String state;
 		int zipCode;
+		Member newMember; 
 		
 		
 		terminal.setOutput("Please enter your name: ");
@@ -37,9 +38,9 @@ public class MemberController extends MasterController {
 		
 		Address address = new Address(street, city, state, zipCode);
 		
-		Member newMember = new Member(name, address); 
+		memberHash.add(name, address); 
+	
 		
-		return newMember;
 	}
 	
 	public void DeleteMember(){
@@ -48,15 +49,19 @@ public class MemberController extends MasterController {
 		terminal.setOutput("Please enter the member ID of the member you wish to delete: "); 
 		id  = terminal.readInt();
 		
-		MemberHash.remove(id);
+		memberHash.remove(id);
 		
 		terminal.setOutput("Member " + id + " has been deleted"); 
 	}
 	
 	public String ValidateMember(int uid){
 		String temp;
-		temp = memberHash.searchMem(uid);	
-		return temp; 
+		//temp = memberHash.searchMem(uid);	
+		return ""; 
+	}
+	
+	protected void writeToDisk(){
+		memberHash.writeToDisk();
 	}
 	
 
