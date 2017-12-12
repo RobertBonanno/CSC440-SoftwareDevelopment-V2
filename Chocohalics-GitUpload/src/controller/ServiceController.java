@@ -8,6 +8,7 @@ public class ServiceController extends MasterController{
 	
 
 	ServiceController(){
+		super();
 		serviceHash = new ServiceHash();
 	}
 	//==========Service Stuff====================

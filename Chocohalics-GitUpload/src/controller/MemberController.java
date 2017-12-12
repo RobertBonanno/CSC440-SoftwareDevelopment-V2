@@ -10,7 +10,9 @@ public class MemberController extends MasterController {
 	MemberHash memberHash; 
 	
 	MemberController(){
+		super();
 		memberHash = new MemberHash(); 
+		
 	}
 	
 	
@@ -57,33 +59,51 @@ public class MemberController extends MasterController {
 	}
 	
 	public void EditMember(){//This method is currently a work in progress. 
-		int id;
+		int memberID;
 		terminal.setOutput("Please enter the member ID of the member you wish to delete: "); 
-		id  = terminal.readInt();
+		memberID  = terminal.readInt();
 		
+		while(memberHash.search(memberID) == null){
+			
+			terminal.setOutput("This ID was not found. Please re-enter you ID or enter \"0\" to exit:");
+			memberID = terminal.readInt();
+			
+			if(memberID==0)
+				return;
+		}
 		
+		terminal.setOutput("This is your current information: "+System.lineSeparator()+((Member)memberHash.search(memberID)).toString());
 		
-		
-		
-		terminal.setOutput("Please enter what you would like to change:"
+		terminal.setOutput("What you would like to change?:"
 				+ System.lineSeparator()+"\t1: Status"
 				+ System.lineSeparator()+"\t2: Name"
-				+ System.lineSeparator()+"\t3: Address");
+				+ System.lineSeparator()+"\t3: Address"
+				+ System.lineSeparator()+"\t4: Nothing");
 		int caseNumber = terminal.readInt(); 
 		
 		String name = null;
 		String street = null;
 		String city = null;
 		String state= null;
-		int zipCode = null;
+		int zipCode = 0;
 		
 		switch (caseNumber) {
 		case 1:
 			
+			terminal.setOutput("Which status would you like to switch to:"
+					+ System.lineSeparator()+"\t1: VALID"
+					+ System.lineSeparator()+"\t2: SUSPENDED");
+			int status = terminal.readInt();
+			((Member)memberHash.search(memberID)).setStatus(status);
+			
+			if(!(status==1 || status==2))
+				terminal.setOutput("You have entered an invalid option. Your status was not changed.");
 			break;
 		case 2:
 			terminal.setOutput("Please enter your name: ");
 			name = terminal.readText();
+			
+			((Member)memberHash.search(memberID)).setName(name);
 			break;
 		case 3:
 			terminal.setOutput("Please enter your street name: "); 
@@ -97,16 +117,15 @@ public class MemberController extends MasterController {
 			
 			Address address = new Address(street, city, state, zipCode);
 			
-			memberHash.add(name, address); 
-			
+			((Member)memberHash.search(memberID)).setAddress(address);
 			break;
-			
+		case 4:
+			break;
 		default:
 			break;
 		}
 		
-		
-		if(ValidateMember(memberID).equals(VALID));
+		terminal.setOutput("This is your modified member information: "+System.lineSeparator()+((Member)memberHash.search(memberID)).toString());
 	}
 	
 	public String ValidateMember(int memberID){

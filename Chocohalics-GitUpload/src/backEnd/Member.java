@@ -40,10 +40,6 @@ public class Member implements IDHolder{
 	 * case 3 sets status to "INVALID"
 	 *  limits typing errors in maintenance
 	 */
-	//public void setStatus(String status) {
-	//		Status = status;
-	//}
-	
 	public void setStatus(int status) {
 		switch(status){
 		case 1: this.Status = "VALID";

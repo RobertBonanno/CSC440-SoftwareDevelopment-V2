@@ -26,9 +26,7 @@ public class MemberHash extends DataStoreHash {
 	@Override
 	public void add(String name, Address address){
 		Integer id = generateID(); 
-		
 		Member newMember = new Member(name,address,id.intValue());
-		newMember.setStatus(1);
 		membersHash.put(id, newMember); 
 	}
 	
@@ -43,21 +41,8 @@ public class MemberHash extends DataStoreHash {
 		}
 		return id;
 	}
-	
-	/**
-	 * 
-	 * @param memberID: The numerical ID for a member. Typically 4-6 digits.
-	 */
-	public void deleteMem(int memberID){
-		membersHash.put(memberID, null);
-	}
-	
-	
 
 	@Override
-	/*public void remove(int memberID){
-		membersHash.put(memberID, null);
-	}*/
 	public void remove(int memberID){
 		(membersHash.get(memberID)).setStatus(3); //1 = VALID 2 = SUSPENDED 3 = INVALID; limits typing errors in maintenance
 	}
@@ -150,29 +135,3 @@ public class MemberHash extends DataStoreHash {
 
 	
 }
-
-
-/*
- * 
- * 	public boolean add(int memberID, Object member ){
-		if(membersHash.get(memberID) == null){
-			membersHash.put(memberID, member);
-			return true;
-		}
-		return false;
-	}
- * 
- * 	public String addMemR(int memberID, Member member ){
- 
-if(membersHash.get(memberID) == null){
-	membersHash.put(memberID, member);
-	return "added member";
-}
-return "member already exists";
-}
-	public String removeMemR(int memberID){
-			membersHash.put(memberID, null);
-		return "member deleted";
-	}
-*
-*/

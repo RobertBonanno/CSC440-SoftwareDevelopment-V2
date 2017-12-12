@@ -6,9 +6,12 @@ import backEnd.Member;
 import backEnd.Provider;
 import backEnd.Service;
 
-public class TransactionController {
+public class TransactionController extends MasterController{
 	
-	
+	public TransactionController() {
+		super();
+		
+	}
 	//============Transactions==================
 	
 	public void CreateTransaction (Member member, Date date, Provider provider, Service service, String comments){

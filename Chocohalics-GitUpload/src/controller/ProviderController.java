@@ -7,9 +7,9 @@ import backEnd.Service;
 public class ProviderController extends MasterController{
 	ProviderHash providerHash;
 	Provider provider; 
-	ServiceController
 	
 	ProviderController(){
+		super();
 		providerHash = new ProviderHash(); 
 	}
 	
