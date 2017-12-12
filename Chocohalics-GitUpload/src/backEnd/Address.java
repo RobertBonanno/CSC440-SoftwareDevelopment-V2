@@ -34,6 +34,22 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 	
+	public String getStreet() {
+		return street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public int getZipCode() {
+		return zipCode;
+	}
+
 	/**
 	 * address can change, meant to provide method for changing address
 	 * @param street is a string value of the street name and building number
