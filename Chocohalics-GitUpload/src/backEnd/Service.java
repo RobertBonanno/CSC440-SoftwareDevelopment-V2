@@ -29,10 +29,10 @@ public class Service {
 	 * @param serviceDescrp is a string value detailing what occurs during the service
 	 */
 	
-	Service(String serviceName, double serviceFee, String serviceDescrp){
+	Service(int serviceID, String serviceName, double serviceFee, String serviceDescrp){
 		this.serviceName = serviceName;
 		//serviceID = id.nextInt();
-		this.serviceID = 700;
+		
 		this.serviceFee = serviceFee;
 		this.serviceDescrp = serviceDescrp;
 	}

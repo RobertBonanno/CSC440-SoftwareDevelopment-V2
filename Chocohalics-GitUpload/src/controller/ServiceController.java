@@ -14,23 +14,22 @@ public class ServiceController extends MasterController{
 	//==========Service Stuff====================
 	/**
 	 * Adds a new service to a service log.
-	 * @return
 	 */
-	public Service AddService(){
+	public void AddService(){
 		String serviceName;
 		double fee;
-		String discription; 
+		String description; 
 		
 		
 		terminal.setOutput("Please enter the name of the service:  ");
 		serviceName = terminal.readText();
 		terminal.setOutput("Please enter the fee of the service: ");
 		fee = terminal.readInt(); 
-		terminal.setOutput("Please enter the discription of the service:  ");
-		discription = terminal.readText();
+		terminal.setOutput("Please enter the description of the service:  ");
+		description = terminal.readText();
 		
 		
-		return null; 
+		serviceHash.add(serviceName, fee, description);; 
 	}
 	
 	public Service EditServiceLog(){

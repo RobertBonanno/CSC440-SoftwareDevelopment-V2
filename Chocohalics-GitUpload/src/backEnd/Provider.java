@@ -22,10 +22,10 @@ public class Provider implements IDHolder{
 	}
 	
 
-	Provider(int ID, String name){
+	Provider(String name,Address address,int ID){
 		ProviderID = ID;
 		ProviderName = name;
-		WorkAddress = new Address(); //--------------------
+		WorkAddress = address; 
 		ServicesOffered = new ArrayList();
 		util = new LogMethods();
 		useMe2 = new ServiceComparator();
