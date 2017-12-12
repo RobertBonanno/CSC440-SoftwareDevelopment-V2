@@ -6,7 +6,10 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Vector;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class MemberHash extends DataStoreHash {
 
@@ -15,6 +18,7 @@ public class MemberHash extends DataStoreHash {
 	public MemberHash(){
 		super();
 		membersHash = new HashMap<Integer, Member>() ;
+		map = new HashMap<Integer, Member>();
 	}
 	
 	/**
@@ -28,6 +32,7 @@ public class MemberHash extends DataStoreHash {
 		Integer id = generateID(); 
 		Member newMember = new Member(name,address,id.intValue());
 		membersHash.put(id, newMember); 
+		map.put(id, newMember);
 	}
 	
 	private Integer generateID(){
@@ -122,8 +127,43 @@ public class MemberHash extends DataStoreHash {
 	//Temporary method for testing
 	public void add(Member mem) {
 		membersHash.put(mem.getID(), mem);
-		
 	}
+	
+	
+
+	@Override
+	public String getDataHashType() {
+		return "Member";
+	}
+
+	@Override
+	protected Node getXMLElement(Document doc, Integer i) {
+		Element memberElement = doc.createElement("Member");
+		Member member = membersHash.get(i.intValue());
+		//set id attribute
+		memberElement.setAttribute("id", member.getID()+"");
+		
+		//create name attribute
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "Name", member.getName()));
+		
+		//create status attribute
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "Status", member.getStatus()));
+		
+		//create address street name attribute	
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "Street", member.getAddress().getStreet() ));
+		
+		//create address city attribute
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "City" , member.getAddress().getCity()));
+		
+		//create address state attribute
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "State", member.getAddress().getState()));
+		
+		//create address ZIP attribute
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "ZIP", ""+member.getAddress().getZipCode()));
+		
+		return memberElement;
+	}
+	
 
 
 

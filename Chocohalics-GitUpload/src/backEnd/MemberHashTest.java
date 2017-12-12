@@ -2,24 +2,29 @@ package backEnd;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class MemberHashTest {
 		
+	MemberHash test;
+	
+	@Before
+	public void setUp() throws Exception{
 		MemberHash test = new MemberHash();
 		Address a1  = new Address();
-		Member bob1 = new Member("bob1", a1);
+		Member bob1 = new Member("bob1", a1,1);
 		Address a2  = new Address();
-		Member bob2 = new Member("bob2", a2);
+		Member bob2 = new Member("bob2", a2,2);
 		Address a3  = new Address();
-		Member bob3 = new Member("bob3", a3);
+		Member bob3 = new Member("bob3", a3,3);
 		Address a4  = new Address();
-		Member bob4 = new Member("bob4", a4);
+		Member bob4 = new Member("bob4", a4,4);
 		Address a5  = new Address();
-		Member bob5 = new Member("bob5", a5);
+		Member bob5 = new Member("bob5", a5,5);
 		Address a6  = new Address();
-		Member Robert = new Member("Robert", a6);
-		
+		Member Robert = new Member("Robert", a6,6);
+	}
+	/*
 	@Test
 	public void testAdd() {
 	
@@ -81,5 +86,16 @@ public class MemberHashTest {
 		String output2 = test.editMem(7001, Robert );
 		assertEquals("edited", output2);
 		
+	}
+	*/
+	@Test
+	public void testWriteToXML(){
+		MemberHash test = new MemberHash();
+		Address a1  = new Address("a","b","c",0);
+		Address a2  = new Address("d","e","f",9);
+		test.add("Bob1", a1);
+		test.add("Bob2", a2);
+		
+		test.writeToXML();
 	}
 }
