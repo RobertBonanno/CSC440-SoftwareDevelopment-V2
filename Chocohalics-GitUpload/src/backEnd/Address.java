@@ -34,6 +34,24 @@ public class Address {
 		this.zipCode = zipCode;
 	}
 	
+	
+	
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public void setZipCode(int zipCode) {
+		this.zipCode = zipCode;
+	}
+
 	public String getStreet() {
 		return street;
 	}
@@ -58,7 +76,7 @@ public class Address {
 	 * @param zipCode is an int value of the areas zipCode 
 	 */
 	
-	private void setAddress(String street, String city, String state, int zipCode){
+	protected void setAddress(String street, String city, String state, int zipCode){
 		this.street = street;
 		this.city = city;
 		this.state = state;

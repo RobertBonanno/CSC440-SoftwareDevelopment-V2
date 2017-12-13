@@ -9,7 +9,9 @@ import java.util.HashMap;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class MemberHash extends DataStoreHash {
 
@@ -162,6 +164,83 @@ public class MemberHash extends DataStoreHash {
 		memberElement.appendChild(super.getElementValue(doc, memberElement, "ZIP", ""+member.getAddress().getZipCode()));
 		
 		return memberElement;
+	}
+
+	@Override
+	protected void loadNote(NodeList nodeList) throws Exception{
+		
+		for (int count = 0; count < nodeList.getLength(); count++) {
+			
+			Node tempNode = nodeList.item(count);
+			
+			//Make sure the node is an element node
+			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+				Member member = new Member();
+				
+				
+				if(tempNode.hasAttributes()) {
+					
+					//get attributes names and values -> load into a member
+					NamedNodeMap nodeMap = tempNode.getAttributes();
+					
+					Address address = new Address();
+					
+					for(int i=0; i < nodeMap.getLength(); i++) {
+						
+						Node node = nodeMap.item(i);
+						switch (node.getNodeName()) {
+						
+						case "Name":
+							member.setName(node.getNodeValue());
+							break;
+						
+						case "Status":
+							String status = node.getNodeValue();
+							if(status.equals("VALID"))
+								member.setStatus(1);
+							else if(status.equals("SUSPENDED"))
+								member.setStatus(2);
+							else if(status.equals("INVALID"))
+								member.setStatus(3);
+							else;
+							break;
+						
+						case "Street":
+							address.setStreet(node.getNodeValue());
+							break;
+						
+						case "City":
+							address.setCity(node.getNodeValue());
+							break;
+						
+						case "State":
+							address.setState(node.getNodeValue());
+							break;
+						
+						case "ZIP":
+							address.setZipCode(Integer.parseInt(node.getNodeValue()));
+							break;	
+							
+						default:
+							break;
+						}
+						
+						//add member to the hashmap
+						member.setAddress(address);
+						membersHash.put(member.getID(), member);
+						
+						if(tempNode.hasChildNodes()) {
+							
+							//loop again if has child nodes
+							loadNote(nodeList);
+						}
+						
+					}
+				}
+			}
+			
+		}
+		
 	}
 	
 
