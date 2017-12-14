@@ -5,14 +5,18 @@ import backEnd.Provider;
 import backEnd.Provider;
 import backEnd.ProviderHash;
 import backEnd.Service;
+import backEnd.ServiceHash;
 
 public class ProviderController extends MasterController{
+	ServiceController serviceController;
 	ProviderHash providerHash;
 	Provider provider; 
+	
 	
 	ProviderController(){
 		super();
 		providerHash = new ProviderHash(); 
+		serviceController = new ServiceController();
 	}
 	
 	//===========Provider Stuff=================
@@ -27,12 +31,11 @@ public class ProviderController extends MasterController{
 		terminal.setOutput("Please enter the ID of the provider you wish to add a service to: ");
 		id = terminal.readInt(); 
 		
+		
+		
 
 		
-		//Service newService = new Service(); 
 		
-		
-		id = terminal.readInt();
 	}
 
 
@@ -141,8 +144,8 @@ public class ProviderController extends MasterController{
 		return providerHash.validate(providerID);
 	}
 	
-	protected void writeToDisk(){
-		providerHash.writeToDisk();
+	protected void writeToXML(){
+		providerHash.writeToXML();
 	}
 
 

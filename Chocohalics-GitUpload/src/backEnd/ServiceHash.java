@@ -1,8 +1,21 @@
 package backEnd;
+import java.io.File;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.HashMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class ServiceHash extends DataStoreHash{
 
@@ -11,11 +24,9 @@ public class ServiceHash extends DataStoreHash{
 	
 	public ServiceHash(){ 
 		super();
-		servicesHash = new HashMap<Integer, Member>() ;
+		servicesHash = new HashMap<Integer, Service>() ;
 	}
 	
-	@Override		//--------------------------------------
-	public void add(String name, Address address){}
 	
 	public void add(String name, double fee, String description) {
 		Integer id = generateID(); 
@@ -57,47 +68,16 @@ public class ServiceHash extends DataStoreHash{
 			return "invalid";
 		}
 		else
-		return "found";//((Provider)servicesHash.get(providerID));
+		return "found";
 	}
 	
 	
-	
-	
-	
-	
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-	@Override
-	public void writeToDisk() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public String getDataHashType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	protected Node getXMLElement(Document doc, Integer i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void readFromXML(String FileName) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void writeToXML() {
@@ -106,67 +86,145 @@ public class ServiceHash extends DataStoreHash{
 	}
 
 
+	@Override
+	protected Node getXMLElement(Document doc, Integer i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void readFromXML(String FileName) {
+		// TODO Auto-generated method stub
+		
+	}
+}
 	
+/*	@Override
+	protected Node getXMLElement(Document doc, Integer i) {
+		Element serviceElement = doc.createElement("service");
+		Service service = (Service) servicesHash.get(i.intValue()); //---------------------------------------------
+		//set id attribute
+		serviceElement.setAttribute("id", service.getID()+"");
+		
+		//create name attribute
+		serviceElement.appendChild(super.getElementValue(doc, serviceElement, "Name", service.getName()));
+		serviceElement.appendChild(super.getElementValue(doc, serviceElement, "Fee", service.getFee()));
+		serviceElement.appendChild(super.getElementValue(doc, serviceElement, "Description", service.getDescrp()));
+
+		
+		return serviceElement;
+	}
+
+	
+	@Override
+	public void readFromXML(String FileName) {
+		try {
+			File file = new File(FileName);
+			
+			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			
+			Document doc = dBuilder.parse(file);
+			
+			doc.getDocumentElement().normalize();
+		
+			NodeList nList = doc.getElementsByTagName("service");
+				
+			for(int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				
+				//for debugging
+				System.out.println("Current element"+nNode.getNodeName());
+				
+				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					Service service = new Service();
+					Address address = new Address();
+					
+					service.setID(Integer.parseInt(eElement.getAttribute("id")));
+					service.setName(eElement.getElementsByTagName("Name").item(0).getTextContent());
+					
+					String status = eElement.getElementsByTagName("Status").item(0).getTextContent();
+					if(status.equals("VALID"))
+						service.setStatus(1);
+					else if(status.equals("SUSPENDED"))
+						service.setStatus(2);
+					else if(status.equals("INVALID"))
+						service.setStatus(3);
+					else;
+					
+					address.setStreet(eElement.getElementsByTagName("Street").item(0).getTextContent());
+					address.setCity(eElement.getElementsByTagName("City").item(0).getTextContent());
+					address.setState(eElement.getElementsByTagName("State").item(0).getTextContent());
+					address.setZipCode(Integer.parseInt(eElement.getElementsByTagName("ZIP").item(0).getTextContent()));
+					
+					service.setAddress(address);
+					
+					System.out.println(service.toString());
+					servicesHash.put(service.getID(), service);
+				}
+			}
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
 }
 
-
-/*	
- * 
- * 
- * 
- * 	/**
-	 * 
-	 * @param memberID
-	 * @param member
-	 * @return if prov is not added, notifies the caller to delete duplicate. possible to duplicate providers if accidentally given different id numbers.
-	 
-	public boolean add(int serviceID, Object service ){
-		if(servicesHash.get(serviceID) == null){
-			servicesHash.put(serviceID, service);
-			return true;
+	@Override
+	public void writeToXML() {
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		
+		Date date = new Date(System.currentTimeMillis());
+		Time time = new Time(System.currentTimeMillis());
+		String hashType = getDataHashType();
+		
+		try{
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.newDocument();
+			//add element
+			Element rootElement = doc.createElement("ChocAn_"+hashType);
+			doc.appendChild(rootElement);
+			for(Integer i : servicesHash.keySet()){
+				rootElement.appendChild(getXMLElement(doc, i));
+			}
+			
+			//for output to file
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			//for pretty print
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			DOMSource source = new DOMSource(doc);
+			
+			//write to file
+			@SuppressWarnings("deprecation")
+			StreamResult file = new StreamResult(new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML"));
+			
+			transformer.transform(source, file);
+			
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		return false;
-	}
- * public String addServR(int serviceID, Service service ){
-
-		if(servicesHash.get(serviceID) == null){
-			servicesHash.put(serviceID, service);
-			return "added Provider";
-		}
-		return "Provider already exists";
-	}
-		public String removeServR(int serviceID){
-		servicesHash.put(serviceID, null);
-		return "Provider deleted";
-	}
-	*
-	*
-	*
-	*
-		public String editServ(int serviceID, String name){
-		if(servicesHash.get(serviceID) == null){
-			return "invalid";
-		}
-		else
-			((Service)servicesHash.get(serviceID)).setServiceName(name);;
-		return "service name edited";
-	}
+		
+	}*/
 	
-	public String editServ(int serviceID, double fee){
-		if(servicesHash.get(serviceID) == null){
-			return "invalid";
-		}
-		else
-			((Service)servicesHash.get(serviceID)).setServiceFee(fee);;
-		return "service fee edited";
-	}
 	
-	public String editServDesc(int serviceID, String descrip){
-		if(servicesHash.get(serviceID) == null){
-			return "invalid";
-		}
-		else
-			((Service)servicesHash.get(serviceID)).setServiceDescrp(descrip);
-		return "service description eddited";
-	}
-	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

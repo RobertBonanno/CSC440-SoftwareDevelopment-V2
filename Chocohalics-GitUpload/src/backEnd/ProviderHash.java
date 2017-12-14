@@ -14,7 +14,6 @@ public class ProviderHash extends DataStoreHash{
 	 * @param address object
 	 *  adds provider to providerhash 
 	 */
-	@Override
 	public void add(String name, Address address) {
 		Integer id = generateID(); 
 		Provider newprovider = new Provider(name,address,id.intValue());
@@ -68,11 +67,7 @@ public class ProviderHash extends DataStoreHash{
 	}
 	
 	
-	@Override
-	public void writeToDisk() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 	
@@ -95,6 +90,18 @@ public class ProviderHash extends DataStoreHash{
 	protected Node getXMLElement(Document doc, Integer i) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void writeToXML() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void readFromXML(String FileName) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

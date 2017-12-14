@@ -4,11 +4,12 @@ import java.util.Random;
 
 public class Service {
 
+
+
 	String serviceName;
 	int serviceID;
 	double serviceFee;
 	String serviceDescrp;
-	Random id = new Random();
 	
 	/**
 	 * constructor of address class, allows instance to be seen
@@ -36,7 +37,11 @@ public class Service {
 		this.serviceDescrp = serviceDescrp;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Service [serviceName=" + serviceName + ", serviceID=" + serviceID + ", serviceFee=" + serviceFee
+				+ ", serviceDescrp=" + serviceDescrp + "]";
+	}
 ////////////////////////////
 	/**
 	 * 

@@ -79,16 +79,8 @@ public class ServiceController extends MasterController{
 		case 3:
 			terminal.setOutput("Please enter your new service description: "); 
 			description = terminal.readText();
-			terminal.setOutput("Please enter your city name: "); 
-		 
-			terminal.setOutput("Please enter your state name: "); 
 			
-			terminal.setOutput("Please enter your zip code: "); 
-			//zipCode  = terminal.readInt();
-			
-			
-			
-			((Service)serviceHash.search(serviceID)).setAddress(address);
+			((Service)serviceHash.search(serviceID)).setDescrp(description);
 			break;
 		case 4:
 			break;
@@ -100,70 +92,3 @@ public class ServiceController extends MasterController{
 	}
 	
 }
-
-
-/*
-
-	public void Editservice(){//This method is currently a work in progress. 
-
-		
-
-		
-		terminal.setOutput("This is your current information: "+System.lineSeparator()+((service)serviceHash.search(serviceID)).toString());
-		
-		terminal.setOutput("What you would like to change?:"
-				+ System.lineSeparator()+"\t1: Status"
-				+ System.lineSeparator()+"\t2: Name"
-				+ System.lineSeparator()+"\t3: Address"
-				+ System.lineSeparator()+"\t4: Nothing");
-		int caseNumber = terminal.readInt(); 
-		
-		String name = null;
-		String street = null;
-		String city = null;
-		String state= null;
-		int zipCode = 0;
-		
-		switch (caseNumber) {
-		case 1:
-			
-			terminal.setOutput("Which status would you like to switch to:"
-					+ System.lineSeparator()+"\t1: VALID"
-					+ System.lineSeparator()+"\t2: SUSPENDED");
-			int status = terminal.readInt();
-			((service)serviceHash.search(serviceID)).setStatus(status);
-			
-			if(!(status==1 || status==2))
-				terminal.setOutput("You have entered an invalid option. Your status was not changed.");
-			break;
-		case 2:
-			terminal.setOutput("Please enter your name: ");
-			name = terminal.readText();
-			
-			((service)serviceHash.search(serviceID)).setName(name);
-			break;
-		case 3:
-			terminal.setOutput("Please enter your street name: "); 
-			street  = terminal.readText(); 
-			terminal.setOutput("Please enter your city name: "); 
-			city  = terminal.readText(); 
-			terminal.setOutput("Please enter your state name: "); 
-			state  = terminal.readText(); 
-			terminal.setOutput("Please enter your zip code: "); 
-			zipCode  = terminal.readInt();
-			
-			Address address = new Address(street, city, state, zipCode);
-			
-			((service)serviceHash.search(serviceID)).setAddress(address);
-			break;
-		case 4:
-			break;
-		default:
-			break;
-		}
-		
-		terminal.setOutput("This is your modified service information: "+System.lineSeparator()+((service)serviceHash.search(serviceID)).toString());
-	}
-
-
-*/

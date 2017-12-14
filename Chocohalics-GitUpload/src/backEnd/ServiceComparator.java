@@ -7,7 +7,7 @@ public class ServiceComparator implements Comparator{
 		Service s1 = (Service) o1;
 		Service s2 = (Service) o2;
 		
-		if(s1.getServiceName() == s2.getServiceName())
+		if(s1.getName() == s2.getName())
 			return 1;
 		return 0;
 	}
