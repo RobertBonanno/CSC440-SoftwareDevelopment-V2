@@ -4,21 +4,24 @@ import java.util.*;
 public class Member implements IDHolder{
 
 	String Status;
-	String MembererName = "";
+	String MemberName;
 	int MemberID;
-	Address HomeAddress = new Address();
+	Address HomeAddress;
 	//LogMethods<Service> util = new LogMethods(); 
 	//ServiceComparator useMe2 = new ServiceComparator();
 
 	public Member(){
-
+		Status = "INVALID";
+		MemberName = "";
+		MemberID = -1;
+		HomeAddress = null;
 	}
 	
 
-	public Member(String membererName, Address homeAddress, int id){
+	public Member(String MemberName, Address homeAddress, int id){
 		setStatus(1);
 		MemberID = id; 
-		MembererName = membererName;
+		this.MemberName = MemberName;
 		HomeAddress = homeAddress;
 	}
 
@@ -63,7 +66,7 @@ public class Member implements IDHolder{
 	
 	@Override
 	public String getName() {
-		return MembererName;
+		return MemberName;
 	}
 
 	@Override
@@ -76,11 +79,15 @@ public class Member implements IDHolder{
 	public int getID() {
 		return MemberID;
 	}
+	
+	protected void setID(int id) {
+		MemberID = id;
+	}
 
 
 	@Override
 	public void setName(String iDHname) {
-		MembererName = iDHname;
+		MemberName = iDHname;
 		
 	}
 
@@ -105,7 +112,7 @@ public class Member implements IDHolder{
 
 	@Override
 	public String toString() {
-		return MembererName+" [Status=" + Status + ", MemberID=" + MemberID + ", HomeAddress=" + HomeAddress + "]";
+		return MemberName+" [Status=" + Status + ", MemberID=" + MemberID + ", HomeAddress=" + HomeAddress + "]";
 	}
 	
 	

@@ -1,4 +1,5 @@
 package backEnd;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
@@ -7,9 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class MemberHash extends DataStoreHash {
 
@@ -163,15 +169,58 @@ public class MemberHash extends DataStoreHash {
 		
 		return memberElement;
 	}
-	
-
-
-
-
-
-
-
-
 
 	
+	@Override
+	public void readFromXML(String FileName) {
+		try {
+			File file = new File(FileName);
+			
+			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			
+			Document doc = dBuilder.parse(file);
+			
+			doc.getDocumentElement().normalize();
+		
+			NodeList nList = doc.getElementsByTagName("Member");
+				
+			for(int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				
+				//for debugging
+				System.out.println("Current element"+nNode.getNodeName());
+				
+				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					Member member = new Member();
+					Address address = new Address();
+					
+					member.setID(Integer.parseInt(eElement.getAttribute("id")));
+					member.setName(eElement.getElementsByTagName("Name").item(0).getTextContent());
+					
+					String status = eElement.getElementsByTagName("Status").item(0).getTextContent();
+					if(status.equals("VALID"))
+						member.setStatus(1);
+					else if(status.equals("SUSPENDED"))
+						member.setStatus(2);
+					else if(status.equals("INVALID"))
+						member.setStatus(3);
+					else;
+					
+					address.setStreet(eElement.getElementsByTagName("Street").item(0).getTextContent());
+					address.setCity(eElement.getElementsByTagName("City").item(0).getTextContent());
+					address.setState(eElement.getElementsByTagName("State").item(0).getTextContent());
+					address.setZipCode(Integer.parseInt(eElement.getElementsByTagName("ZIP").item(0).getTextContent()));
+					
+					member.setAddress(address);
+					
+					System.out.println(member.toString());
+					membersHash.put(member.getID(), member);
+				}
+			}
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
 }

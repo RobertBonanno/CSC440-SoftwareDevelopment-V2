@@ -4,6 +4,13 @@ import java.util.Date;
 
 public class Receipt {
 	
+	int identifier;
+	Service service;
+	Member member; 
+	Provider provider;
+	Date dateOfService;
+	String comments;
+	
 	/**
 	 * @param member: The name of the member who is receiving the service
 	 * @param provider: The name of the provider who is providing the service
@@ -11,20 +18,15 @@ public class Receipt {
 	 * @param service: The name of the service provided.
 	 * @param comments: Comments about the service.
 	 */
-	public Receipt(Service service, Member member, Provider provider, Date dateOfService, String comments) {
+	public Receipt(int identifier, Service service, Member member, Provider provider, Date dateOfService, String comments) {
 		super();
+		this.identifier = identifier;
 		this.member = member;
 		this.provider = provider;
 		this.dateOfService = dateOfService;
 		this.service = service;
 		this.comments = comments;
 	}
-	
-	Service service;
-	Member member; 
-	Provider provider;
-	Date dateOfService;
-	String comments;
 	
 
 	@Override
@@ -51,9 +53,11 @@ public class Receipt {
 	public String getComments() {
 		return comments;
 	}
-	
-	
-	
+	public int getIdentifier() {
+		return identifier;
+	}
+
+
 	//---------------------Setters--------------------
 	public void setMember(Member member) {
 		this.member = member;
@@ -70,5 +74,7 @@ public class Receipt {
 	public void setComments(String comments) {
 		this.comments = comments;
 	} 
-
+	public void setIdentifier(int id) {
+		this.identifier = id;
+	}
 }

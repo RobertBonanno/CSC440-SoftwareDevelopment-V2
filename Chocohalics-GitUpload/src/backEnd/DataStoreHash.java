@@ -20,8 +20,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.UserDataHandler;
 
 public abstract class DataStoreHash<T> {
-	
-	HashMap<Integer, T> map;
 
 	public abstract void add(String name, Address address);
 		
@@ -77,9 +75,8 @@ public abstract class DataStoreHash<T> {
 		return node;
 	}
 	
-	public void readFromXML(String FileName){
-		
-	}
+	public abstract void readFromXML(String FileName);
+
 	
 	
 }
