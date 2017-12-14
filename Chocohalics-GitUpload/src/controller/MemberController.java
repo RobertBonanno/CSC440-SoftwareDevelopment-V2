@@ -38,7 +38,6 @@ public class MemberController extends MasterController {
 	
 		
 		Address address = new Address(street, city, state, zipCode);
-		
 		memberHash.add(name, address); 
 	}
 	
@@ -133,7 +132,7 @@ public class MemberController extends MasterController {
 	}
 	
 	protected void writeToDisk(){
-		memberHash.writeToDisk();
+		memberHash.writeToXML();
 	}
 	
 

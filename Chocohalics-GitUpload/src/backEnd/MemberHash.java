@@ -1,11 +1,7 @@
 package backEnd;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,11 +14,10 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class MemberHash extends DataStoreHash {
+public class MemberHash extends DataStoreHash<Member> {
 
 	HashMap<Integer, Member> membersHash;
 	
@@ -37,7 +32,7 @@ public class MemberHash extends DataStoreHash {
 	 * @param member
 	 */
 
-	@Override
+	
 	public void add(String name, Address address){
 		Integer id = generateID(); 
 		Member newMember = new Member(name,address,id.intValue());
@@ -67,7 +62,7 @@ public class MemberHash extends DataStoreHash {
 	 * @return if member is found, calls and returns member class get status
 	 */
 	@Override
-	public Object search(int memberID){
+	public Member search(int memberID){
 		if(membersHash.containsKey(memberID))
 			return membersHash.get(memberID);
 		else
@@ -224,6 +219,7 @@ public class MemberHash extends DataStoreHash {
 			DOMSource source = new DOMSource(doc);
 			
 			//write to file
+			@SuppressWarnings("deprecation")
 			StreamResult file = new StreamResult(new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML"));
 			
 			transformer.transform(source, file);

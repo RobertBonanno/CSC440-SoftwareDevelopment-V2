@@ -3,6 +3,7 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,9 +16,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-public class ReceiptLog extends DataStore {
+public class ReceiptLog extends DataStoreHash<Receipt> {
 
-	ArrayList<Receipt> receiptList; 
+	HashMap<Integer, Receipt> receiptList; 
 	
 	/**
 	 * Constructor for the ReceiptLog. 
@@ -26,14 +27,7 @@ public class ReceiptLog extends DataStore {
 	 */
 	public ReceiptLog() {
 		super();
-		receiptList = new ArrayList<Receipt>(); 
-		
-	}
-	
-	/**
-	 * Sorts the receipt List by the date of the service. 
-	 */
-	public void sort() {	
+		receiptList = new HashMap<Integer, Receipt>(); 
 		
 	}
 	
@@ -41,7 +35,7 @@ public class ReceiptLog extends DataStore {
 		Integer id; 
 		while(true){
 			id =(int) (Math.random()*1000.0); 
-			if(receiptList.contains(id)){
+			if(receiptList.containsKey(id)){
 				continue; 
 			}
 			break; 
@@ -72,7 +66,7 @@ public class ReceiptLog extends DataStore {
 			//add element
 			Element rootElement = doc.createElement("ChocAn_"+hashType);
 			doc.appendChild(rootElement);
-			for(Integer i : map.keySet()){
+			for(Integer i : receiptList.keySet()){
 				rootElement.appendChild(getXMLElement(doc, i));
 			}
 			
@@ -84,6 +78,7 @@ public class ReceiptLog extends DataStore {
 			DOMSource source = new DOMSource(doc);
 			
 			//write to file
+			@SuppressWarnings("deprecation")
 			StreamResult file = new StreamResult(new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML"));
 			
 			transformer.transform(source, file);
@@ -94,55 +89,63 @@ public class ReceiptLog extends DataStore {
 		
 	}
 	
-	private Node getXMLElement(Document doc, Integer i) {
+	protected Node getXMLElement(Document doc, Integer i) {
 		Element memberElement = doc.createElement("Member");
-		Receipt member = receiptList.get(i.intValue());
+		Receipt receipt = receiptList.get(i.intValue());
 		//set id attribute
-		memberElement.setAttribute("id", member.getID()+"");
+		memberElement.setAttribute("id", receipt.getIdentifier()+"");
 		
 		//create name attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Name", member.getName()));
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "Member", receipt.getMember()));
 		
 		//create status attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Status", member.getStatus()));
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "Provider", receipt.getProvider()));
 		
 		//create address street name attribute	
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Street", member.getAddress().getStreet() ));
-		
-		//create address city attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "City" , member.getAddress().getCity()));
-		
-		//create address state attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "State", member.getAddress().getState()));
-		
-		//create address ZIP attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "ZIP", ""+member.getAddress().getZipCode()));
+		memberElement.appendChild(super.getElementValue(doc, memberElement, "Service", receipt.getService()));
 		
 		return memberElement;
-	}
-
-	@Override
-	public void search(String identifier) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void add(Receipt receipt) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Object remove(String identifier) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void add(String name, Address address) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(int ID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object search(int ID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDataHashType() {
+		return "Receipt";
+	}
+
+	@Override
+	public void writeToXML() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void readFromXML(String FileName) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
