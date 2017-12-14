@@ -20,8 +20,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.UserDataHandler;
 
 public abstract class DataStoreHash<T> {
-	
-	HashMap<Integer, T> map;
 
 	public abstract void add(String name, Address address);
 		

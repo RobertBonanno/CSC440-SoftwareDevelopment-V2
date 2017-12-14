@@ -104,5 +104,6 @@ public class MemberHashTest {
 		MemberHash test = new MemberHash();
 		
 		test.readFromXML("ChocAnMember_2017-12-13_16-24.XML");
+		test.writeToDisk();
 	}
 }
