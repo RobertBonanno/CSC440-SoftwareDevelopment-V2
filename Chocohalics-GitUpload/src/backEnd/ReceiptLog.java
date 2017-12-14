@@ -113,7 +113,7 @@ public class ReceiptLog extends DataStoreHash<Receipt> {
 		return null;
 	}
 
-	@Override
+
 	public void add(String name, Address address) {
 		// TODO Auto-generated method stub
 		
@@ -126,7 +126,7 @@ public class ReceiptLog extends DataStoreHash<Receipt> {
 	}
 
 	@Override
-	public Object search(int ID) {
+	public Receipt search(int ID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

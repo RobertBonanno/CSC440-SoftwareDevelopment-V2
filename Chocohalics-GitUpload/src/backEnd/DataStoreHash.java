@@ -6,7 +6,7 @@ import org.w3c.dom.Node;
 
 public abstract class DataStoreHash<T> {
 
-
+	//
 		
 	public abstract void remove(int ID);
 	
