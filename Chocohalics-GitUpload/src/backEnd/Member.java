@@ -1,6 +1,10 @@
 package backEnd;
 
 import java.util.*;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 public class Member implements IDHolder{
 
 	String Status;
@@ -115,5 +119,37 @@ public class Member implements IDHolder{
 		return MemberName+" [Status=" + Status + ", MemberID=" + MemberID + ", HomeAddress=" + HomeAddress + "]";
 	}
 	
+	protected Node getXMLElement(Document doc) {
+		Element memberElement = doc.createElement("Member");
+		Member member = this;
+		//set id attribute
+		memberElement.setAttribute("id", member.getID()+"");
+		
+		//create name attribute
+		memberElement.appendChild(getElementValue(doc, memberElement, "Name", getName()));
+		
+		//create status attribute
+		memberElement.appendChild(getElementValue(doc, memberElement, "Status", getStatus()));
+		
+		//create address street name attribute	
+		memberElement.appendChild(getElementValue(doc, memberElement, "Street", HomeAddress.getStreet() ));
+		
+		//create address city attribute
+		memberElement.appendChild(getElementValue(doc, memberElement, "City" , HomeAddress.getCity()));
+		
+		//create address state attribute
+		memberElement.appendChild(getElementValue(doc, memberElement, "State", HomeAddress.getState()));
+		
+		//create address ZIP attribute
+		memberElement.appendChild(getElementValue(doc, memberElement, "ZIP", ""+HomeAddress.getZipCode()));
+		
+		return memberElement;
+	}
+	
+	private Node getElementValue(Document doc, Element element, String name, String value){
+		Element node = doc.createElement(name);
+		node.appendChild(doc.createTextNode(value));
+		return node;
+	}
 	
 }

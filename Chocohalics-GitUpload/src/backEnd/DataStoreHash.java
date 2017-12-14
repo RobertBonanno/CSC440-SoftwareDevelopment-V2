@@ -16,8 +16,6 @@ public abstract class DataStoreHash<T> {
 	
 	public abstract void writeToXML();
 	
-	protected abstract Node getXMLElement(Document doc, Integer i);
-	
 	protected Node getElementValue(Document doc, Element element, String name, String value){
 		Element node = doc.createElement(name);
 		node.appendChild(doc.createTextNode(value));

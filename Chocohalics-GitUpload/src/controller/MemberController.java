@@ -9,6 +9,10 @@ import backEnd.MemberHash;
 public class MemberController extends MasterController {
 	MemberHash memberHash; 
 	
+	MemberController instance;
+	
+	
+	
 	MemberController(){
 		super();
 		memberHash = new MemberHash(); 

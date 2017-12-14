@@ -52,7 +52,50 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		
 	}
 	
-	public void writeToDisk() {
+	protected Node getXMLElement(Document doc, Integer i) {
+		Element receiptElement = doc.createElement("Receipt");
+		Receipt receipt = receiptList.get(i.intValue());
+		//set id attribute
+		receiptElement.setAttribute("id", receipt.getIdentifier()+"");
+		
+		//Add member element	
+		receiptElement.appendChild(receipt.getMember().getXMLElement(doc));
+		
+		//add provider element
+		receiptElement.appendChild(receipt.getProvider().getXMLElement(doc));
+		
+		//create address street name attribute	
+		receiptElement.appendChild(receipt.getService().getXMLElement(doc));
+		
+		return receiptElement;
+	}
+
+
+	public void add(Service service, Member member, Provider provider, Date dateOfService, String comments) {
+		Integer id = generateID();
+		Receipt receipt = new Receipt(id.intValue(), service, member, provider, dateOfService, comments);
+		receiptList.put(id, receipt);
+	}
+
+	@Override
+	public void remove(int ID) {
+		receiptList.remove(ID);
+	}
+
+	@Override
+	public Receipt search(int ID) {
+		if(receiptList.containsKey(ID))
+			return receiptList.get(ID);
+		return null;
+	}
+
+	@Override
+	public String getDataHashType() {
+		return "Receipt";
+	}
+
+	@Override
+	public void writeToXML() {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		
@@ -86,59 +129,11 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
-	}
-	
-	protected Node getXMLElement(Document doc, Integer i) {
-		Element receiptElement = doc.createElement("Receipt");
-		Receipt receipt = receiptList.get(i.intValue());
-		//set id attribute
-		receiptElement.setAttribute("id", receipt.getIdentifier()+"");
-		
-		//Add member element	
-		receiptElement.appendChild(receipt.getMember().getXMLElement(doc));
-		
-		//add provider element
-		receiptElement.appendChild(receipt.getProvider().getXMLElement(doc));
-		
-		//create address street name attribute	
-		receiptElement.appendChild(receipt.getService().getXMLElement(doc));
-		
-		return receiptElement;
-	}
-
-
-	public void add(int id, Service service, Member member, Provider provider, Date dateOfService, String comments) {
-		
-		Receipt receipt = new Receipt(id, service, member, provider, dateOfService, comments);
-	}
-
-	@Override
-	public void remove(int ID) {
-		receiptList.remove(ID);
-		
-	}
-
-	@Override
-	public Receipt search(int ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDataHashType() {
-		return "Receipt";
-	}
-
-	@Override
-	public void writeToXML() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void readFromXML(String FileName) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
