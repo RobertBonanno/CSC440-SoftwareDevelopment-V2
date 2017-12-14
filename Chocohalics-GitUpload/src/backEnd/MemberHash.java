@@ -110,35 +110,6 @@ public class MemberHash extends DataStoreHash<Member> {
 	public String getDataHashType() {
 		return "Member";
 	}
-
-	@Override
-	protected Node getXMLElement(Document doc, Integer i) {
-		Element memberElement = doc.createElement("Member");
-		Member member = membersHash.get(i.intValue());
-		//set id attribute
-		memberElement.setAttribute("id", member.getID()+"");
-		
-		//create name attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Name", member.getName()));
-		
-		//create status attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Status", member.getStatus()));
-		
-		//create address street name attribute	
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Street", member.getAddress().getStreet() ));
-		
-		//create address city attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "City" , member.getAddress().getCity()));
-		
-		//create address state attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "State", member.getAddress().getState()));
-		
-		//create address ZIP attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "ZIP", ""+member.getAddress().getZipCode()));
-		
-		return memberElement;
-	}
-
 	
 	@Override
 	public void readFromXML(String FileName) {
@@ -207,8 +178,10 @@ public class MemberHash extends DataStoreHash<Member> {
 			//add element
 			Element rootElement = doc.createElement("ChocAn_"+hashType);
 			doc.appendChild(rootElement);
+			
+			
 			for(Integer i : membersHash.keySet()){
-				rootElement.appendChild(getXMLElement(doc, i));
+				rootElement.appendChild(membersHash.get(i).getXMLElement(doc));
 			}
 			
 			//for output to file

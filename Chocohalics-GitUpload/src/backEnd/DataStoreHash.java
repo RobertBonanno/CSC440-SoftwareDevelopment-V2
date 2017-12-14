@@ -6,7 +6,7 @@ import org.w3c.dom.Node;
 
 public abstract class DataStoreHash<T> {
 
-
+	//
 		
 	public abstract void remove(int ID);
 	
@@ -15,8 +15,6 @@ public abstract class DataStoreHash<T> {
 	public abstract String getDataHashType();
 	
 	public abstract void writeToXML();
-	
-	protected abstract Node getXMLElement(Document doc, Integer i);
 	
 	protected Node getElementValue(Document doc, Element element, String name, String value){
 		Element node = doc.createElement(name);
