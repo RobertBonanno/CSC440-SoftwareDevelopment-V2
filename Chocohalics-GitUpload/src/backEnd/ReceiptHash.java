@@ -16,7 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-public class ReceiptLog extends DataStoreHash<Receipt> {
+public class ReceiptHash extends DataStoreHash<Receipt> {
 
 	HashMap<Integer, Receipt> receiptList; 
 	
@@ -25,7 +25,7 @@ public class ReceiptLog extends DataStoreHash<Receipt> {
 	 * Calls the DataStore constructor
 	 * then instantiates the recieptList ArrayList. 
 	 */
-	public ReceiptLog() {
+	public ReceiptHash() {
 		super();
 		receiptList = new HashMap<Integer, Receipt>(); 
 		
@@ -90,38 +90,32 @@ public class ReceiptLog extends DataStoreHash<Receipt> {
 	}
 	
 	protected Node getXMLElement(Document doc, Integer i) {
-		Element memberElement = doc.createElement("Member");
+		Element receiptElement = doc.createElement("Receipt");
 		Receipt receipt = receiptList.get(i.intValue());
 		//set id attribute
-		memberElement.setAttribute("id", receipt.getIdentifier()+"");
+		receiptElement.setAttribute("id", receipt.getIdentifier()+"");
 		
-		//create name attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Member", receipt.getMember()));
+		//Add member element	
+		receiptElement.appendChild(receipt.getMember().getXMLElement(doc));
 		
-		//create status attribute
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Provider", receipt.getProvider()));
+		//add provider element
+		receiptElement.appendChild(receipt.getProvider().getXMLElement(doc));
 		
 		//create address street name attribute	
-		memberElement.appendChild(super.getElementValue(doc, memberElement, "Service", receipt.getService()));
+		receiptElement.appendChild(receipt.getService().getXMLElement(doc));
 		
-		return memberElement;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return receiptElement;
 	}
 
 
-	public void add(String name, Address address) {
-		// TODO Auto-generated method stub
+	public void add(int id, Service service, Member member, Provider provider, Date dateOfService, String comments) {
 		
+		Receipt receipt = new Receipt(id, service, member, provider, dateOfService, comments);
 	}
 
 	@Override
 	public void remove(int ID) {
-		// TODO Auto-generated method stub
+		receiptList.remove(ID);
 		
 	}
 
