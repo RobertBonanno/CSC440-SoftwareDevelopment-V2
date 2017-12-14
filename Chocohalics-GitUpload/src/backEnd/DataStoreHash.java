@@ -29,43 +29,7 @@ public abstract class DataStoreHash<T> {
 	
 	public abstract String getDataHashType();
 	
-	public abstract void writeToDisk();
-	
-	public void writeToXML(){
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder;
-		
-		Date date = new Date(System.currentTimeMillis());
-		Time time = new Time(System.currentTimeMillis());
-		String hashType = getDataHashType();
-		
-		try{
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.newDocument();
-			//add element
-			Element rootElement = doc.createElement("ChocAn_"+hashType);
-			doc.appendChild(rootElement);
-			for(Integer i : map.keySet()){
-				rootElement.appendChild(getXMLElement(doc, i));
-			}
-			
-			//for output to file
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			//for pretty print
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			DOMSource source = new DOMSource(doc);
-			
-			//write to file
-			StreamResult file = new StreamResult(new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML"));
-			
-			transformer.transform(source, file);
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
+	public abstract void writeToXML();
 	
 	protected abstract Node getXMLElement(Document doc, Integer i);
 	
