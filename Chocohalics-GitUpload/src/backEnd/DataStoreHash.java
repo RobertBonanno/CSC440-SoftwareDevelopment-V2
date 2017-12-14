@@ -77,83 +77,8 @@ public abstract class DataStoreHash<T> {
 		return node;
 	}
 	
-	public void readFromXML(String FileName){
-		try {
-			File file = new File(FileName);
-			
-			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			
-			Document doc = dBuilder.parse(file);
-			
-			doc.getDocumentElement().normalize();
-		
-			switch (getDataHashType()) {
-			case "Member":
-				
-				NodeList nList = doc.getElementsByTagName("Member");
-				
-				for(int temp = 0; temp < nList.getLength(); temp++) {
-					Node nNode = nList.item(temp);
-					
-					//for debugging
-					System.out.println("Current element"+nNode.getNodeName());
-					
-					if(nNode.getNodeType() == Node.ELEMENT_NODE) {
-						Element eElement = (Element) nNode;
-						Member member = new Member();
-						Address address = new Address();
-						
-						member.setID(Integer.parseInt(eElement.getAttribute("id")));
-						member.setName(eElement.getElementsByTagName("Name").item(0).getTextContent());
-						
-						String status = eElement.getElementsByTagName("Status").item(0).getTextContent();
-						if(status.equals("VALID"))
-							member.setStatus(1);
-						else if(status.equals("SUSPENDED"))
-							member.setStatus(2);
-						else if(status.equals("INVALID"))
-							member.setStatus(3);
-						else;
-						
-						address.setStreet(eElement.getElementsByTagName("Street").item(0).getTextContent());
-						address.setCity(eElement.getElementsByTagName("City").item(0).getTextContent());
-						address.setState(eElement.getElementsByTagName("State").item(0).getTextContent());
-						address.setZipCode(Integer.parseInt(eElement.getElementsByTagName("ZIP").item(0).getTextContent()));
-						
-						member.setAddress(address);
-						
-						System.out.println(member.toString());
-						map.put(member.getID(), (T)member);
-					}
-				}
-				
-				break;
-				
-			case "Provider":
-				
-				
-				break;
-				
-			case "Service":
-				
-				
-				break;
-				
-			case "Receipt":
-				
-				
-				break;
+	public abstract void readFromXML(String FileName);
 
-			default:
-				break;
-			}
-		
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected abstract void loadNote(NodeList nodeList) throws Exception; 
 	
 	
 }
