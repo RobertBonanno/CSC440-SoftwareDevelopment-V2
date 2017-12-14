@@ -10,6 +10,11 @@ import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,7 +29,6 @@ public class MemberHash extends DataStoreHash {
 	public MemberHash(){
 		super();
 		membersHash = new HashMap<Integer, Member>() ;
-		map = new HashMap<Integer, Member>();
 	}
 	
 	/**
@@ -38,7 +42,6 @@ public class MemberHash extends DataStoreHash {
 		Integer id = generateID(); 
 		Member newMember = new Member(name,address,id.intValue());
 		membersHash.put(id, newMember); 
-		map.put(id, newMember);
 	}
 	
 	private Integer generateID(){
@@ -100,35 +103,6 @@ public class MemberHash extends DataStoreHash {
 	 * 
 	 */
 	//@Override
-	public void writeToDisk() {
-		
-		Date date = new Date(System.currentTimeMillis());
-		Time time = new Time(System.currentTimeMillis());
-		System.out.println(date);
-		
-		try {
-			FileWriter writer = new FileWriter("ChocAn Member List "+date.toString()+" "+time.getHours()+"-"+time.getMinutes()+".txt");
-			ArrayList<Member> members = new ArrayList<Member>();
-			
-			
-			for(int i : membersHash.keySet()){
-				members.add(membersHash.get(i));
-			}
-			
-			Collections.sort(members, new IDHolderComparator());
-			
-			for(Member m : members){
-				writer.write(m.toString()+System.getProperty("line.separator"));
-			}
-			
-			writer.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-	}
 	
 	//Temporary method for testing
 	public void add(Member mem) {
@@ -222,5 +196,42 @@ public class MemberHash extends DataStoreHash {
 		e.printStackTrace();
 	}
 }
+
+	@Override
+	public void writeToXML() {
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		
+		Date date = new Date(System.currentTimeMillis());
+		Time time = new Time(System.currentTimeMillis());
+		String hashType = getDataHashType();
+		
+		try{
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.newDocument();
+			//add element
+			Element rootElement = doc.createElement("ChocAn_"+hashType);
+			doc.appendChild(rootElement);
+			for(Integer i : membersHash.keySet()){
+				rootElement.appendChild(getXMLElement(doc, i));
+			}
+			
+			//for output to file
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			//for pretty print
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			DOMSource source = new DOMSource(doc);
+			
+			//write to file
+			StreamResult file = new StreamResult(new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML"));
+			
+			transformer.transform(source, file);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
 
 }
