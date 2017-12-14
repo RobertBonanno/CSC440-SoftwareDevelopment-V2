@@ -1,5 +1,7 @@
 package frontEnd;
 
+import java.util.concurrent.TimeoutException;
+
 public class GUI extends UI {
 
 	@Override
@@ -18,6 +20,12 @@ public class GUI extends UI {
 	public int readInt() {
 		return 0;
 		
+	}
+
+	@Override
+	public double readDouble() throws TimeoutException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

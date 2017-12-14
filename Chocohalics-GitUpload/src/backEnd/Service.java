@@ -31,8 +31,7 @@ public class Service {
 	
 	Service(int serviceID, String serviceName, double serviceFee, String serviceDescrp){
 		this.serviceName = serviceName;
-		//serviceID = id.nextInt();
-		
+		this.serviceID = serviceID;
 		this.serviceFee = serviceFee;
 		this.serviceDescrp = serviceDescrp;
 	}
@@ -43,7 +42,7 @@ public class Service {
 	 * 
 	 * @return name of service
 	 */
-	public String getServiceName() {
+	public String getName() {
 		return serviceName;
 	}
 	
@@ -52,7 +51,7 @@ public class Service {
 	 * 
 	 * @return cost of service
 	 */
-	public double getServiceFee() {
+	public double getFee() {
 		return serviceFee;
 	}
 
@@ -61,7 +60,7 @@ public class Service {
 	 * 
 	 * @return description of service
 	 */
-	public String getServiceDescrp() {
+	public String getDescrp() {
 		return serviceDescrp;
 	}
 	
@@ -70,7 +69,7 @@ public class Service {
 	 * 
 	 * @return unique ID of service
 	 */
-	public int getServiceID() {
+	public int getID() {
 		return serviceID;
 	}
 	
@@ -80,7 +79,7 @@ public class Service {
 	 * 
 	 * @param serviceName is used to update a name change
 	 */
-	protected void setServiceName(String serviceName) {
+	public void setName(String serviceName) {
 		this.serviceName = serviceName;
 	}
 	//public void setServiceID(int serviceID) {
@@ -91,7 +90,7 @@ public class Service {
 	 * 
 	 * @param serviceFee is used to update a price change
 	 */
-	protected void setServiceFee(double serviceFee) {
+	public void setFee(double serviceFee) {
 		this.serviceFee = serviceFee;
 	}
 	
@@ -99,7 +98,7 @@ public class Service {
 	 * 
 	 * @param serviceDescrp replaces old service description with new description
 	 */
-	protected void setServiceDescrp(String serviceDescrp) {
+	public void setDescrp(String serviceDescrp) {
 		this.serviceDescrp = serviceDescrp;
 	}
 }

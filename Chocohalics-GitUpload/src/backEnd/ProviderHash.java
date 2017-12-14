@@ -1,6 +1,9 @@
 package backEnd;
 import java.util.HashMap;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 public class ProviderHash extends DataStoreHash{
 
 	HashMap providersHash = new HashMap();
@@ -80,6 +83,18 @@ public class ProviderHash extends DataStoreHash{
 	 */
 	public void put(int providerID, Object provider ){
 		providersHash.put(providerID, provider);
+	}
+
+	@Override
+	public String getDataHashType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Node getXMLElement(Document doc, Integer i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
