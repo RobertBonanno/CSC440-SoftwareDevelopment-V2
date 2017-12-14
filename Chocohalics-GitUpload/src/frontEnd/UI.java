@@ -13,5 +13,7 @@ public abstract class UI {
 	
 	public abstract int readInt() throws TimeoutException; 
 	
+	public abstract double readDouble() throws TimeoutException; 
+	
 
 }

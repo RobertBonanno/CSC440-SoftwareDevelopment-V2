@@ -47,4 +47,21 @@ public class Console extends UI {
 		in.nextLine();
 	}
 
+	@Override
+	public double readDouble() throws TimeoutException {
+		int inputAttemptcount = 0;
+		while(in.hasNext()){
+			if(inputAttemptcount>4)
+				break;
+			try{
+				return in.nextDouble()+in.nextLine().length()*0; 
+			} catch (InputMismatchException e){
+				in.nextLine();
+				System.out.println("Invalid input. Please try again:");
+				inputAttemptcount++;
+			}
+		}
+		throw new TimeoutException();
+	}
+
 }

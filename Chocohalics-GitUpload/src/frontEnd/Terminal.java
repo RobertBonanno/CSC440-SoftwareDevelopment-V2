@@ -59,4 +59,15 @@ public class Terminal {
 		}
 	}
 	
+	
+	public double readDouble() {
+		try {
+			return IO.readDouble();
+		} catch (TimeoutException e) {
+			//e.printStackTrace();		//uncomment this line to reinstate timeone exceptions
+			return readDouble(); //ignores a timeout exception by calling recursively
+							  //May cause a memory leak
+		}
+	}
+	
 }
