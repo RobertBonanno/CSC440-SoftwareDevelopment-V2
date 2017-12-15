@@ -7,13 +7,13 @@ import frontEnd.Terminal;
 
 public class MasterController {
 	
-	ReceiptLog receiptLog;
-	ServiceLog serviceLog;
+	ReceiptHash receiptHash;
+	ServiceHash serviceHash;
 	protected Terminal terminal;
 	
 	MasterController(){
-		receiptLog = new ReceiptLog();
-		serviceLog = new ServiceLog();
+		receiptHash = new ReceiptHash();
+		serviceHash = new ServiceHash();
 		terminal = new Terminal("Console");
 	}
 

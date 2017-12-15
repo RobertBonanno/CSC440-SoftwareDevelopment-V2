@@ -27,12 +27,41 @@ public class ProviderController extends MasterController{
 	}
 	
 	public void AddService(){
-		int id;
+		int providerID;
+		int serviceID;
+		boolean flag = false;
 		terminal.setOutput("Please enter the ID of the provider you wish to add a service to: ");
-		id = terminal.readInt(); 
+		providerID = terminal.readInt(); 
+		
+		do{
+			if(providerHash.search(providerID) == null ){
+				terminal.setOutput("Provider ID entered was invalid, please enter the ID of the provider you wish to add a service to or enter '0' to exit: ");
+				providerID = terminal.readInt(); 
+				
+				if (providerID != 0)
+					flag = true;
+			}
+			
+			else{
+				terminal.setOutput("Please enter the ID of the Service you wish to add to provider: ");
+				serviceID = terminal.readInt(); 
+				
+				while(serviceController.searchServiceHash(serviceID) == null){
+					terminal.setOutput("Service ID entered was invalid enter the ID of the provider you wish to add a service to or enter '0' to exit: ");
+					serviceID = terminal.readInt(); 
+					
+					if (serviceID == 0) {
+						flag = false;
+						break;
+					}
+				}
+			}
+		}while(flag);
 		
 		
 		
+
+			
 
 		
 		
