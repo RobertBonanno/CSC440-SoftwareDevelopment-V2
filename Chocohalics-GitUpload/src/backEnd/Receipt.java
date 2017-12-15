@@ -2,6 +2,10 @@ package backEnd;
 
 import java.util.Date;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 public class Receipt {
 	
 	int identifier;
@@ -77,4 +81,26 @@ public class Receipt {
 	public void setIdentifier(int id) {
 		this.identifier = id;
 	}
+	
+	//--------------------XML Writing helper-----------
+	protected Node getXMLElement(Document doc) {
+		Element receiptElement = doc.createElement("Receipt");
+		
+		receiptElement.setAttribute("ReceiptID", identifier+"");
+		
+		receiptElement.appendChild(service.getXMLElement(doc));
+		receiptElement.appendChild(member.getXMLElement(doc));
+		receiptElement.appendChild(provider.getXMLElement(doc));
+		receiptElement.appendChild(getElementValue(doc, receiptElement, "Date", dateOfService.toString()));
+		receiptElement.appendChild(getElementValue(doc, receiptElement, "Comments", comments));
+		
+		return receiptElement;
+	}
+
+	private Node getElementValue(Document doc, Element element, String name, String value) {
+		Element node = doc.createElement(name);
+		node.appendChild(doc.createTextNode(value));
+		return node;
+	}
+	
 }

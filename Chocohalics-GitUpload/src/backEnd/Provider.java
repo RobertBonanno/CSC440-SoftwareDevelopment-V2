@@ -107,10 +107,10 @@ public class Provider implements IDHolder{
 		Element providerElement = doc.createElement("Provider");
 		
 		//set id attribute
-		providerElement.setAttribute("id", ProviderID+"");
+		providerElement.setAttribute("ProviderID", ProviderID+"");
 		
 		//create name element
-		providerElement.appendChild(getElementValue(doc, providerElement, "Name", ProviderName));
+		providerElement.appendChild(getElementValue(doc, providerElement, "ProviderName", ProviderName));
 		
 		//create address element
 		providerElement.appendChild(WorkAddress.getXMLElement(doc));
