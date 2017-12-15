@@ -17,9 +17,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class ServiceHash extends DataStoreHash{
+public class ServiceHash extends DataStoreHash<Service>{
 
-	HashMap servicesHash; 
+	HashMap<Integer, Service> servicesHash; 
 	Service newService;
 	
 	public ServiceHash(){ 
@@ -56,7 +56,7 @@ public class ServiceHash extends DataStoreHash{
 	
 	
 	@Override
-	public Object search(int serviceID){
+	public Service search(int serviceID){
 		if(servicesHash.containsKey(serviceID))
 			return servicesHash.get(serviceID);
 		else
@@ -74,100 +74,9 @@ public class ServiceHash extends DataStoreHash{
 	
 	@Override
 	public String getDataHashType() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Service";
 	}
 
-
-	@Override
-	public void writeToXML() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	protected Node getXMLElement(Document doc, Integer i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void readFromXML(String FileName) {
-		// TODO Auto-generated method stub
-		
-	}
-}
-	
-/*	@Override
-	protected Node getXMLElement(Document doc, Integer i) {
-		Element serviceElement = doc.createElement("service");
-		Service service = (Service) servicesHash.get(i.intValue()); //---------------------------------------------
-		//set id attribute
-		serviceElement.setAttribute("id", service.getID()+"");
-		
-		//create name attribute
-		serviceElement.appendChild(super.getElementValue(doc, serviceElement, "Name", service.getName()));
-		serviceElement.appendChild(super.getElementValue(doc, serviceElement, "Fee", service.getFee()));
-		serviceElement.appendChild(super.getElementValue(doc, serviceElement, "Description", service.getDescrp()));
-
-		
-		return serviceElement;
-	}
-
-	
-	@Override
-	public void readFromXML(String FileName) {
-		try {
-			File file = new File(FileName);
-			
-			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			
-			Document doc = dBuilder.parse(file);
-			
-			doc.getDocumentElement().normalize();
-		
-			NodeList nList = doc.getElementsByTagName("service");
-				
-			for(int temp = 0; temp < nList.getLength(); temp++) {
-				Node nNode = nList.item(temp);
-				
-				//for debugging
-				System.out.println("Current element"+nNode.getNodeName());
-				
-				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element eElement = (Element) nNode;
-					Service service = new Service();
-					Address address = new Address();
-					
-					service.setID(Integer.parseInt(eElement.getAttribute("id")));
-					service.setName(eElement.getElementsByTagName("Name").item(0).getTextContent());
-					
-					String status = eElement.getElementsByTagName("Status").item(0).getTextContent();
-					if(status.equals("VALID"))
-						service.setStatus(1);
-					else if(status.equals("SUSPENDED"))
-						service.setStatus(2);
-					else if(status.equals("INVALID"))
-						service.setStatus(3);
-					else;
-					
-					address.setStreet(eElement.getElementsByTagName("Street").item(0).getTextContent());
-					address.setCity(eElement.getElementsByTagName("City").item(0).getTextContent());
-					address.setState(eElement.getElementsByTagName("State").item(0).getTextContent());
-					address.setZipCode(Integer.parseInt(eElement.getElementsByTagName("ZIP").item(0).getTextContent()));
-					
-					service.setAddress(address);
-					
-					System.out.println(service.toString());
-					servicesHash.put(service.getID(), service);
-				}
-			}
-	}catch(Exception e) {
-		e.printStackTrace();
-	}
-}
 
 	@Override
 	public void writeToXML() {
@@ -184,8 +93,10 @@ public class ServiceHash extends DataStoreHash{
 			//add element
 			Element rootElement = doc.createElement("ChocAn_"+hashType);
 			doc.appendChild(rootElement);
+			
+			
 			for(Integer i : servicesHash.keySet()){
-				rootElement.appendChild(getXMLElement(doc, i));
+				rootElement.appendChild(servicesHash.get(i).getXMLElement(doc));
 			}
 			
 			//for output to file
@@ -205,7 +116,47 @@ public class ServiceHash extends DataStoreHash{
 			e.printStackTrace();
 		}
 		
-	}*/
+	}
+
+
+	@Override
+	public void readFromXML(String FileName) {
+		try {
+			File file = new File(FileName);
+			
+			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			
+			Document doc = dBuilder.parse(file);
+			
+			doc.getDocumentElement().normalize();
+		
+			NodeList nList = doc.getElementsByTagName("Service");
+				
+			for(int temp = 0; temp < nList.getLength(); temp++) {
+				Node nNode = nList.item(temp);
+				
+				//for debugging
+				System.out.println("Current element"+nNode.getNodeName());
+				
+				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eElement = (Element) nNode;
+					Service service = new Service();
+					
+					service.setID(Integer.parseInt(eElement.getAttribute("ServiceID")));
+					service.setName(eElement.getElementsByTagName("ServiceName").item(0).getTextContent());
+					
+					service.setFee(Double.parseDouble(eElement.getElementsByTagName("ServiceFee").item(0).getTextContent()));
+					service.setDescrp(eElement.getElementsByTagName("ServiceDescription").item(0).getTextContent());
+					
+					System.out.println(service.toString());
+					servicesHash.put(service.getID(), service);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
 	
 	
 	
