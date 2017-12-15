@@ -48,7 +48,8 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 	 * All of the data from the previous week is deleted.  
 	 */
 	public void clear(){
-		
+		writeToXML();
+		receiptList = new HashMap<Integer, Receipt>();
 	}
 	
 	protected Node getXMLElement(Document doc, Integer i) {
