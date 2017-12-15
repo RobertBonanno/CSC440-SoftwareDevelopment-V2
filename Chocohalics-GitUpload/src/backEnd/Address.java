@@ -1,5 +1,9 @@
 package backEnd;	//new
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 public class Address {
 
 	private String street;
@@ -96,5 +100,22 @@ public class Address {
 		String address ="";
 		address = street +", " + city +", " + state +", "+ zipCode;
 		return address;
+	}
+	
+	protected Node getXMLElement(Document doc) {
+		Element addressElement = doc.createElement("Address");
+		
+		addressElement.appendChild(getElementValue(doc, addressElement, "Street", street));
+		addressElement.appendChild(getElementValue(doc, addressElement, "City", city));
+		addressElement.appendChild(getElementValue(doc, addressElement, "State", state));
+		addressElement.appendChild(getElementValue(doc, addressElement, "ZIP", ""+zipCode));
+		
+		return addressElement;
+	}
+
+	private Node getElementValue(Document doc, Element element, String name, String value) {
+		Element node = doc.createElement(name);
+		node.appendChild(doc.createTextNode(value));
+		return node;
 	}
 }

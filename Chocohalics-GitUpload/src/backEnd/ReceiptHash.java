@@ -2,7 +2,6 @@ package backEnd;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -101,7 +100,7 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		
 		Date date = new Date(System.currentTimeMillis());
 		Time time = new Time(System.currentTimeMillis());
-		String hashType = "Receipt";
+		String hashType = getDataHashType();
 		
 		try{
 			dBuilder = dbFactory.newDocumentBuilder();

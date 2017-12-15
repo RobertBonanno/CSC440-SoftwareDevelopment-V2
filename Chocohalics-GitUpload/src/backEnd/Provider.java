@@ -2,13 +2,17 @@ package backEnd;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 //import java.util.List;
 public class Provider implements IDHolder{
 
 	int ProviderID;
 	String ProviderName;
 	Address WorkAddress;
-	ArrayList ServicesOffered;
+	ArrayList<Service> ServicesOffered;
 	LogMethods<Service> util; 
 	ServiceComparator useMe2;
 	
@@ -16,18 +20,18 @@ public class Provider implements IDHolder{
 		ProviderID = 0;
 		ProviderName = "x";
 		WorkAddress = new Address();
-		ServicesOffered = new ArrayList();
-		util = new LogMethods();
+		ServicesOffered = new ArrayList<Service>();
+		util = new LogMethods<Service>();
 		useMe2 = new ServiceComparator();
 	}
 	
 
-	Provider(String name,Address address,int ID){
+	Provider(String name, Address address, int ID){
 		ProviderID = ID;
 		ProviderName = name;
 		WorkAddress = address; 
-		ServicesOffered = new ArrayList();
-		util = new LogMethods();
+		ServicesOffered = new ArrayList<Service>(); 
+		util = new LogMethods<Service>();
 		useMe2 = new ServiceComparator();
 	}
 	
@@ -57,10 +61,9 @@ public class Provider implements IDHolder{
 		return WorkAddress;
 	}
 
-	public String getServicesOffered() {
-		String serviceList = "";
+	public ArrayList<Service> getServicesOffered() {
 		
-		return "";
+		return ServicesOffered;
 		//return ServicesOffered;
 	}
 
@@ -76,7 +79,7 @@ public class Provider implements IDHolder{
 		WorkAddress = workAddress;
 	}
 
-	public void setServicesOffered(ArrayList servicesOffered) {
+	public void setServicesOffered(ArrayList<Service> servicesOffered) {
 		ServicesOffered = servicesOffered;
 	}
 
@@ -97,6 +100,33 @@ public class Provider implements IDHolder{
 	public void setAddress(Address iDHaddress) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	protected Node getXMLElement(Document doc) {
+		Element providerElement = doc.createElement("Provider");
+		
+		//set id attribute
+		providerElement.setAttribute("id", ProviderID+"");
+		
+		//create name element
+		providerElement.appendChild(getElementValue(doc, providerElement, "Name", ProviderName));
+		
+		//create address element
+		providerElement.appendChild(WorkAddress.getXMLElement(doc));
+		
+		//add service elements
+		for(Service service : ServicesOffered) {
+			providerElement.appendChild(service.getXMLElement(doc));
+		}
+		
+		return providerElement;
+	}
+	
+	private Node getElementValue(Document doc, Element element, String name, String value){
+		Element node = doc.createElement(name);
+		node.appendChild(doc.createTextNode(value));
+		return node;
 	}
 	
 }

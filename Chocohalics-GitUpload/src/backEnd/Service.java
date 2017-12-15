@@ -1,10 +1,10 @@
 package backEnd;
 
-import java.util.Random;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class Service {
-
-
 
 	String serviceName;
 	int serviceID;
@@ -78,6 +78,9 @@ public class Service {
 		return serviceID;
 	}
 	
+	protected void setID(int id) {
+		serviceID = id;
+	}
 	
 	
 	/**
@@ -105,5 +108,25 @@ public class Service {
 	 */
 	public void setDescrp(String serviceDescrp) {
 		this.serviceDescrp = serviceDescrp;
+	}
+	
+	protected Node getXMLElement(Document doc) {
+		Element serviceElement = doc.createElement("Service");
+		
+		serviceElement.setAttribute("ServiceID", ""+serviceID);
+		
+		serviceElement.appendChild(getElementValue(doc, serviceElement, "ServiceName", serviceName));
+		
+		serviceElement.appendChild(getElementValue(doc, serviceElement, "ServiceFee", ""+serviceFee));
+		
+		serviceElement.appendChild(getElementValue(doc, serviceElement, "ServiceDescription", serviceDescrp));
+		
+		return serviceElement;
+	}
+	
+	private Node getElementValue(Document doc, Element element, String name, String value){
+		Element node = doc.createElement(name);
+		node.appendChild(doc.createTextNode(value));
+		return node;
 	}
 }

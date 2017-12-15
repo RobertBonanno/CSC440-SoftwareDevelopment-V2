@@ -1,7 +1,5 @@
 package backEnd;
 
-import java.util.*;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -121,9 +119,9 @@ public class Member implements IDHolder{
 	
 	protected Node getXMLElement(Document doc) {
 		Element memberElement = doc.createElement("Member");
-		Member member = this;
+		
 		//set id attribute
-		memberElement.setAttribute("id", member.getID()+"");
+		memberElement.setAttribute("id", getID()+"");
 		
 		//create name attribute
 		memberElement.appendChild(getElementValue(doc, memberElement, "Name", getName()));
@@ -132,16 +130,7 @@ public class Member implements IDHolder{
 		memberElement.appendChild(getElementValue(doc, memberElement, "Status", getStatus()));
 		
 		//create address street name attribute	
-		memberElement.appendChild(getElementValue(doc, memberElement, "Street", HomeAddress.getStreet() ));
-		
-		//create address city attribute
-		memberElement.appendChild(getElementValue(doc, memberElement, "City" , HomeAddress.getCity()));
-		
-		//create address state attribute
-		memberElement.appendChild(getElementValue(doc, memberElement, "State", HomeAddress.getState()));
-		
-		//create address ZIP attribute
-		memberElement.appendChild(getElementValue(doc, memberElement, "ZIP", ""+HomeAddress.getZipCode()));
+		memberElement.appendChild(HomeAddress.getXMLElement(doc));
 		
 		return memberElement;
 	}

@@ -4,9 +4,9 @@ import java.util.HashMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-public class ProviderHash extends DataStoreHash{
+public class ProviderHash extends DataStoreHash<Provider>{
 
-	HashMap providersHash = new HashMap();
+	HashMap<Integer, Provider> providersHash;
 	
 	/**
 	 * 
@@ -41,21 +41,21 @@ public class ProviderHash extends DataStoreHash{
 		providersHash.put(providerID, null);
 	}
 	
-	public Object search(int providerID){
+	public Provider search(int providerID){
 		if(providersHash.get(providerID) == null){
-			return "invalid";
+			return null;
 		}
 		else
-		return (Provider)providersHash.get(providerID);
+		return providersHash.get(providerID);
 		//return "found";//((Provider)providersHash.get(providerID));
 	}
 	
 	public String editProv(int providerID, Service service){
 		if(providersHash.get(providerID) == null){
-			return "invalid";
+			return "INVALID";
 		}
 		else
-			((Provider)providersHash.get(providerID)).addService(service);
+			(providersHash.get(providerID)).addService(service);
 		return "service added";
 	}
 	
@@ -66,17 +66,12 @@ public class ProviderHash extends DataStoreHash{
 			return true;
 	}
 	
-	
-
-	
-	
-	
 	/**
 	 *  this method only serves for the test case, sould be replaced with a read from disc for security reasons
 	 * @param providerID
 	 * @param provider
 	 */
-	public void put(int providerID, Object provider ){
+	public void put(int providerID, Provider provider){
 		providersHash.put(providerID, provider);
 	}
 
@@ -86,8 +81,8 @@ public class ProviderHash extends DataStoreHash{
 		return null;
 	}
 
-	@Override
-	protected Node getXMLElement(Document doc, Integer i) {
+
+	protected Node getXMLElement(Document doc) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -105,30 +100,3 @@ public class ProviderHash extends DataStoreHash{
 	}
 	
 }
-/*	
-	 * 
-	 * @param providerID
-	 * @param provider
-	 * @return if prov is not added, notifies the caller to delete duplicate. possible to duplicate providers if accidentally given different id numbers.
-	 
-	public boolean add(int providerID, Object provider ){
-		if(providersHash.get(providerID) == null){
-			providersHash.put(providerID, provider);
-			return true;
-		}
-		return false;
-	}
-*/
-/*	public String addProvR(int providerID, Provider provider ){
-		if(providersHash.get(providerID) == null){
-			providersHash.put(providerID, provider);
-			return "added Provider";
-		}
-		return "Provider already exists";
-	}
-		public String removeProvR(int providerID){
-		providersHash.put(providerID, null);
-		return "Provider deleted";
-	}
-	*
-	*/
