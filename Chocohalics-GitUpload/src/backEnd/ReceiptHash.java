@@ -132,7 +132,7 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 
 	@Override
 	public void readFromXML(String FileName) {
-		
+		System.err.println("I ain't reading any receipt logs... Please ask your developer really nicely or buy them dinner to implement this function.");
 		
 	}
 	

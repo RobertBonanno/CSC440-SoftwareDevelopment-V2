@@ -156,16 +156,40 @@ public class ProviderHash extends DataStoreHash<Provider>{
 					Element eElement = (Element) nNode;
 					Provider provider = new Provider();
 					
-					provider.setIDNum(providerID);
+					//set provider ID
+					provider.setIDNum(Integer.parseInt(eElement.getAttribute("ProviderID")));
 					
-					service.setID(Integer.parseInt(eElement.getAttribute("ServiceID")));
-					service.setName(eElement.getElementsByTagName("ServiceName").item(0).getTextContent());
+					//set provider Name
+					provider.setName(eElement.getElementsByTagName("ProviderName").item(0).getTextContent());
 					
-					service.setFee(Double.parseDouble(eElement.getElementsByTagName("ServiceFee").item(0).getTextContent()));
-					service.setDescrp(eElement.getElementsByTagName("ServiceDescription").item(0).getTextContent());
+					//set provider Address
+					Address providerAddress = new Address();
+					providerAddress.setStreet(eElement.getElementsByTagName("Street").item(0).getTextContent());
+					providerAddress.setCity(eElement.getElementsByTagName("City").item(0).getTextContent());
+					providerAddress.setState(eElement.getElementsByTagName("State").item(0).getTextContent());
+					providerAddress.setZipCode(Integer.parseInt(eElement.getElementsByTagName("ZIP").item(0).getTextContent()));
+					provider.setAddress(providerAddress);
 					
-					System.out.println(service.toString());
-					servicesHash.put(service.getID(), service);
+					//add provider Services
+					NodeList eList = eElement.getElementsByTagName("Service");
+					for(int i = 0; i < eList.getLength(); i++) {
+						Node eNode = eList.item(i);
+						
+						if(eNode.getNodeType() == Node.ELEMENT_NODE) {
+							Element serviceElement = (Element) eNode;
+							Service service = new Service();
+							
+							service.setID(Integer.parseInt(serviceElement.getAttribute("ServiceID")));
+							service.setName(serviceElement.getElementsByTagName("ServiceName").item(0).getTextContent());
+							service.setFee(Double.parseDouble(serviceElement.getElementsByTagName("ServiceFee").item(0).getTextContent()));
+							service.setDescrp(serviceElement.getElementsByTagName("ServiceDescription").item(0).getTextContent());
+							
+							provider.addService(service);
+						}
+					}
+					
+					System.out.println(provider.toString());
+					providersHash.put(provider.getID(), provider);
 				}
 			}
 		}catch(Exception e) {
