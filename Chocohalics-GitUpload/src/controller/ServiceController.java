@@ -1,11 +1,14 @@
 package controller;
 
 import backEnd.Address;
+import backEnd.Provider;
+import backEnd.ProviderHash;
 //import backEnd.service;
 import backEnd.Service;
 import backEnd.ServiceHash;
 
 public class ServiceController extends MasterController{
+	/*
 	ServiceHash serviceHash; 
 	
 
@@ -13,6 +16,30 @@ public class ServiceController extends MasterController{
 		super();
 		serviceHash = new ServiceHash();
 	}
+	*/
+	
+	/////////////////--new code for singleton?--/////////////////////////////////////
+	private static ServiceController instance = null;
+ 	
+ 	ServiceHash serviceHash;
+	
+	protected ServiceController(){ 
+		super();
+		serviceHash = new ServiceHash(); 
+	}
+	
+	 static ServiceController getInstance(){ 
+		if(instance == null){
+			instance = new ServiceController() ;
+		}
+
+		return instance;
+	}
+	///////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
 	//==========Service Stuff====================
 	/**
 	 * Adds a new service to a service log.
@@ -29,7 +56,6 @@ public class ServiceController extends MasterController{
 		fee = terminal.readInt(); 
 		terminal.setOutput("Please enter the description of the service:  ");
 		description = terminal.readText();
-		
 		
 		serviceHash.add(serviceName, fee, description);
 	}
@@ -95,4 +121,10 @@ public class ServiceController extends MasterController{
 		return serviceHash.search(serviceID);
 	}
 	
+	public String ListServiceHash(){
+		return serviceHash.toString();
+	}
+	protected void writeToXML(){
+		serviceHash.writeToXML();
+	}
 }

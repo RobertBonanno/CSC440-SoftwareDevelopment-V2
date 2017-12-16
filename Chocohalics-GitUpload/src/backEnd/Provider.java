@@ -41,7 +41,7 @@ public class Provider implements IDHolder{
 	//}
 	
 	protected void addService(Service service){
-		if(util.listed(service, ServicesOffered, useMe2)){}
+		if(!util.listed(service, ServicesOffered, useMe2)){}
 		ServicesOffered.add(service);
 	}	
 
@@ -100,6 +100,13 @@ public class Provider implements IDHolder{
 	public void setAddress(Address iDHaddress) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public String toString() {
+		return "Provider [ProviderID = " + ProviderID + ", ProviderName = " + ProviderName + ", WorkAddress = " + WorkAddress
+				+ ", ServicesOffered = " + ServicesOffered + "]";
 	}
 
 

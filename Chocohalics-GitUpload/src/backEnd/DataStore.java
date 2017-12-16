@@ -24,7 +24,7 @@ public abstract class DataStore<T> {
 	 * Attempts to add the parameter item to summaryList
 	 * @param item is added to summaryList without duplication
 	 */
-	public abstract void add(int identifier, ); 
+	public abstract void add(int identifier); 
 	
 	/**
 	 * Removes the passed in item from the summary list. If the item is not in the list then nothing happens.

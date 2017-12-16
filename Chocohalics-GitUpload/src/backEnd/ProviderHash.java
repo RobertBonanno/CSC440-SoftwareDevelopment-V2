@@ -19,19 +19,43 @@ import org.w3c.dom.NodeList;
 
 public class ProviderHash extends DataStoreHash<Provider>{
 
-	HashMap<Integer, Provider> providersHash;
+/*	HashMap<Integer, Provider> providersHash;
 	
+	
+	
+	public ProviderHash() {
+		super();
+		providersHash = new HashMap<Integer, Provider>();
+	}
+	
+*/
+	/////////////////--new code for singleton?--/////////////////////////////////////
+	private static HashMap<Integer, Provider> providersHash = null; 
+	
+	
+	public ProviderHash(){ 
+		super();
+		if(providersHash == null){
+			providersHash = new HashMap<Integer, Provider>() ;
+		}
+		else{
+			
+		}
+	}
+	/////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * 
 	 * @param name <= 25 char 
 	 * @param address object
 	 *  adds provider to providerhash 
 	 */
-	public void add(String name, Address address) {
+	public Provider add(String name, Address address) {
 		Integer id = generateID(); 
+		//Integer id = 3; //-------------------------------------------------------
 		Provider newprovider = new Provider(name,address,id.intValue());
 		providersHash.put(id, newprovider); 
-		
+		return newprovider;
 	}
 	
 	/**
@@ -64,7 +88,7 @@ public class ProviderHash extends DataStoreHash<Provider>{
 	}
 	
 	public String editProv(int providerID, Service service){
-		if(providersHash.get(providerID) == null){
+		if(providersHash.get(providerID) == null){		//--------------------if this is not used outside providerController Addservice, this is redundant
 			return "INVALID";
 		}
 		else

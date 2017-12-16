@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.HashMap;
+
 import backEnd.Address;
 import backEnd.Provider;
 import backEnd.Provider;
@@ -8,7 +10,8 @@ import backEnd.Service;
 import backEnd.ServiceHash;
 
 public class ProviderController extends MasterController{
-	ServiceController serviceController;
+/*
+ 	ServiceController serviceController;
 	ProviderHash providerHash;
 	Provider provider; 
 	
@@ -18,7 +21,28 @@ public class ProviderController extends MasterController{
 		providerHash = new ProviderHash(); 
 		serviceController = new ServiceController();
 	}
+	*/
 	
+	/////////////////--new code for singleton?--/////////////////////////////////////
+	private static ProviderController instance = null;
+ 	ServiceController serviceController;
+	ProviderHash providerHash;
+	Provider provider; 
+	
+	protected ProviderController(){ 
+		super();
+		providerHash = new ProviderHash(); 
+		serviceController = ServiceController.getInstance();
+	}
+	
+	public static ProviderController getInstance(){ 
+		if(instance == null){
+			instance = new ProviderController() ;
+		}
+
+		return instance;
+	}
+	///////////////////////////////////////////////////////
 	//===========Provider Stuff=================
 
 	
@@ -30,6 +54,7 @@ public class ProviderController extends MasterController{
 		int providerID;
 		int serviceID;
 		boolean flag = false;
+		
 		terminal.setOutput("Please enter the ID of the provider you wish to add a service to: ");
 		providerID = terminal.readInt(); 
 		
@@ -47,7 +72,8 @@ public class ProviderController extends MasterController{
 				serviceID = terminal.readInt(); 
 				
 				while(serviceController.searchServiceHash(serviceID) == null){
-					terminal.setOutput("Service ID entered was invalid enter the ID of the provider you wish to add a service to or enter '0' to exit: ");
+					
+					terminal.setOutput("Service ID entered was invalid enter the ID of the Service you wish to add to provider to or enter '0' to exit: ");
 					serviceID = terminal.readInt(); 
 					
 					if (serviceID == 0) {
@@ -55,23 +81,15 @@ public class ProviderController extends MasterController{
 						break;
 					}
 				}
+				if(serviceController.searchServiceHash(serviceID) != null){
+					providerHash.editProv(providerID, serviceController.searchServiceHash(serviceID));
+					terminal.setOutput("service added to provider: " + providerHash.search(providerID).getServicesOffered());
+				}
 			}
-		}while(flag);
-		
-		
-		
-
-			
-
+		}while(flag);		
 		
 		
 	}
-
-
-
-
-
-
 
 
 	public void AddProvider(){
@@ -81,22 +99,35 @@ public class ProviderController extends MasterController{
 		String state;
 		int zipCode;
 		
+		Provider newprovider;
+		
 		
 		terminal.setOutput("Please enter your name: ");
-		name = terminal.readText(); 
+		//name = terminal.readText(); 
 		terminal.setOutput("Please enter your street name: "); 
-		street  = terminal.readText(); 
+		//street  = terminal.readText(); 
 		terminal.setOutput("Please enter your city name: "); 
-		city  = terminal.readText(); 
+		//city  = terminal.readText(); 
 		terminal.setOutput("Please enter your state name: "); 
-		state  = terminal.readText(); 
+		//state  = terminal.readText(); 
 		terminal.setOutput("Please enter your zip code: "); 
-		zipCode  = terminal.readInt();
+		//zipCode  = terminal.readInt();
 	
+		///*
+		name = "j";
+		street = "j";
+		city = "j";
+		state = "j";
+		zipCode = 0;
+		//*/
 		
 		Address address = new Address(street, city, state, zipCode);
 		
-		providerHash.add(name, address); 
+		newprovider = providerHash.add(name, address); 
+		
+		terminal.setOutput("provider added with following information:"
+				+ System.lineSeparator()+"\t" + newprovider.toString());
+		
 	}
 	
 	public void Deleteprovider(){
@@ -171,6 +202,10 @@ public class ProviderController extends MasterController{
 	
 	public boolean Validateprovider(int providerID){
 		return providerHash.validate(providerID);
+	}
+	
+	public Provider searchProviderHash(int providerID){
+		return providerHash.search(providerID);
 	}
 	
 	protected void writeToXML(){

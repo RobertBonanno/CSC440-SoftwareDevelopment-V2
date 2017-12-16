@@ -13,8 +13,8 @@ public class providerAddServiceTest {
 	@Test
 	public void test() {
 		
-		Service john = new Service("doctor", 2.00, "body health");
-		Provider me = new Provider( 107,  "test");
+		Service john = new Service(78, "doctor", 2.00, "body health");
+		Provider me = new Provider( "john", null,  0);					//---------------------not sure address can be null, this is a testcase, not urgent
 		me.addService(john);
 		
 		testHash.put(107, me);

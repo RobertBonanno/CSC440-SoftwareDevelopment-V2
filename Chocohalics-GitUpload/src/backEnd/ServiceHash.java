@@ -3,6 +3,7 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class ServiceHash extends DataStoreHash<Service>{
-
+/*
 	HashMap<Integer, Service> servicesHash; 
 	Service newService;
 	
@@ -26,12 +27,30 @@ public class ServiceHash extends DataStoreHash<Service>{
 		super();
 		servicesHash = new HashMap<Integer, Service>() ;
 	}
+	*/
+/////////////////--new code for singleton?--/////////////////////////////////////
+	private static HashMap<Integer, Service> servicesHash = null; 
+	Service newService;
+	
+	public ServiceHash(){ 
+		super();
+		if(servicesHash == null){
+			servicesHash = new HashMap<Integer, Service>() ;
+		}
+		else{
+			
+		}
+	}
+	////////////////////////////////////////////////////////////////////////
+	
+	
 	
 	
 	public void add(String name, double fee, String description) {
 		Integer id = generateID(); 
 		newService = new Service(id.intValue(), name, fee, description);
 		servicesHash.put(id, newService); 
+		
 		
 	}
 	/**
@@ -57,10 +76,22 @@ public class ServiceHash extends DataStoreHash<Service>{
 	
 	@Override
 	public Service search(int serviceID){
-		if(servicesHash.containsKey(serviceID))
-			return servicesHash.get(serviceID);
-		else
+		if(servicesHash.get(serviceID) == null){
 			return null;
+		}
+		else{
+			return servicesHash.get(serviceID);
+		}
+/*		System.out.println("im in ServiceHash search " + serviceID);
+		if(servicesHash.containsKey(serviceID)){
+			System.out.println("im in ServiceHash search \"if\" " + serviceID);
+			return servicesHash.get(serviceID);
+		}
+		else{
+			System.out.println("im returning null");
+			return null;
+			}
+*/
 	}
 	
 	public String validate(int serviceID){
@@ -71,6 +102,22 @@ public class ServiceHash extends DataStoreHash<Service>{
 		return "found";
 	}
 	
+	private String iterate (){
+		String servList = "";
+		for(Entry<Integer, Service> entry : servicesHash.entrySet()){
+			servList += "\n\tID: " + entry.getKey() + " service name: " + entry.getValue().getName();
+		}
+		if(servList == ""){
+			servList = "No services available";
+		}
+			
+		return servList;
+		
+	}
+	
+	public String toString(){
+		return iterate();
+	}
 	
 	@Override
 	public String getDataHashType() {

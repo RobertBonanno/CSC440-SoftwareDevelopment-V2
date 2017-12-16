@@ -39,8 +39,8 @@ public class Service {
 
 	@Override
 	public String toString() {
-		return "Service [serviceName=" + serviceName + ", serviceID=" + serviceID + ", serviceFee=" + serviceFee
-				+ ", serviceDescrp=" + serviceDescrp + "]";
+		return "serviceName = " + serviceName + ", serviceID = " + serviceID + ", serviceFee = " + serviceFee
+				+ ", serviceDescrp = " + serviceDescrp;
 	}
 ////////////////////////////
 	/**

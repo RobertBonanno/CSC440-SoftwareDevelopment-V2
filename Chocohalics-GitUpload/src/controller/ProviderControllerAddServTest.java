@@ -4,16 +4,22 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ProviderControllerAddServTest {
+import frontEnd.Terminal;
 
+public class ProviderControllerAddServTest {
 	
+	ProviderController Provadded = ProviderController.getInstance();
+	ServiceController servadded = new  ServiceController();
+	Terminal terminal = new Terminal("Console");
+	
+	/*
 	@Test
 	public void testAddProvider() {
-		 ProviderController Provadded = new  ProviderController();
+		 
 		 Provadded.AddProvider();
 		 Provadded.writeToXML();
 	}
-	
+	*/
 	@Test
 	public void testProviderController() {
 		fail("Not yet implemented");
@@ -21,7 +27,15 @@ public class ProviderControllerAddServTest {
 
 	@Test
 	public void testAddService() {
-		fail("Not yet implemented");
+		 Provadded.AddProvider();
+		 Provadded.writeToXML();
+		 
+		 servadded.AddService();
+		 servadded.writeToXML();
+		 
+		terminal.setOutput("Serviec IDs available:" 
+		+ System.lineSeparator() + servadded.ListServiceHash());
+		Provadded.AddService();
 	}
 
 
