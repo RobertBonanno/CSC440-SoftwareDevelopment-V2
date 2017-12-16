@@ -60,7 +60,7 @@ public class ServiceHash extends DataStoreHash<Service>{
 	private Integer generateID(){
 		Integer id; 
 		while(true){
-			id =(int) (Math.random()*1000.0); 
+			id =(int) (Math.random()*100000.0); 
 			if(servicesHash.containsKey(id)){
 				continue; 
 			}

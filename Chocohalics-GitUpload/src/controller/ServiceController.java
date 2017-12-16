@@ -7,7 +7,7 @@ import backEnd.ProviderHash;
 import backEnd.Service;
 import backEnd.ServiceHash;
 
-public class ServiceController extends MasterController{
+public class ServiceController extends BaseController{
 	/*
 	ServiceHash serviceHash; 
 	
@@ -23,7 +23,7 @@ public class ServiceController extends MasterController{
  	
  	ServiceHash serviceHash;
 	
-	protected ServiceController(){ 
+	private ServiceController(){ 
 		super();
 		serviceHash = new ServiceHash(); 
 	}
@@ -53,7 +53,7 @@ public class ServiceController extends MasterController{
 		terminal.setOutput("Please enter the name of the service:  ");
 		serviceName = terminal.readText();
 		terminal.setOutput("Please enter the fee of the service: ");
-		fee = terminal.readInt(); 
+		fee = terminal.readDouble(); 
 		terminal.setOutput("Please enter the description of the service:  ");
 		description = terminal.readText();
 		

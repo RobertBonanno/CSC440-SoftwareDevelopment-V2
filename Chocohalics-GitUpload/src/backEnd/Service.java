@@ -1,5 +1,7 @@
 package backEnd;
 
+import java.text.DecimalFormat;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -39,7 +41,7 @@ public class Service {
 
 	@Override
 	public String toString() {
-		return "serviceName = " + serviceName + ", serviceID = " + serviceID + ", serviceFee = " + serviceFee
+		return "serviceName = " + serviceName + ", serviceID = " + idToString() + ", serviceFee = " + serviceFee
 				+ ", serviceDescrp = " + serviceDescrp;
 	}
 ////////////////////////////
@@ -113,7 +115,7 @@ public class Service {
 	protected Node getXMLElement(Document doc) {
 		Element serviceElement = doc.createElement("Service");
 		
-		serviceElement.setAttribute("ServiceID", ""+serviceID);
+		serviceElement.setAttribute("ServiceID", idToString());
 		
 		serviceElement.appendChild(getElementValue(doc, serviceElement, "ServiceName", serviceName));
 		
@@ -128,5 +130,12 @@ public class Service {
 		Element node = doc.createElement(name);
 		node.appendChild(doc.createTextNode(value));
 		return node;
+	}
+	
+	public String idToString() {
+		String toReturn = "";
+		DecimalFormat dformat = new DecimalFormat("000000");
+		toReturn+=dformat.format(serviceID);
+		return toReturn;
 	}
 }

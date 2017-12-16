@@ -42,7 +42,7 @@ public class MemberHash extends DataStoreHash<Member> {
 	private Integer generateID(){
 		Integer id; 
 		while(true){
-			id =(int) (Math.random()*1000.0); 
+			id =(int) (Math.random()*100000000.0); 
 			if(membersHash.containsKey(id)){
 				continue; 
 			}
@@ -73,7 +73,7 @@ public class MemberHash extends DataStoreHash<Member> {
 		if(search(memberID).equals(null))
 			return "INVALID";
 		else
-			return (membersHash.get(memberID)).getStatus();
+			return membersHash.get(memberID).getStatus();
 	}
 	
 	/**

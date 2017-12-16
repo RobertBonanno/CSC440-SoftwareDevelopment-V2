@@ -1,5 +1,6 @@
 package backEnd; 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.w3c.dom.Document;
@@ -40,7 +41,7 @@ public class Provider implements IDHolder{
 	//	ServicesOffered.add(service);
 	//}
 	
-	protected void addService(Service service){
+	public void addService(Service service){
 		if(!util.listed(service, ServicesOffered, useMe2)){}
 		ServicesOffered.add(service);
 	}	
@@ -105,7 +106,7 @@ public class Provider implements IDHolder{
 
 	@Override
 	public String toString() {
-		return "Provider [ProviderID = " + ProviderID + ", ProviderName = " + ProviderName + ", WorkAddress = " + WorkAddress
+		return "Provider [ProviderID = " + idToString() + ", ProviderName = " + ProviderName + ", WorkAddress = " + WorkAddress
 				+ ", ServicesOffered = " + ServicesOffered + "]";
 	}
 
@@ -114,7 +115,7 @@ public class Provider implements IDHolder{
 		Element providerElement = doc.createElement("Provider");
 		
 		//set id attribute
-		providerElement.setAttribute("ProviderID", ProviderID+"");
+		providerElement.setAttribute("ProviderID", idToString());
 		
 		//create name element
 		providerElement.appendChild(getElementValue(doc, providerElement, "ProviderName", ProviderName));
@@ -134,6 +135,15 @@ public class Provider implements IDHolder{
 		Element node = doc.createElement(name);
 		node.appendChild(doc.createTextNode(value));
 		return node;
+	}
+
+
+	@Override
+	public String idToString() {
+		String toReturn = "";
+		DecimalFormat dformat = new DecimalFormat("000000000");
+		toReturn+=dformat.format(ProviderID);
+		return toReturn;
 	}
 	
 }

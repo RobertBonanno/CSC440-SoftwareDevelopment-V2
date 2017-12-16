@@ -1,5 +1,7 @@
 package backEnd;
 
+import java.text.DecimalFormat;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -114,14 +116,14 @@ public class Member implements IDHolder{
 
 	@Override
 	public String toString() {
-		return MemberName+" [Status=" + Status + ", MemberID=" + MemberID + ", HomeAddress=" + HomeAddress + "]";
+		return MemberName+" [Status=" + Status + ", MemberID=" + idToString() + ", HomeAddress=" + HomeAddress + "]";
 	}
 	
 	protected Node getXMLElement(Document doc) {
 		Element memberElement = doc.createElement("Member");
 		
 		//set id attribute
-		memberElement.setAttribute("id", getID()+"");
+		memberElement.setAttribute("id", idToString());
 		
 		//create name attribute
 		memberElement.appendChild(getElementValue(doc, memberElement, "Name", getName()));
@@ -139,6 +141,15 @@ public class Member implements IDHolder{
 		Element node = doc.createElement(name);
 		node.appendChild(doc.createTextNode(value));
 		return node;
+	}
+
+
+	@Override
+	public String idToString() {
+		String toReturn = "";
+		DecimalFormat dformat = new DecimalFormat("000000000");
+		toReturn+=dformat.format(MemberID);
+		return toReturn;
 	}
 	
 }

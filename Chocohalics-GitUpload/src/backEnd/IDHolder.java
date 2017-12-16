@@ -32,6 +32,8 @@ public interface IDHolder {
 	//}
 
 	public void setAddress(Address iDHaddress);
+	
+	public String idToString();
 
 	
 /*	request service

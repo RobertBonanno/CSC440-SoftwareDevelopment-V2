@@ -9,7 +9,7 @@ import frontEnd.Terminal;
 public class ProviderControllerAddServTest {
 	
 	ProviderController Provadded = ProviderController.getInstance();
-	ServiceController servadded = new  ServiceController();
+	ServiceController servadded = ServiceController.getInstance();
 	Terminal terminal = new Terminal("Console");
 	
 	/*

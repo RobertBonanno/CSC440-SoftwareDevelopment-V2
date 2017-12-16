@@ -6,7 +6,7 @@ import backEnd.Address;
 import backEnd.Member;
 import backEnd.MemberHash;
 
-public class MemberController extends MasterController {
+public class MemberController extends BaseController {
 	MemberHash memberHash; 
 	
 	MemberController instance;

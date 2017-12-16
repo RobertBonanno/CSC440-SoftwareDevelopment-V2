@@ -65,7 +65,7 @@ public class ProviderHash extends DataStoreHash<Provider>{
 	private Integer generateID(){
 		Integer id; 
 		while(true){
-			id =(int) (Math.random()*1000.0); 
+			id = (int) (Math.random()*100000000.0)+100000000;
 			if(providersHash.containsKey(id)){
 				continue; 
 			}
@@ -79,11 +79,14 @@ public class ProviderHash extends DataStoreHash<Provider>{
 	}
 	
 	public Provider search(int providerID){
-		if(providersHash.get(providerID) == null){
+		if(providersHash.get(new Integer(providerID)) == null){
 			return null;
 		}
-		else
-		return providersHash.get(providerID);
+		else{
+			Provider provider =  providersHash.get(new Integer(providerID));
+			return provider;
+		}
+		
 		//return "found";//((Provider)providersHash.get(providerID));
 	}
 	
@@ -97,14 +100,14 @@ public class ProviderHash extends DataStoreHash<Provider>{
 	}
 	
 	public boolean validate(int providerID){
-		if(search(providerID).equals(null))
+		if(search(providerID) == null)
 			return false;
 		else
 			return true;
 	}
 	
 	/**
-	 *  this method only serves for the test case, sould be replaced with a read from disc for security reasons
+	 *  this method only serves for the test case, should be replaced with a read from disc for security reasons
 	 * @param providerID
 	 * @param provider
 	 */
@@ -112,6 +115,16 @@ public class ProviderHash extends DataStoreHash<Provider>{
 		providersHash.put(providerID, provider);
 	}
 
+	public String toString(){
+		String toString = "";
+		for(Provider p : providersHash.values()){
+			toString += p.toString()+System.lineSeparator();
+		}
+		if(toString.equals(""))
+			return "There's nothing here Jim! (providerHash)";
+		return toString;
+	}
+	
 	@Override
 	public String getDataHashType() {
 		return "Provider";

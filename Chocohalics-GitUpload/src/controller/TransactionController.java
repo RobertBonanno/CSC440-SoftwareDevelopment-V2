@@ -6,7 +6,7 @@ import backEnd.Member;
 import backEnd.Provider;
 import backEnd.Service;
 
-public class TransactionController extends MasterController{
+public class TransactionController extends BaseController{
 	
 	public TransactionController() {
 		super();
