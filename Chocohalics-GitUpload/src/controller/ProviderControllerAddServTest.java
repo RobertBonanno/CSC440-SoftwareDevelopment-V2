@@ -35,7 +35,7 @@ public class ProviderControllerAddServTest {
 		 
 		terminal.setOutput("Serviec IDs available:" 
 		+ System.lineSeparator() + servadded.ListServiceHash());
-		Provadded.AddService();
+		//Provadded.AddService();
 	}
 
 
