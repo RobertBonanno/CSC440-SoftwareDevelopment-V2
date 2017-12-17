@@ -75,7 +75,7 @@ public class ProviderHash extends DataStoreHash<Provider>{
 	}
 
 	public void remove(int providerID){
-		providersHash.put(providerID, null);
+		providersHash.remove(providerID);
 	}
 	
 	public Provider search(int providerID){

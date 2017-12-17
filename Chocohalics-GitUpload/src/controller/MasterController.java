@@ -17,7 +17,7 @@ public class MasterController extends BaseController{
 		
 	}
 	
-	public void addServiceToProvider(){
+	private void addServiceToProvider(){ // method is in master because it needs to interact with multiple controllers
 		int providerID;
 		int serviceID;
 		boolean flag = false;
@@ -59,7 +59,7 @@ public class MasterController extends BaseController{
 		}while(flag);
 	}
 	
-	public void runn(){
+	public void run(){
 		terminal.setOutput("Hello, welcome to Chocohalics. Please enter your ID");
 		int id = terminal.readInt();
 		if(id<100000000 && id>0){ // they be member
@@ -69,7 +69,7 @@ public class MasterController extends BaseController{
 				
 				terminal.setOutput("Is this member finishing an appointment? (Y/N)");
 				if(terminal.readText().toLowerCase().charAt(0) =='y'){
-					//do something
+					//write receipt from transaction controller
 				}
 				return; //normally would use a break but in this case we want to infinite loop after this point...
 				
@@ -78,7 +78,7 @@ public class MasterController extends BaseController{
 				return;
 				
 			case "INVALID":
-				terminal.setOutput("This member is not a part of ze plan!"); 
+				terminal.setOutput("Invalid entry. Please try again."); 
 				return;
 			}
 				
@@ -92,66 +92,118 @@ public class MasterController extends BaseController{
 						+ System.lineSeparator() +"\t1: Interact with a provider account"
 						+ System.lineSeparator() +"\t2: Interact with a member account"
 						+ System.lineSeparator() +"\t3: Run a report"
-						+ System.lineSeparator() +"\t4: Log Out");
+						+ System.lineSeparator() +"\t4: Log out");
 	
 					switch (terminal.readInt()) {
 					
 					case 1: // provider controller stuff
-					
-						terminal.setOutput("How would you like to interact with a provider account:"
-								+ System.lineSeparator() +"\t1: Add a new provider"
-								+ System.lineSeparator() +"\t2: Edit an existing provider"
-								+ System.lineSeparator() +"\t3: Remove an existing provider"
-								+ System.lineSeparator() +"\t4: Go Back");
-						switch (terminal.readInt()) {
-						
-						case 1: //add new provider
+						providerInternalLoop: while(true){
+							terminal.setOutput("How would you like to interact with a provider account:"
+									+ System.lineSeparator() +"\t1: Add a new provider"
+									+ System.lineSeparator() +"\t2: Edit an existing provider"
+									+ System.lineSeparator() +"\t3: Remove an existing provider"
+									+ System.lineSeparator() +"\t4: Go Back");
+							switch (terminal.readInt()) {
 							
-							// IO handled within providerController
-							providerController.AddProvider();
-							break; 
-						
-						case 2: // edit an existing provider
+							case 1: //add new provider
+								providerController.AddProvider();
+								break; 
 							
-							providerController.Editprovider();
-							break;
-							
-						case 3: // remove an existing provider
-							
-							break;
-							
-						case 4: //go back
-							
-							break;
-						default:
-							break;
+							case 2: // edit an existing provider
+								terminal.setOutput("Would you like to add or remove a service? (Y/N)");
+								char response = terminal.readText().toLowerCase().charAt(0);
+								
+								if(response=='y'){
+									terminal.setOutput("Would you like to Add (A) or remove (R) a service? (or anything else to exit)"); 
+									switch(terminal.readText().toLowerCase().charAt(0)){
+									case 'a':
+										addServiceToProvider(); 
+										break;
+									case 'r':
+										providerController.removeServiceFromProvider();
+										break;
+									default: break;
+									}
+								}else if(response == 'n'){
+									providerController.Editprovider();
+								}
+								break;
+								
+							case 3: // remove an existing provider
+								providerController.deleteProvider();
+								break;
+								
+							case 4: //go back
+								
+								break providerInternalLoop;
+							default:
+								break;
+							}
 						}
-						
-					
-						
 						break;
 					
 					case 2: //member account stuff
-						terminal.setOutput("How would you like to interact with a member account:"
+						memberInternalLoop: while(true){
+								
+							terminal.setOutput("How would you like to interact with a member account:"
 								+ System.lineSeparator() +"\t1: Add a new member"
 								+ System.lineSeparator() +"\t2: Edit an existing member"
-								+ System.lineSeparator() +"\t3: Remove an existing member");
-						//add switch
-						
+								+ System.lineSeparator() +"\t3: Remove an existing member"
+								+ System.lineSeparator() +"\t4: Go back");
+							
+							switch(terminal.readInt()){
+							case 1: // add a new member
+								memberController.AddMember();
+								break;
+								
+							case 2: //edit an existing member
+								memberController.EditMember();
+								break;
+								
+							case 3: //remove an existing member
+								memberController.DeleteMember();
+								break;
+								
+							case 4: //go back
+								break memberInternalLoop;
+							
+							default: break;
+							}
+						}
 						break;
 					
 					case 3: //report running stuff
-						terminal.setOutput("Which report would you like to run?"
-								+ System.lineSeparator() +"\t1: Member Transaction Report"
-								+ System.lineSeparator() +"\t2: Provider Transaction Report"
-								+ System.lineSeparator() +"\t3: EFT Report"
-								+ System.lineSeparator() +"\t3: Provider Services Provided Report");
-						//add switch
-						
+						reportInternalLoop: while(true){
+							terminal.setOutput("Which report would you like to run?"
+									+ System.lineSeparator() +"\t1: Member Transaction Report"
+									+ System.lineSeparator() +"\t2: Provider Transaction Report"
+									+ System.lineSeparator() +"\t3: EFT Report"
+									+ System.lineSeparator() +"\t4: Provider Services Provided Report"
+									+ System.lineSeparator() +"\t5: Go back");
+							switch(terminal.readInt()){
+							case 1: //member report from transactionController
+								
+								break;
+							case 2: //provider report from transactionController
+								
+								break;
+								
+							case 3: //EFT report from transactionController
+								
+								break;
+								
+							case 4: //Provider Services Provided report from transactionController
+								break;
+								
+							case 5: 
+								break reportInternalLoop;
+							default: break;
+							}
+						}
 						break;
 					
 					case 4:
-						return;
+						break providerControllerLoop;
 					
 					default: //You're a dumbass
 						terminal.setOutput("You're a dumbass.");
@@ -159,16 +211,16 @@ public class MasterController extends BaseController{
 					}
 				}
 			}else/*a ... Frozen reference*/{
-				terminal.setOutput("Invalid providerID. Please try again.");
+				terminal.setOutput("Invalid entry. Please try again.");
+				return;
 			}
-				
-			
 		}
 		else {
-			terminal.setOutput("Invalid entry Please try again.");
+			terminal.setOutput("Invalid entry. Please try again.");
 			return;
 		}
 		
 	}
+	
 
 }

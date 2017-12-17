@@ -96,7 +96,7 @@ public class ProviderController extends BaseController{
 		
 	}
 	
-	public void Deleteprovider(){
+	public void deleteProvider(){
 		int id;
 		
 		terminal.setOutput("Please enter the provider ID of the provider you wish to delete: "); 
@@ -123,14 +123,39 @@ public class ProviderController extends BaseController{
 		else terminal.setOutput("Provider entered was not a part of the system.");
 	}
 	
-	public void removeServiceFromProvider(int providerID){
+	public void removeServiceFromProvider(){
+		int providerID = -1;
+		while(!providerHash.validate(providerID)){
+			terminal.setOutput("Invalid provider entered. Please enter the provider's ID that you would like to remove a service from or enter 0 to exit.");
+			providerID = terminal.readInt();
+			
+			//check for exit
+			if(providerID==0)
+				{terminal.setOutput("Operation aborted");return;}
+		}
+		Provider provider = providerHash.search(providerID);
+		String providerName = provider.getName();
 		
+		ArrayList<Service> servicesOffered = provider.getServicesOffered();
+		HashMap<Integer, Service> serviceOfferedHash = new HashMap<Integer, Service>();
+		for(Service s : servicesOffered)
+			serviceOfferedHash.put(s.getID(), s);
 		
+		int serviceID = -1;
 		
-		terminal.setOutput("What you would like to change?:"
-				+ System.lineSeparator()+"\t1: Name"
-				+ System.lineSeparator()+"\t2: Address"
-				+ System.lineSeparator()+"\t3: Nothing");
+		while(!serviceOfferedHash.containsKey(serviceID)){
+			terminal.setOutput("These are the services currently offered by "+providerName+":"+servicesOffered
+				+System.lineSeparator()+"Please enter the service you would like to remove from "+providerName+" or enter 0 to exit: ");
+			
+			serviceID = terminal.readInt();
+			//check for exit
+			if(serviceID == 0) 
+				{terminal.setOutput("Operation aborted");return;}
+		}
+		
+		Service toRemove = serviceOfferedHash.get(serviceID);
+		servicesOffered.remove(toRemove);
+		terminal.setOutput("The following service has been removed: "+toRemove);
 	}
 	
 	public void Editprovider(){//This method is currently a work in progress. 

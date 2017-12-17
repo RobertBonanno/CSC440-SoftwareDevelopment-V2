@@ -70,7 +70,7 @@ public class ServiceHash extends DataStoreHash<Service>{
 	}
 	
 	public void remove(int serviceID){
-		servicesHash.put(serviceID, null);
+		servicesHash.remove(serviceID);
 	}
 	
 	
