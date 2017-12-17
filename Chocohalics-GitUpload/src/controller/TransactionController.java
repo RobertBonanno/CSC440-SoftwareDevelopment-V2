@@ -1,10 +1,12 @@
 package controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 import backEnd.Member;
 import backEnd.Provider;
+import backEnd.Receipt;
 import backEnd.ReceiptHash;
 import backEnd.Service;
 
@@ -43,9 +45,9 @@ public class TransactionController extends BaseController{
 	}
 	
 	public void memberReport(){
-		for(Entry<Integer, Receipt> entry : receiptHash.entrySet()){
-			
-		}
+		HashMap<Integer, Receipt> memberOrderedHash = new HashMap<Integer, Receipt>();
+		for(Receipt recieipt : receiptHash.)
+		
 		//ittereate through the receipt hash
 		//build an array for each member
 		//fill each array with service date, name, and provider

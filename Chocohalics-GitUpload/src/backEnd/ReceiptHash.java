@@ -1,6 +1,7 @@
 package backEnd;
 import java.io.File;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.sql.Time;
 import java.util.HashMap;
@@ -91,10 +92,28 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		return null;
 	}
 	
-	private String iterate (){
-		String recptList = "";
-		Receipt newRecp;
-		for(Entry<Integer, Receipt> entry : receiptList.entrySet()){
+	public String transformToMemberKey (){
+		HashMap<Integer, Receipt> memberOrderedHash = new HashMap<Integer, Receipt>();
+		
+		for(Receipt receipt : receiptList.values()){
+			memberOrderedHash.put(receipt.getMember().getID(), receipt);
+		}
+		
+		ArrayList<Entry<Integer, Receipt>> entries = new ArrayList<Entry<Integer, Receipt>>();
+		
+		for(Entry<Integer, Receipt> entry : memberOrderedHash.entrySet()){
+			entries.add(entry);
+		}
+		
+		entries.sort(new MemberReceiptComparator());
+		
+		//for debugging
+		for(Entry<Integer, Receipt> entry : entries)
+			System.out.println(entry.getValue());
+		
+		
+		
+/*		for(Entry<Integer, Receipt> entry : receiptList.entrySet()){
 			newRecp = entry.getValue();
 			recptList += "\n service name: " + newRecp.getService().getName();
 			recptList += " Provider name: " + newRecp.getProvider().getName();
@@ -105,7 +124,9 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 			recptList = "No receipts available";
 		}
 			
-		return recptList;
+		return recptList;*/
+		
+		return null;
 		
 	}
 
