@@ -1,8 +1,10 @@
 package backEnd;
 import java.io.File;
-import java.sql.Date;
+
+import java.util.Date;
 import java.sql.Time;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -87,6 +89,24 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		if(receiptList.containsKey(ID))
 			return receiptList.get(ID);
 		return null;
+	}
+	
+	private String iterate (){
+		String recptList = "";
+		Receipt newRecp;
+		for(Entry<Integer, Receipt> entry : receiptList.entrySet()){
+			newRecp = entry.getValue();
+			recptList += "\n service name: " + newRecp.getService().getName();
+			recptList += " Provider name: " + newRecp.getProvider().getName();
+			recptList += " member name: " + newRecp.getMember().getName();
+			recptList += " Date of Service: " + newRecp.getDateOfService();
+		}
+		if(recptList == ""){
+			recptList = "No receipts available";
+		}
+			
+		return recptList;
+		
 	}
 
 	@Override

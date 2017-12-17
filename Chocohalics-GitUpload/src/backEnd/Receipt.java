@@ -35,7 +35,7 @@ public class Receipt {
 
 	@Override
 	public String toString() {
-		return "Service: " + service + "\nService recipant: " + member + "\n Service provider=" + provider + "\n Date of Service: " + dateOfService
+		return "Service: " + service + "\nService recipant: " + member + "\n Service provider: " + provider + "\n Date of Service: " + dateOfService
 				 + "\ncomments: " + comments;
 	}
 	
