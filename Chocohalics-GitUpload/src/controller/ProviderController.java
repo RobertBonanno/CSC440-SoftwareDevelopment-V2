@@ -123,6 +123,16 @@ public class ProviderController extends BaseController{
 		else terminal.setOutput("Provider entered was not a part of the system.");
 	}
 	
+	public void removeServiceFromProvider(int providerID){
+		
+		
+		
+		terminal.setOutput("What you would like to change?:"
+				+ System.lineSeparator()+"\t1: Name"
+				+ System.lineSeparator()+"\t2: Address"
+				+ System.lineSeparator()+"\t3: Nothing");
+	}
+	
 	public void Editprovider(){//This method is currently a work in progress. 
 		int providerID;
 		terminal.setOutput("Please enter the provider ID of the provider you wish to delete: "); 

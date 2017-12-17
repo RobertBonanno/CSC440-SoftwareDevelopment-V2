@@ -59,7 +59,7 @@ public class MasterController extends BaseController{
 		}while(flag);
 	}
 	
-	void runner(){
+	public void runn(){
 		terminal.setOutput("Hello, welcome to Chocohalics. Please enter your ID");
 		int id = terminal.readInt();
 		if(id<100000000 && id>0){ // they be member
@@ -104,15 +104,19 @@ public class MasterController extends BaseController{
 								+ System.lineSeparator() +"\t3: Remove an existing provider"
 								+ System.lineSeparator() +"\t4: Go Back");
 						switch (terminal.readInt()) {
-						case 1:
+						
+						case 1: //add new provider
 							
+							// IO handled within providerController
+							providerController.AddProvider();
 							break; 
 						
-						case 2:
+						case 2: // edit an existing provider
 							
+							providerController.Editprovider();
 							break;
 							
-						case 3:
+						case 3: // remove an existing provider
 							
 							break;
 							
