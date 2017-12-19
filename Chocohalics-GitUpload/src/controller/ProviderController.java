@@ -26,14 +26,11 @@ public class ProviderController extends BaseController{
 	
 	/////////////////--new code for singleton?--/////////////////////////////////////
 	private static ProviderController instance = null;
- 	ServiceController serviceController;
 	ProviderHash providerHash;
-	Provider provider; 
 	
 	private ProviderController(){ 
 		super();
 		providerHash = new ProviderHash(); 
-		serviceController = ServiceController.getInstance();
 	}
 	
 	public static ProviderController getInstance(){ 

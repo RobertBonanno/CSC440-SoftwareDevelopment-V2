@@ -32,7 +32,7 @@ public class Service {
 	 * @param serviceDescrp is a string value detailing what occurs during the service
 	 */
 	
-	Service(int serviceID, String serviceName, double serviceFee, String serviceDescrp){
+	public Service(int serviceID, String serviceName, double serviceFee, String serviceDescrp){
 		this.serviceName = serviceName;
 		this.serviceID = serviceID;
 		this.serviceFee = serviceFee;

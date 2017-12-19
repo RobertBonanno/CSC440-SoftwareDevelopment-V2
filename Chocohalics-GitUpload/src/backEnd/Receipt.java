@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class Receipt {
+public class Receipt implements  Comparable<Receipt>{
 	
 	int identifier;
 	Service service;
@@ -101,6 +101,23 @@ public class Receipt {
 		Element node = doc.createElement(name);
 		node.appendChild(doc.createTextNode(value));
 		return node;
+	}
+
+
+	@Override
+	public int compareTo(Receipt r) {
+		if(member.getName().compareToIgnoreCase(r.getMember().getName()) < 0)
+			return -1;
+		else if( member.getName().compareToIgnoreCase(r.getMember().getName()) == 0){
+			if(getDateOfService().compareTo(r.getDateOfService()) < 0)
+				return -1;
+			else if(dateOfService.compareTo(r.getDateOfService()) == 0)
+				return 0;
+			else
+				return 1;
+		}
+		else
+			return 1;
 	}
 	
 }

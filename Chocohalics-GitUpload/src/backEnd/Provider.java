@@ -27,7 +27,7 @@ public class Provider implements IDHolder{
 	}
 	
 
-	Provider(String name, Address address, int ID){
+	public Provider(String name, Address address, int ID){
 		ProviderID = ID;
 		ProviderName = name;
 		WorkAddress = address; 

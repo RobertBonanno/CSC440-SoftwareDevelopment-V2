@@ -92,42 +92,60 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		return null;
 	}
 	
-	public String transformToMemberKey (){
-		HashMap<Integer, Receipt> memberOrderedHash = new HashMap<Integer, Receipt>();
+	public ArrayList<Entry<Integer, ArrayList<Receipt>>> transformToProviderKey (){
+		HashMap<Integer, ArrayList<Receipt>> memberOrderedHash = new HashMap<Integer, ArrayList<Receipt>>();
 		
 		for(Receipt receipt : receiptList.values()){
-			memberOrderedHash.put(receipt.getMember().getID(), receipt);
+			int id = receipt.getProvider().getID();
+			if(memberOrderedHash.get(id) == null){
+				ArrayList<Receipt> temp = new ArrayList<Receipt>();
+				temp.add(receipt);
+				memberOrderedHash.put(id,temp);
+			} else{
+				ArrayList<Receipt> temp = memberOrderedHash.get(id);
+				System.out.println(temp);
+				temp.add(receipt);
+				Collections.sort(temp);
+			}
 		}
 		
-		ArrayList<Entry<Integer, Receipt>> entries = new ArrayList<Entry<Integer, Receipt>>();
+		ArrayList<Entry<Integer, ArrayList<Receipt>>> entries = new ArrayList<Entry<Integer, ArrayList<Receipt>>>();
 		
-		for(Entry<Integer, Receipt> entry : memberOrderedHash.entrySet()){
+		for(Entry<Integer, ArrayList<Receipt>> entry : memberOrderedHash.entrySet()){
 			entries.add(entry);
 		}
 		
 		entries.sort(new MemberReceiptComparator());
 		
-		//for debugging
-		for(Entry<Integer, Receipt> entry : entries)
-			System.out.println(entry.getValue());
+		return entries;
+	}
+	
+	public ArrayList<Entry<Integer, ArrayList<Receipt>>> transformToMemberKey (){
+		HashMap<Integer, ArrayList<Receipt>> memberOrderedHash = new HashMap<Integer, ArrayList<Receipt>>();
 		
-		
-		
-/*		for(Entry<Integer, Receipt> entry : receiptList.entrySet()){
-			newRecp = entry.getValue();
-			recptList += "\n service name: " + newRecp.getService().getName();
-			recptList += " Provider name: " + newRecp.getProvider().getName();
-			recptList += " member name: " + newRecp.getMember().getName();
-			recptList += " Date of Service: " + newRecp.getDateOfService();
+		for(Receipt receipt : receiptList.values()){
+			int id = receipt.getMember().getID();
+			if(memberOrderedHash.get(id) == null){
+				ArrayList<Receipt> temp = new ArrayList<Receipt>();
+				temp.add(receipt);
+				memberOrderedHash.put(id,temp);
+			} else{
+				ArrayList<Receipt> temp = memberOrderedHash.get(id);
+				System.out.println(temp);
+				temp.add(receipt);
+				Collections.sort(temp);
+			}
 		}
-		if(recptList == ""){
-			recptList = "No receipts available";
+		
+		ArrayList<Entry<Integer, ArrayList<Receipt>>> entries = new ArrayList<Entry<Integer, ArrayList<Receipt>>>();
+		
+		for(Entry<Integer, ArrayList<Receipt>> entry : memberOrderedHash.entrySet()){
+			entries.add(entry);
 		}
-			
-		return recptList;*/
 		
-		return null;
+		entries.sort(new MemberReceiptComparator());
 		
+		return entries;
 	}
 
 	@Override

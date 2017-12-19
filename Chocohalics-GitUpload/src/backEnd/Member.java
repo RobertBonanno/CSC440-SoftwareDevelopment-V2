@@ -116,7 +116,7 @@ public class Member implements IDHolder{
 
 	@Override
 	public String toString() {
-		return MemberName+" [Status=" + Status + ", MemberID=" + idToString() + ", HomeAddress=" + HomeAddress + "]";
+		return MemberName+"-" + idToString() + "- Has a status of "+Status + System.lineSeparator() + "HomeAddress:" + HomeAddress;
 	}
 	
 	protected Node getXMLElement(Document doc) {
