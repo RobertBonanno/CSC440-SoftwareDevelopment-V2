@@ -59,6 +59,7 @@ public class TransactionController extends BaseController{
 		eftReport();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void writeAcmeLog(int receiptID) {
 		Receipt receipt = receiptHash.search(receiptID);
 		String date = receipt.getDateOfService().getMonth()+"_"+receipt.getDateOfService().getDay()+"_"+receipt.getDateOfService().getYear();
@@ -78,6 +79,7 @@ public class TransactionController extends BaseController{
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void memberReport(){
 		Date today = new Date(System.currentTimeMillis());
 		String date = today.getMonth()+"_"+today.getDay();
@@ -86,7 +88,7 @@ public class TransactionController extends BaseController{
 			String mName = entry.getValue().get(0).getMember().getName();
 			String fileName = mName	+"'s Service Report " + date+".txt";
 			
-			File file = new File(fileName);
+			new File(fileName);
 			
 			try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
 				bw.write(mName+","+System.lineSeparator()+"Your recorded services recieved during the week of "+date
@@ -105,7 +107,8 @@ public class TransactionController extends BaseController{
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	public void providerReport(){
 		
 		Date today = new Date(System.currentTimeMillis());
@@ -119,7 +122,7 @@ public class TransactionController extends BaseController{
 			String pName = provider.getName();
 			String fileName = pName	+"'s Service Report " + date+".txt";
 			
-			File file = new File(fileName);
+			new File(fileName);
 			
 			try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
 				bw.write(pName+","+System.lineSeparator()+"Your recorded services provided during the week of "
@@ -148,6 +151,7 @@ public class TransactionController extends BaseController{
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void summaryReport(){
 		
 		Date today = new Date(System.currentTimeMillis());
@@ -155,7 +159,7 @@ public class TransactionController extends BaseController{
 		ArrayList<Entry<Integer, ArrayList<Receipt>>> providerListOfServices = receiptHash.transformToProviderKey();
 		
 		String fileName = "Summary Report " +date+ ".txt";
-		File file = new File(fileName);
+		new File(fileName);
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
 			int summaryNumConsultations = 0;

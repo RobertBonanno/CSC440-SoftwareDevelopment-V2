@@ -20,6 +20,7 @@ public class MasterController extends BaseController{
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	void addTransaction(int memberID) {
 		terminal.setOutput("Please enter the month of the service provided (numerical in form of MM)");
 		int month = terminal.readInt();
@@ -27,6 +28,7 @@ public class MasterController extends BaseController{
 		int day = terminal.readInt();
 		terminal.setOutput("Please enter the Year of the service provided (numerical in form of YYYY)");
 		int year = terminal.readInt();
+		@SuppressWarnings("unused")
 		Date date = new Date(year, month, day);
 		
 		for(String provider : providerController.getProviderDirectory()) {
@@ -120,6 +122,7 @@ public class MasterController extends BaseController{
 		}while(flag);
 	}
 	
+	@SuppressWarnings("unused")
 	public void run(){
 		try {
 		mainLoop: while(true) {

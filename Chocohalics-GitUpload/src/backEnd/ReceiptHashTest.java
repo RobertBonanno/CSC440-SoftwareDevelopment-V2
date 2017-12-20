@@ -30,6 +30,7 @@ public class ReceiptHashTest {
 		test.writeToXML();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testTransformToMemberKey(){
 		
