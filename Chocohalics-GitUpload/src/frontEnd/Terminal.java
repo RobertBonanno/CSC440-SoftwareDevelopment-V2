@@ -40,7 +40,12 @@ public class Terminal {
 	 * @return: The input that was entered by the user.
 	 */
 	public String readText() {
-		return IO.readText();
+		try {
+			return IO.readText();
+		}catch(IllegalArgumentException e) {
+			e.printStackTrace();
+			return readText();
+		}
 		
 	}
 	
