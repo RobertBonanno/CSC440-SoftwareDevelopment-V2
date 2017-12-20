@@ -62,7 +62,7 @@ public class TransactionController extends BaseController{
 	private void writeAcmeLog(int receiptID) {
 		Receipt receipt = receiptHash.search(receiptID);
 		String date = receipt.getDateOfService().getMonth()+"_"+receipt.getDateOfService().getDay()+"_"+receipt.getDateOfService().getYear();
-		String fileName = receipt.getMember().getName()+date;
+		String fileName = receipt.getMember().getName()+date+".txt";
 		
 		try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
 			Calendar calendar = Calendar.getInstance();
@@ -113,7 +113,6 @@ public class TransactionController extends BaseController{
 		ArrayList<Entry<Integer, ArrayList<Receipt>>> providerListOfServices = receiptHash.transformToProviderKey();
 		
 		for(Entry<Integer, ArrayList<Receipt>> entry : providerListOfServices){
-			System.out.println("----------------"+entry.getValue().size());
 			Provider provider = entry.getValue().get(0).getProvider();
 			Double totalFee = 0.0;
 			

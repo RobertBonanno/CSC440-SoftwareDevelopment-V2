@@ -114,7 +114,7 @@ public class MasterController extends BaseController{
 					Service service = serviceController.searchServiceHash(serviceID);
 					
 					providerController.addService(service, providerID);
-					terminal.setOutput("service added to provider: " + providerController.toString());
+					terminal.setOutput("Service added to provider: " + providerController.searchProviderHash(providerID).getName()+System.lineSeparator());
 				}
 			}
 		}while(flag);

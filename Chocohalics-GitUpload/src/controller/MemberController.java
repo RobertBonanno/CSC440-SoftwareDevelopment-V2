@@ -40,7 +40,8 @@ public class MemberController extends BaseController {
 	
 		
 		Address address = new Address(street, city, state, zipCode);
-		memberHash.add(name, address); 
+		Member mem = memberHash.add(name, address); 
+		terminal.setOutput("The following member has been added: "+mem.toString());
 	}
 	
 	//temporary method for testing
@@ -61,7 +62,7 @@ public class MemberController extends BaseController {
 	
 	public void EditMember(){//This method is currently a work in progress. 
 		int memberID;
-		terminal.setOutput("Please enter the member ID of the member you wish to delete: "); 
+		terminal.setOutput("Please enter the member ID of the member you wish to edit: "); 
 		memberID  = terminal.readInt();
 		
 		while(memberHash.search(memberID) == null){

@@ -33,10 +33,11 @@ public class MemberHash extends DataStoreHash<Member> {
 	 */
 
 	
-	public void add(String name, Address address){
+	public Member add(String name, Address address){
 		Integer id = generateID(); 
 		Member newMember = new Member(name,address,id.intValue());
 		membersHash.put(id, newMember); 
+		return newMember;
 	}
 	
 	private Integer generateID(){

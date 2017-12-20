@@ -41,9 +41,12 @@ public class Terminal {
 	 */
 	public String readText() {
 		try {
-			return IO.readText();
+			String toReturn = IO.readText();
+			IO.setOutput("");
+			return toReturn;
 		}catch(IllegalArgumentException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			setOutput("Text too long, please shorten your message");
 			return readText();
 		}
 		
@@ -56,7 +59,9 @@ public class Terminal {
 	 */
 	public int readInt() {
 		try {
-			return IO.readInt();
+			int toReturn = IO.readInt();
+			IO.setOutput("");
+			return toReturn;
 		} catch (TimeoutException e) {
 			//e.printStackTrace();		//uncomment this line to reinstate timeone exceptions
 			return readInt(); //ignores a timeout exception by calling recursively
@@ -67,7 +72,9 @@ public class Terminal {
 	
 	public double readDouble() {
 		try {
-			return IO.readDouble();
+			double toReturn = IO.readDouble();
+			IO.setOutput("");
+			return toReturn;
 		} catch (TimeoutException e) {
 			//e.printStackTrace();		//uncomment this line to reinstate timeone exceptions
 			return readDouble(); //ignores a timeout exception by calling recursively
