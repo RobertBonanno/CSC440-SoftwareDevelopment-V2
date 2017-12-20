@@ -6,8 +6,6 @@ import java.sql.Date;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
-
 public class ReceiptHashTest {
 
 	@Test
@@ -27,7 +25,7 @@ public class ReceiptHashTest {
 		Member member1 = new Member("John Michaels", a1, 1010);
 		Address a2 = new Address("B Lane", "Detroit", "MI", 99851);
 		Provider provider1 = new Provider("Mary Smith", a2, 2020);
-		test.add(service1, member1, provider1, new Date(System.currentTimeMillis()), "It was a success!");
+		test.add(65413,service1, member1, provider1, new Date(System.currentTimeMillis()), "It was a success!");
 		
 		test.writeToXML();
 	}
@@ -41,21 +39,21 @@ public class ReceiptHashTest {
 		Member member1 = new Member("John Michaels", a1, 1010);
 		Address a2 = new Address("B Lane", "Detroit", "MI", 99851);
 		Provider provider1 = new Provider("Mary Smith", a2, 2020);
-		test.add(service1, member1, provider1, new Date(System.currentTimeMillis()), "It was a success!");
+		test.add(98743,service1, member1, provider1, new Date(System.currentTimeMillis()), "It was a success!");
 		
 		Service service2 = new Service(6666, "Yawning", 10.00, "A session of relaxation");
 		Address a3 = new Address("C Lan", "Johnsonville", "MK", 44861);
 		Member member2 = new Member("Mary Michaels", a3, 1020);
 		Address a4 = new Address("D Lane", "Detroit", "MI", 99851);
 		Provider provider2 = new Provider("Michael Smith", a4, 2020);
-		test.add(service2, member2, provider2, new Date(2016, 10, 10), "It was a success!");
+		test.add(261844,service2, member2, provider2, new Date(2016, 10, 10), "It was a success!");
 		
 		Service service3 = new Service(6666, "Yawning", 10.00, "A session of relaxation");
 		Address a5 = new Address("C Lan", "Johnsonville", "MK", 44861);
 		Member member3 = new Member("Mary Michaels", a5, 1020);
 		Address a6 = new Address("D Lane", "Detroit", "MI", 99851);
 		Provider provider3 = new Provider("Michael Smith", a6, 2020);
-		test.add(service3, member3, provider3, new Date(2016, 10, 10), "It was a success!");
+		test.add(24135,service3, member3, provider3, new Date(2016, 10, 10), "It was a success!");
 		
 		test.transformToMemberKey();
 	}

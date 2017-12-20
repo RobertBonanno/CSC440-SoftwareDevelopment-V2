@@ -33,18 +33,6 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 		
 	}
 	
-	private Integer generateID(){
-		Integer id; 
-		while(true){
-			id =(int) (Math.random()*1000.0); 
-			if(receiptList.containsKey(id)){
-				continue; 
-			}
-			break; 
-		}
-		return id;
-	}
-	
 	/**
 	 * Clears the out-dated receipt log. 
 	 * Every Friday, the log is written to disk and then cleared.
@@ -74,8 +62,7 @@ public class ReceiptHash extends DataStoreHash<Receipt> {
 	}
 
 
-	public void add(Service service, Member member, Provider provider, Date dateOfService, String comments) {
-		Integer id = generateID();
+	public void add(Integer id, Service service, Member member, Provider provider, Date dateOfService, String comments) {
 		Receipt receipt = new Receipt(id.intValue(), service, member, provider, dateOfService, comments);
 		receiptList.put(id, receipt);
 	}

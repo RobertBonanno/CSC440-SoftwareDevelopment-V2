@@ -1,95 +1,99 @@
 package controller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import backEnd.Address;
 import backEnd.Provider;
-import backEnd.Provider;
 import backEnd.ProviderHash;
 import backEnd.Service;
-import backEnd.ServiceHash;
 
 public class ProviderController extends BaseController{
-/*
- 	ServiceController serviceController;
-	ProviderHash providerHash;
-	Provider provider; 
-	
-	
-	ProviderController(){
-		super();
-		providerHash = new ProviderHash(); 
-		serviceController = new ServiceController();
-	}
-	*/
-	
-	/////////////////--new code for singleton?--/////////////////////////////////////
-	private static ProviderController instance = null;
+
+	//ProviderController instance;
 	ProviderHash providerHash;
 	
-	private ProviderController(){ 
+	ProviderController(){ 
 		super();
 		providerHash = new ProviderHash(); 
 	}
 	
-	public static ProviderController getInstance(){ 
-		if(instance == null){
-			instance = new ProviderController() ;
-		}
 
-		return instance;
-	}
-	///////////////////////////////////////////////////////
-	//===========Provider Stuff=================
-
-	
-	public void CreateProviderDirectory(){
+	public void createProviderDirectory(){
+		Calendar calendar = Calendar.getInstance();
+		String date = calendar.get(Calendar.DAY_OF_MONTH)+"_"+calendar.get(Calendar.WEEK_OF_YEAR); //Use this instead of Date Class for day/month
+		File file = new File("Provider Directory "+date+".txt");
 		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(file.getName()))){
+			
+			bw.write("Chocohalics Anonymous Provider Directory "+System.lineSeparator()+"As of: "+date+System.lineSeparator());
+			bw.write("------------------------------"+System.lineSeparator());
+			
+			ArrayList<Provider> providerList = providerHash.getProviderList();
+			for(Provider provider : providerList) {
+				bw.write(provider.getName()+"'s Services Offered:"+System.lineSeparator());
+				bw.write("------------------------------"+System.lineSeparator());
+				for(Service service : provider.getServicesOffered()) {
+					bw.write(service.getName()+"-Service ID: "+service.getID()+"-ServiceFee: "+service.getFee()+System.lineSeparator());
+				}
+				bw.write("------------------------------"+System.lineSeparator());
+			}
+			bw.close();
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public void AddService(Service service, Integer providerID){
+
+	public void addService(Service service, Integer providerID){
 		if(providerHash.validate(providerID.intValue())){
 			providerHash.editProv(providerID, service);
 		}
 	}
 
 
-	public void AddProvider(){
+	public void addProvider(){
 		String name;
 		String street;
 		String city;
 		String state;
 		int zipCode;
 		
-		Provider newprovider;
+		Provider newProvider;
 		
 		
 		terminal.setOutput("Please enter your name: ");
-		//name = terminal.readText(); 
+		name = terminal.readText(); 
 		terminal.setOutput("Please enter your street name: "); 
-		//street  = terminal.readText(); 
+		street  = terminal.readText(); 
 		terminal.setOutput("Please enter your city name: "); 
-		//city  = terminal.readText(); 
+		city  = terminal.readText(); 
 		terminal.setOutput("Please enter your state name: "); 
-		//state  = terminal.readText(); 
+		state  = terminal.readText(); 
 		terminal.setOutput("Please enter your zip code: "); 
-		//zipCode  = terminal.readInt();
-	
-		///*
-		name = "j";
-		street = "j";
-		city = "j";
-		state = "j";
-		zipCode = 0;
-		//*/
+		zipCode  = terminal.readInt();
 		
 		Address address = new Address(street, city, state, zipCode);
-		
-		newprovider = providerHash.add(name, address); 
-		
+
+		newProvider = providerHash.add(name, address);
+
 		terminal.setOutput("provider added with following information:"
-				+ System.lineSeparator()+"\t" + newprovider.toString());
+				+ System.lineSeparator()+"\t" + newProvider.toString());
+	}
+	
+	protected void addProvider(String name, Address address, ArrayList<Service> services){
+		Provider newProvider;	
+		newProvider = providerHash.add(name, address); 
+		for(Service s : services) {
+			newProvider.addService(s);
+		}
+		terminal.setOutput("provider added with following information:"
+				+ System.lineSeparator()+"\t" + newProvider.toString());
 		
 	}
 	
@@ -104,7 +108,7 @@ public class ProviderController extends BaseController{
 		terminal.setOutput("provider " + id + " has been deleted"); 
 	}
 	
-	public void EditProvider(Integer providerID, String name, Address address, ArrayList<Service> serviceList){
+	public void editProvider(Integer providerID, String name, Address address, ArrayList<Service> serviceList){
 		if(providerHash.validate(providerID)){
 			Provider provider = providerHash.search(providerID);
 			if(name!=null)
@@ -155,7 +159,7 @@ public class ProviderController extends BaseController{
 		terminal.setOutput("The following service has been removed: "+toRemove);
 	}
 	
-	public void Editprovider(){//This method is currently a work in progress. 
+	public void editprovider(){//This method is currently a work in progress. 
 		int providerID;
 		terminal.setOutput("Please enter the provider ID of the provider you wish to delete: "); 
 		providerID  = terminal.readInt();
@@ -214,7 +218,7 @@ public class ProviderController extends BaseController{
 		terminal.setOutput("This is your modified provider information: "+System.lineSeparator()+providerHash.search(providerID).toString());
 	}
 	
-	public boolean Validateprovider(int providerID){
+	public boolean validateprovider(int providerID){
 		return providerHash.validate(providerID);
 	}
 	
@@ -224,6 +228,30 @@ public class ProviderController extends BaseController{
 	
 	protected void writeToXML(){
 		providerHash.writeToXML();
+	}
+
+	public void loadFromXML(String readText) {
+		providerHash.readFromXML(readText);
+	}
+
+	public boolean isEmpty() {
+		return providerHash.getProviderList().isEmpty();
+	}
+
+
+	public ArrayList<String> getProviderDirectory() {
+		ArrayList<String> toReturn = new ArrayList<String>();
+		ArrayList<Provider> providerList = providerHash.getProviderList();
+		
+		for(Provider provider : providerList) {
+			String toAdd = "";
+			toAdd += provider.getName()+"'s Services Offered: ";
+			for(Service service : provider.getServicesOffered()) {
+				toAdd+= "["+service.getName()+"-Service ID: "+service.getID()+"-ServiceFee: "+service.getFee()+"]"+System.lineSeparator();
+			}
+			toReturn.add(toAdd);
+		}
+		return toReturn;
 	}
 
 

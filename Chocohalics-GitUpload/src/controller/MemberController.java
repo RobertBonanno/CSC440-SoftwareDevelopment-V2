@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.concurrent.TimeoutException;
-
 import backEnd.Address;
 import backEnd.Member;
 import backEnd.MemberHash;
@@ -9,7 +7,7 @@ import backEnd.MemberHash;
 public class MemberController extends BaseController {
 	MemberHash memberHash; 
 	
-	MemberController instance;
+	//MemberController instance;
 	
 	
 	
@@ -106,7 +104,7 @@ public class MemberController extends BaseController {
 			terminal.setOutput("Please enter your name: ");
 			name = terminal.readText();
 			
-			((Member)memberHash.search(memberID)).setName(name);
+			memberHash.search(memberID).setName(name);
 			break;
 		case 3:
 			terminal.setOutput("Please enter your street name: "); 
@@ -135,8 +133,18 @@ public class MemberController extends BaseController {
 		return memberHash.validate(memberID);
 	}
 	
-	protected void writeToDisk(){
+	protected void writeToXML(){
 		memberHash.writeToXML();
+	}
+
+
+	public void loadFromXML(String readText) {
+		memberHash.readFromXML(readText);
+	}
+
+
+	public Member search(int memberID) {
+		return memberHash.search(memberID);
 	}
 	
 

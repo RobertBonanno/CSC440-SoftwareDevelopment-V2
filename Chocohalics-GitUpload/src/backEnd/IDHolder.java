@@ -1,6 +1,7 @@
 package backEnd;
 import java.lang.String;
-public interface IDHolder {
+
+public interface IDHolder{
 
 	//String IDHname;
 	//String IDHEmail;

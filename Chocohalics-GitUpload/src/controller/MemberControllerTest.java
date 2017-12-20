@@ -19,7 +19,7 @@ public class MemberControllerTest {
 		MemberController memc = new MemberController(); 
 		memc.AddMember();
 		memc.AddMember();
-		memc.writeToDisk();
+		memc.writeToXML();
 	}
 
 	@Test

@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class Service {
+public class Service implements Comparable<Service> {
 
 	String serviceName;
 	int serviceID;
@@ -137,5 +137,10 @@ public class Service {
 		DecimalFormat dformat = new DecimalFormat("000000");
 		toReturn+=dformat.format(serviceID);
 		return toReturn;
+	}
+
+	@Override
+	public int compareTo(Service o) {
+		return serviceName.compareTo(o.getName());
 	}
 }

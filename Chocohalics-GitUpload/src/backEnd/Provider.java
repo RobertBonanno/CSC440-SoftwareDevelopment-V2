@@ -2,13 +2,14 @@ package backEnd;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 //import java.util.List;
-public class Provider implements IDHolder{
+public class Provider implements Comparable<Provider>, IDHolder{
 
 	int ProviderID;
 	String ProviderName;
@@ -44,6 +45,7 @@ public class Provider implements IDHolder{
 	public void addService(Service service){
 		if(!util.listed(service, ServicesOffered, useMe2)){}
 		ServicesOffered.add(service);
+		Collections.sort(ServicesOffered);
 	}	
 
 ///////////////////////////////////////////
@@ -76,8 +78,9 @@ public class Provider implements IDHolder{
 		ProviderName = providerName;
 	}
 
-	public void setWorkAddress(Address workAddress) {
-		WorkAddress = workAddress;
+	@Override
+	public void setAddress(Address iDHaddress) {
+		WorkAddress = iDHaddress;
 	}
 
 	public void setServicesOffered(ArrayList<Service> servicesOffered) {
@@ -93,12 +96,6 @@ public class Provider implements IDHolder{
 
 	@Override
 	public void setEmail(String iDHEmail) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setAddress(Address iDHaddress) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -144,6 +141,11 @@ public class Provider implements IDHolder{
 		DecimalFormat dformat = new DecimalFormat("000000000");
 		toReturn+=dformat.format(ProviderID);
 		return toReturn;
+	}
+
+	@Override
+	public int compareTo(Provider provider) {
+		return ProviderName.compareTo(provider.getName());
 	}
 	
 }

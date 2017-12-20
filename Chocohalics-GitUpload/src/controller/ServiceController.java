@@ -1,24 +1,10 @@
 package controller;
 
-import backEnd.Address;
-import backEnd.Provider;
-import backEnd.ProviderHash;
-//import backEnd.service;
 import backEnd.Service;
 import backEnd.ServiceHash;
 
 public class ServiceController extends BaseController{
-	/*
-	ServiceHash serviceHash; 
-	
 
-	ServiceController(){
-		super();
-		serviceHash = new ServiceHash();
-	}
-	*/
-	
-	/////////////////--new code for singleton?--/////////////////////////////////////
 	private static ServiceController instance = null;
  	
  	ServiceHash serviceHash;
@@ -35,16 +21,12 @@ public class ServiceController extends BaseController{
 
 		return instance;
 	}
-	///////////////////////////////////////////////////////////////////////////////
-	
-	
-	
 	
 	//==========Service Stuff====================
 	/**
 	 * Adds a new service to a service log.
 	 */
-	public void AddService(){
+	public void addService(){
 		String serviceName;
 		double fee;
 		String description; 
@@ -60,7 +42,7 @@ public class ServiceController extends BaseController{
 		serviceHash.add(serviceName, fee, description);
 	}
 	
-	public void EditServiceHash(){
+	public void editServiceHash(){
 		int serviceID;
 		terminal.setOutput("Please enter the service ID of the service you wish to edit: "); 
 		serviceID  = terminal.readInt();
@@ -85,6 +67,7 @@ public class ServiceController extends BaseController{
 		
 		String name = null;
 		String description = null;
+		@SuppressWarnings("unused")
 		double fee = 0;
 		
 		switch (caseNumber) {
@@ -121,7 +104,7 @@ public class ServiceController extends BaseController{
 		return serviceHash.search(serviceID);
 	}
 	
-	public String ListServiceHash(){
+	public String listServiceHash(){
 		return serviceHash.toString();
 	}
 	protected void writeToXML(){

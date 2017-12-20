@@ -70,7 +70,7 @@ public class MemberHash extends DataStoreHash<Member> {
 	}
 	
 	public String validate(int memberID){
-		if(search(memberID).equals(null))
+		if(search(memberID) ==null)
 			return "INVALID";
 		else
 			return membersHash.get(memberID).getStatus();

@@ -2,6 +2,8 @@ package backEnd;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -19,30 +21,13 @@ import org.w3c.dom.NodeList;
 
 public class ProviderHash extends DataStoreHash<Provider>{
 
-/*	HashMap<Integer, Provider> providersHash;
-	
-	
-	
-	public ProviderHash() {
-		super();
-		providersHash = new HashMap<Integer, Provider>();
-	}
-	
-*/
-	/////////////////--new code for singleton?--/////////////////////////////////////
-	private static HashMap<Integer, Provider> providersHash = null; 
-	
+	HashMap<Integer, Provider> providersHash; 
+	ProviderHash instance = null;
 	
 	public ProviderHash(){ 
 		super();
-		if(providersHash == null){
-			providersHash = new HashMap<Integer, Provider>() ;
-		}
-		else{
-			
-		}
+		providersHash = new HashMap<Integer, Provider>();
 	}
-	/////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 
@@ -160,7 +145,8 @@ public class ProviderHash extends DataStoreHash<Provider>{
 			
 			//write to file
 			@SuppressWarnings("deprecation")
-			StreamResult file = new StreamResult(new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML"));
+			File f = new File("ChocAn"+hashType+"_"+date.toString()+"_"+time.getHours()+"-"+time.getMinutes()+".XML");
+			StreamResult file = new StreamResult(f);
 			
 			transformer.transform(source, file);
 			
@@ -181,13 +167,13 @@ public class ProviderHash extends DataStoreHash<Provider>{
 			
 			doc.getDocumentElement().normalize();
 		
-			NodeList nList = doc.getElementsByTagName("Service");
+			NodeList nList = doc.getElementsByTagName("Provider");
 				
 			for(int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
 				
 				//for debugging
-				System.out.println("Current element"+nNode.getNodeName());
+				//System.out.println("Current element"+nNode.getNodeName());
 				
 				if(nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
@@ -201,12 +187,12 @@ public class ProviderHash extends DataStoreHash<Provider>{
 					
 					//set provider Address
 					Address providerAddress = new Address();
-					providerAddress.setStreet(eElement.getElementsByTagName("Street").item(0).getTextContent());
-					providerAddress.setCity(eElement.getElementsByTagName("City").item(0).getTextContent());
-					providerAddress.setState(eElement.getElementsByTagName("State").item(0).getTextContent());
+					providerAddress.setStreet(eElement.getElementsByTagName("Street").item(0).getFirstChild().getTextContent());
+					providerAddress.setCity(eElement.getElementsByTagName("City").item(0).getFirstChild().getTextContent());
+					providerAddress.setState(eElement.getElementsByTagName("State").item(0).getFirstChild().getTextContent());
 					providerAddress.setZipCode(Integer.parseInt(eElement.getElementsByTagName("ZIP").item(0).getTextContent()));
 					provider.setAddress(providerAddress);
-					
+					//System.out.println(provider);
 					//add provider Services
 					NodeList eList = eElement.getElementsByTagName("Service");
 					for(int i = 0; i < eList.getLength(); i++) {
@@ -224,8 +210,8 @@ public class ProviderHash extends DataStoreHash<Provider>{
 							provider.addService(service);
 						}
 					}
-					
-					System.out.println(provider.toString());
+					//for debugging
+					//System.out.println(provider.toString());
 					providersHash.put(provider.getID(), provider);
 				}
 			}
@@ -233,6 +219,17 @@ public class ProviderHash extends DataStoreHash<Provider>{
 			e.printStackTrace();
 		}
 		
+	}
+
+	public ArrayList<Provider> getProviderList() {
+		ArrayList<Provider> providerCollection = new ArrayList<Provider>();
+		
+		for(Provider p : providersHash.values())
+			providerCollection.add(p);
+
+		Collections.sort(providerCollection);
+		
+		return providerCollection;
 	}
 	
 }

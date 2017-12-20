@@ -5,14 +5,12 @@ import java.text.DecimalFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-public class Member implements IDHolder{
+public class Member implements Comparable<Member>,IDHolder{
 
 	String Status;
 	String MemberName;
 	int MemberID;
 	Address HomeAddress;
-	//LogMethods<Service> util = new LogMethods(); 
-	//ServiceComparator useMe2 = new ServiceComparator();
 
 	public Member(){
 		Status = "INVALID";
@@ -59,14 +57,6 @@ public class Member implements IDHolder{
 		
 	
 }
-	
-	private void seekService(){
-		
-	}
-	
-	// public String toString
-	
-///////////////////////////////////////////////	
 	
 	@Override
 	public String getName() {
@@ -150,6 +140,12 @@ public class Member implements IDHolder{
 		DecimalFormat dformat = new DecimalFormat("000000000");
 		toReturn+=dformat.format(MemberID);
 		return toReturn;
+	}
+
+
+	@Override
+	public int compareTo(Member o) {
+		return MemberName.compareTo(o.getName());
 	}
 	
 }

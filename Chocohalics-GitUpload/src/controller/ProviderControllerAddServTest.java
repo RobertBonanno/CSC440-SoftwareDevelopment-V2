@@ -8,7 +8,7 @@ import frontEnd.Terminal;
 
 public class ProviderControllerAddServTest {
 	
-	ProviderController Provadded = ProviderController.getInstance();
+	ProviderController Provadded = new ProviderController();
 	ServiceController servadded = ServiceController.getInstance();
 	Terminal terminal = new Terminal("Console");
 	
@@ -27,14 +27,13 @@ public class ProviderControllerAddServTest {
 
 	@Test
 	public void testAddService() {
-		 Provadded.AddProvider();
-		 Provadded.writeToXML();
+		 Provadded.addProvider();
 		 
-		 servadded.AddService();
+		 servadded.addService();
 		 servadded.writeToXML();
 		 
 		terminal.setOutput("Serviec IDs available:" 
-		+ System.lineSeparator() + servadded.ListServiceHash());
+		+ System.lineSeparator() + servadded.listServiceHash());
 		//Provadded.AddService();
 	}
 

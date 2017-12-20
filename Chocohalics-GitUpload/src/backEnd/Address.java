@@ -6,10 +6,10 @@ import org.w3c.dom.Node;
 
 public class Address {
 
-	private String street;
-	private String city;
-	private String state;
-	private int zipCode;
+	 String street;
+	 String city;
+	 String state;
+	 int zipCode;
 	
 	
 	/**
@@ -17,9 +17,9 @@ public class Address {
 	 */
 	
 	public Address(){
-		street = "x";
-		city = "y";
-		state = "z";
+		street = "s";
+		city = "c";
+		state = "st";
 		zipCode = 0;
 	}
 	
